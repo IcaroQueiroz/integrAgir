@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/align-justify.svg</file>
+    <file>icons/help-circle.svg</file>
+    <file>icons/home.svg</file>
+    <file>icons/info.svg</file>
+    <file>icons/printer.svg</file>
+    <file>icons/settings.svg</file>
+    <file>icons/trending-up.svg</file>
+    <file>icons/x-square.svg</file>
+  </qresource>
+</RCC>
