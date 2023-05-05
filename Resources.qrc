@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/chevron-left.svg</file>
     <file>icons/align-justify.svg</file>
     <file>icons/bell.svg</file>
     <file>icons/copy.svg</file>

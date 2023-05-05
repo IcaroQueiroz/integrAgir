@@ -2,34 +2,60 @@
 	"QMainWindow":[
 		{
 			"tittle":"integrAgir",
-			"icon":":/icons/icons/github.svg",
+			"icon":":/imagens/img/logo.png", 
 			"frameless": true,
 			"transluscentBg": true,
-			"sizeGrip": "size_grip",
-			"shadow":[
-				{
-					"color": "#fff",
-					"blurRadius": 20,
-					"xOffset": 0,
-					"yOffset": 0,
-					"centralWidget": "centralwidget"
-				}
-			],
+			"sizeGrip": "sizeGrip",
 			"navigation":[
 				{
-					"minimize":"minimize_window_button",
-					"close": "close_window_button",
+					"minimize":"minimizeBtn",
+					"close": "closeBtn",
 					"restore":[
 						{	
-							"buttonName": "restore_window_button",
-							"normalIcon": ":/icons/icons/maximize-2.svg",
-							"maximizedIcon": ":/icons/icons/minimize-2.svg"
+							"buttonName": "restoreBtn",
+							"normalIcon": ":/icons/icons/square.svg",
+							"maximizedIcon": ":/icons/icons/copy.svg"
 						}
 					],
-					"moveWindow": "header_frame",
-					"tittleBar": "header_frame"
+					"moveWindow": "headerContainer",
+					"tittleBar": "headerContainer"
 				}
 			]
 		}
-	]
+	],
+	"QCustomSlideMenu": [{
+		"name": "leftMenuContainer",
+		"defaultSize": [{
+			"width": 45,
+			"height": "parent"
+		}],
+		"collapsedSize": [{
+			"width": 45,
+			"height": "parent"
+		}],
+		"expandedSize": [{
+			"width": 130,
+			"height": "parent"
+		}],
+		"toggleButton": [{
+			"buttonName": "menuBtn",
+			"icons": [{
+				"whenMenuIsCollapsed": ":/icons/icons/align-justify.svg",
+				"whenMenuIsExpanded": ":/icons/icons/chevron-left.svg"
+			}]
+		}],
+		"menuTransitionAnimation": [{
+			"animationDuration": 500,
+			"animationEasingCurve": "Linear",
+			"whenCollapsing": [{
+				"animationDuration": 100,
+				"animationEasingCurve": "Linear"
+			}],
+			"whenExpanding": [{
+				"animationDuration": 100,
+				"animationEasingCurve": "OutInBack"
+			}]
+		}]
+
+	}]
 }

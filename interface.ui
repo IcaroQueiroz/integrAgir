@@ -68,7 +68,13 @@
      <number>0</number>
     </property>
     <item alignment="Qt::AlignLeft">
-     <widget class="QWidget" name="leftMenuContainer" native="true">
+     <widget class="QCustomSlideMenu" name="leftMenuContainer" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>45</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="spacing">
         <number>0</number>
@@ -347,7 +353,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="centerMenuContainer" native="true">
+     <widget class="QCustomSlideMenu" name="centerMenuContainer" native="true">
       <property name="minimumSize">
        <size>
         <width>200</width>
@@ -695,7 +701,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="minimizeBtn">
                <property name="toolTip">
                 <string>Minimizar</string>
                </property>
@@ -715,7 +721,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="restoreBtn">
                <property name="toolTip">
                 <string>Maximizar</string>
                </property>
@@ -735,7 +741,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_4">
+              <widget class="QPushButton" name="closeBtn">
                <property name="toolTip">
                 <string>Fechar</string>
                </property>
@@ -873,7 +879,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="popupNotificationContainer" native="true">
+           <widget class="QCustomSlideMenu" name="popupNotificationContainer" native="true">
             <layout class="QVBoxLayout" name="verticalLayout_12">
              <property name="spacing">
               <number>0</number>
@@ -962,7 +968,7 @@
           </item>
           <item>
            <widget class="QWidget" name="footerContainer" native="true">
-            <layout class="QVBoxLayout" name="verticalLayout_14" stretch="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0,0">
              <property name="spacing">
               <number>5</number>
              </property>
@@ -985,6 +991,28 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QFrame" name="sizeGrip">
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -997,6 +1025,14 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomSlideMenu</class>
+   <extends>QWidget</extends>
+   <header location="global">Custom_Widgets.Widgets.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="Resources.qrc"/>
  </resources>
