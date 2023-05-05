@@ -26,15 +26,15 @@
 	"QCustomSlideMenu": [{
 		"name": "leftMenuContainer",
 		"defaultSize": [{
-			"width": 45,
+			"width": 46,
 			"height": "parent"
 		}],
 		"collapsedSize": [{
-			"width": 45,
+			"width": 46,
 			"height": "parent"
 		}],
 		"expandedSize": [{
-			"width": 130,
+			"width": 144,
 			"height": "parent"
 		}],
 		"toggleButton": [{
@@ -48,14 +48,77 @@
 			"animationDuration": 500,
 			"animationEasingCurve": "Linear",
 			"whenCollapsing": [{
-				"animationDuration": 100,
+				"animationDuration": 500,
+				"animationEasingCurve": "Linear"
+			}]
+
+		}]
+
+	}, {
+		"name": "centerMenuContainer",
+		"defaultSize": [{
+			"width": 0,
+			"height": "parent"
+		}],
+		"collapsedSize": [{
+			"width": 0,
+			"height": "parent"
+		}],
+		"expandedSize": [{
+			"width": 200,
+			"height": "parent"
+		}],
+		"menuTransitionAnimation": [{
+			"animationDuration": 500,
+			"animationEasingCurve": "Linear",
+			"whenCollapsing": [{
+				"animationDuration": 500,
+				"animationEasingCurve": "Linear"
+			}]
+
+		}]
+
+	},{
+		"name": "popupNotificationContainer",
+		"defaultSize": [{
+			"width": 0,
+			"height": "auto"
+		}],
+		"collapsedSize": [{
+			"width": 0,
+			"height": "auto"
+		}],
+		"expandedSize": [{
+			"width": 500,
+			"height": "auto"
+		}],
+		"menuTransitionAnimation": [{
+			"animationDuration": 500,
+			"animationEasingCurve": "Linear",
+			"whenCollapsing": [{
+				"animationDuration": 500,
 				"animationEasingCurve": "Linear"
 			}],
-			"whenExpanding": [{
-				"animationDuration": 100,
-				"animationEasingCurve": "OutInBack"
+			"floatPosition": [
+				{
+					"relativeTo": "centralwidget",
+					"position": "bottom-center",
+					"shadow":[
+						{
+							"color": "#000",
+							"blurRadius": 20,
+							"xOffset": 0,
+							"yOffset": 0
+						}
+					]
+				}
+			],
+			"toggleButton": [{
+				"buttonName": "notificationBtn"
 			}]
+
 		}]
 
 	}]
+
 }

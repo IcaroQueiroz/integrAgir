@@ -21,10 +21,15 @@ class MainWindow(QMainWindow):
         # self.ui = Ui_MainWindow / user interface class
         loadJsonStyle(self, self.ui)
 
-
-
-
         self.show()
+
+        # EXPAND MENU CENTER WIDGET SIZE
+        self.ui.settingsBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
+        self.ui.infoBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
+        self.ui.helpBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
+        # CLOSE MENU CENTER WIDGET SIZE
+        self.ui.closeMenuCenterBtn.clicked.connect(lambda: self.ui.centerMenuContainer.collapseMenu())
+
 #--------------------------------------------------------#
 # EXECUÇÃO DA APLICAÇÃO                                  #
 #--------------------------------------------------------#

@@ -71,7 +71,7 @@
      <widget class="QCustomSlideMenu" name="leftMenuContainer" native="true">
       <property name="maximumSize">
        <size>
-        <width>45</width>
+        <width>167</width>
         <height>16777215</height>
        </size>
       </property>
@@ -125,7 +125,7 @@
               <number>0</number>
              </property>
              <property name="topMargin">
-              <number>0</number>
+              <number>6</number>
              </property>
              <property name="rightMargin">
               <number>0</number>
@@ -147,8 +147,8 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>26</width>
+                 <height>26</height>
                 </size>
                </property>
               </widget>
@@ -182,6 +182,11 @@
              </property>
              <item>
               <widget class="QPushButton" name="homeBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="toolTip">
                 <string>Home</string>
                </property>
@@ -189,7 +194,7 @@
                 <string notr="true">background-color: #1f232a;</string>
                </property>
                <property name="text">
-                <string>Home</string>
+                <string>  Home</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -197,19 +202,24 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>26</width>
+                 <height>26</height>
                 </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="cardBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="toolTip">
                 <string>Data</string>
                </property>
                <property name="text">
-                <string>Cartão</string>
+                <string>  Cartão</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -217,28 +227,33 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>26</width>
+                 <height>26</height>
                 </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="reportBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="toolTip">
                 <string>View Report</string>
                </property>
                <property name="text">
-                <string>Reports</string>
+                <string>  Parcelados</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
-                 <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
+                 <normaloff>:/icons/icons/edit.svg</normaloff>:/icons/icons/edit.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>26</width>
+                 <height>26</height>
                 </size>
                </property>
               </widget>
@@ -285,11 +300,16 @@
              </property>
              <item>
               <widget class="QPushButton" name="settingsBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="toolTip">
                 <string>Go to settings</string>
                </property>
                <property name="text">
-                <string>Settings</string>
+                <string>  Configurações </string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -297,19 +317,24 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>26</width>
+                 <height>26</height>
                 </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="infoBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="toolTip">
                 <string>Information about the app</string>
                </property>
                <property name="text">
-                <string>Information</string>
+                <string>  Informações  </string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -317,19 +342,24 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>26</width>
+                 <height>26</height>
                 </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="helpBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="toolTip">
                 <string>Get more help</string>
                </property>
                <property name="text">
-                <string>Help</string>
+                <string>  Ajuda</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -411,6 +441,11 @@
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QLabel" name="label">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>More Menu</string>
                </property>
@@ -420,7 +455,7 @@
               </widget>
              </item>
              <item alignment="Qt::AlignRight">
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="closeMenuCenterBtn">
                <property name="toolTip">
                 <string>Close Menu</string>
                </property>
@@ -433,8 +468,8 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>20</width>
+                 <height>20</height>
                 </size>
                </property>
               </widget>
@@ -657,7 +692,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_5">
+              <widget class="QPushButton" name="notificationBtn">
                <property name="text">
                 <string/>
                </property>
@@ -880,29 +915,45 @@
           </item>
           <item>
            <widget class="QCustomSlideMenu" name="popupNotificationContainer" native="true">
-            <layout class="QVBoxLayout" name="verticalLayout_12">
+            <layout class="QVBoxLayout" name="verticalLayout_12" stretch="0">
              <property name="spacing">
-              <number>0</number>
+              <number>9</number>
              </property>
              <property name="leftMargin">
-              <number>0</number>
+              <number>9</number>
              </property>
              <property name="topMargin">
-              <number>0</number>
+              <number>9</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>9</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>9</number>
              </property>
              <item>
               <widget class="QWidget" name="widget" native="true">
                <layout class="QVBoxLayout" name="verticalLayout_13">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QLabel" name="label_7">
                   <property name="font">
                    <font>
+                    <pointsize>10</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
                    </font>
@@ -928,6 +979,11 @@
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>9</pointsize>
+                      </font>
                      </property>
                      <property name="text">
                       <string>Notification Menssage</string>
