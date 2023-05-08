@@ -41,7 +41,7 @@
 	background-color: #2c313c;
 }
 
-#frame_4, #popupNotificationContainer{
+#frame_4, #popupNotificationContantContainer{
 	background-color: #16191d;
 	border-radius:10px;	
 }
@@ -869,6 +869,9 @@
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
                    </property>
+                   <property name="margin">
+                    <number>1</number>
+                   </property>
                   </widget>
                  </item>
                 </layout>
@@ -921,6 +924,12 @@
        </item>
        <item>
         <widget class="QCustomSlideMenu" name="popupNotificationContainer" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_12" stretch="0">
           <property name="spacing">
            <number>9</number>
@@ -938,7 +947,13 @@
            <number>9</number>
           </property>
           <item>
-           <widget class="QWidget" name="widget" native="true">
+           <widget class="QWidget" name="popupNotificationContantContainer" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <layout class="QVBoxLayout" name="verticalLayout_13">
              <property name="spacing">
               <number>0</number>
@@ -966,6 +981,21 @@
                </property>
                <property name="text">
                 <string>Notification</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>false</bool>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <property name="indent">
+                <number>8</number>
+               </property>
+               <property name="openExternalLinks">
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -1032,19 +1062,19 @@
         <widget class="QWidget" name="footerContainer" native="true">
          <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0,0">
           <property name="spacing">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="leftMargin">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="topMargin">
            <number>5</number>
           </property>
           <property name="rightMargin">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>5</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QLabel" name="label_8">

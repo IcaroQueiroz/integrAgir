@@ -77,7 +77,6 @@
 			}]
 
 		}]
-
 	},
 	{
 		"name": "popupNotificationContainer",
@@ -90,11 +89,11 @@
 			"height": "auto"
 		}],
 		"expandedSize": [{
-			"width": "auto",
-			"height": "auto"
+			"width": 500,
+			"height": 150
 		}],
 		"menuTransitionAnimation": [{
-			"animationDuration": 500,
+			"animationDuration": 200,
 			"animationEasingCurve": "Linear"
 			}],
 			"floatPosition": [
@@ -103,7 +102,7 @@
 					"position": "center-center",
 					"shadow":[
 						{
-							"color": "#16191d",
+							"color": "#000",
 							"blurRadius": 20,
 							"xOffset": 0,
 							"yOffset": 0

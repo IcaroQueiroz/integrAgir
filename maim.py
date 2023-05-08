@@ -33,8 +33,6 @@ class MainWindow(QMainWindow):
         self.setMaximumSize(800, 600)
 
 
-
-
         # EXPAND MENU CENTER WIDGET SIZE
         self.ui.settingsBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
         self.ui.infoBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
@@ -43,8 +41,19 @@ class MainWindow(QMainWindow):
         self.ui.closeMenuCenterBtn.clicked.connect(lambda: self.ui.centerMenuContainer.collapseMenu())
 
                 # CLOSE MENU CENTER WIDGET SIZE
-        self.ui.notificationBtn.clicked.connect(lambda: self.ui.popupNotificationContainer.slideMenu())
+        #self.ui.notificationBtn.clicked.connect(lambda: self.ui.popupNotificationContainer.slideMenu())
 
+"""        self.ui.popupNotificationContainer.customizeQCustomSlideMenu(
+                floatMenu = True, #bool
+                relativeTo = self.ui.centralwidget,
+                position = "center-center",
+                shadowColor = "#000",
+                shadowBlurRadius    = 20,
+                shadowXOffset   = 0,
+                shadowYOffset   = 0)"""
+
+
+    
 
 #--------------------------------------------------------#
 # EXECUÇÃO DA APLICAÇÃO                                  #
