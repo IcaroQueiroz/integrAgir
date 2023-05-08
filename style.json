@@ -78,7 +78,8 @@
 
 		}]
 
-	},{
+	},
+	{
 		"name": "popupNotificationContainer",
 		"defaultSize": [{
 			"width": 0,
@@ -89,23 +90,20 @@
 			"height": "auto"
 		}],
 		"expandedSize": [{
-			"width": 500,
+			"width": "auto",
 			"height": "auto"
 		}],
 		"menuTransitionAnimation": [{
 			"animationDuration": 500,
-			"animationEasingCurve": "Linear",
-			"whenCollapsing": [{
-				"animationDuration": 500,
-				"animationEasingCurve": "Linear"
+			"animationEasingCurve": "Linear"
 			}],
 			"floatPosition": [
 				{
 					"relativeTo": "centralwidget",
-					"position": "bottom-center",
+					"position": "center-center",
 					"shadow":[
 						{
-							"color": "#000",
+							"color": "#16191d",
 							"blurRadius": 20,
 							"xOffset": 0,
 							"yOffset": 0
@@ -116,8 +114,6 @@
 			"toggleButton": [{
 				"buttonName": "notificationBtn"
 			}]
-
-		}]
 
 	}]
 

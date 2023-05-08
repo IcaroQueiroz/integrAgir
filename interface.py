@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(883, 490)
+        MainWindow.resize(883, 529)
         MainWindow.setStyleSheet("*{\n"
 "    border:none;\n"
 "    background-color: transparent;\n"
@@ -285,6 +285,9 @@ class Ui_MainWindow(object):
         self.label_5.setScaledContents(True)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_7.addWidget(self.label_5)
+        self.widget_2 = QtWidgets.QWidget(self.frame_5)
+        self.widget_2.setObjectName("widget_2")
+        self.horizontalLayout_7.addWidget(self.widget_2)
         self.horizontalLayout_5.addWidget(self.frame_5, 0, QtCore.Qt.AlignLeft)
         self.frame_6 = QtWidgets.QFrame(self.headerContainer)
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -346,7 +349,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.frame_7, 0, QtCore.Qt.AlignRight)
         self.verticalLayout_10.addWidget(self.headerContainer)
         self.mainBodyContent = QtWidgets.QWidget(self.mainBodyContainer)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.mainBodyContent.sizePolicy().hasHeightForWidth())
@@ -369,7 +372,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.pageHome)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.labelHome = QtWidgets.QLabel(self.pageHome)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.labelHome.sizePolicy().hasHeightForWidth())
@@ -407,7 +410,8 @@ class Ui_MainWindow(object):
         self.stackedWidget_2.addWidget(self.pageReports)
         self.horizontalLayout_9.addWidget(self.stackedWidget_2)
         self.verticalLayout_11.addWidget(self.mainContentContainer)
-        self.popupNotificationContainer = QCustomSlideMenu(self.mainBodyContent)
+        self.verticalLayout_10.addWidget(self.mainBodyContent)
+        self.popupNotificationContainer = QCustomSlideMenu(self.mainBodyContainer)
         self.popupNotificationContainer.setObjectName("popupNotificationContainer")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.popupNotificationContainer)
         self.verticalLayout_12.setContentsMargins(9, 9, 9, 9)
@@ -453,8 +457,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.addWidget(self.pushButton_7, 0, QtCore.Qt.AlignRight)
         self.verticalLayout_13.addWidget(self.frame_8)
         self.verticalLayout_12.addWidget(self.widget)
-        self.verticalLayout_11.addWidget(self.popupNotificationContainer)
-        self.footerContainer = QtWidgets.QWidget(self.mainBodyContent)
+        self.verticalLayout_10.addWidget(self.popupNotificationContainer)
+        self.footerContainer = QtWidgets.QWidget(self.mainBodyContainer)
         self.footerContainer.setObjectName("footerContainer")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.footerContainer)
         self.horizontalLayout_10.setContentsMargins(5, 5, 5, 5)
@@ -470,8 +474,7 @@ class Ui_MainWindow(object):
         self.sizeGrip.setFrameShadow(QtWidgets.QFrame.Raised)
         self.sizeGrip.setObjectName("sizeGrip")
         self.horizontalLayout_10.addWidget(self.sizeGrip)
-        self.verticalLayout_11.addWidget(self.footerContainer)
-        self.verticalLayout_10.addWidget(self.mainBodyContent)
+        self.verticalLayout_10.addWidget(self.footerContainer)
         self.horizontalLayout.addWidget(self.mainBodyContainer)
         MainWindow.setCentralWidget(self.centralwidget)
 
