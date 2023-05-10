@@ -139,7 +139,7 @@
 			"reportBtn"
 		],
 		"Style":[{
-			"Active": "background-color: #1f232a; border-left: 2px solid rgb(0,0,255);",
+			"Active": "background-color: #1f232a; border-left: 2px solid rgb(255,255,255);",
 			"NotActive": "background-color: transparent;"
 		}]
 	}]

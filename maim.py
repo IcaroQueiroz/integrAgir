@@ -1,8 +1,10 @@
 from interface import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QWidget , QSizePolicy, QStackedWidget, QLabel, QVBoxLayout
 
-
+import iconify as ico
+from iconify.qt import QtGui, QtWidgets, QtCore
 from PyQt5 import uic, QtCore
+from PySide2.QtCore import *
 
 import os
 import sys
@@ -72,8 +74,13 @@ class MainWindow(QMainWindow):
 
 
         # EXPAND MENU CENTER WIDGET SIZE
+
+
+
+
+
         self.ui.settingsBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
-        self.ui.infoBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
+        self.ui.infoBtn.clicked.connect(lambda: self.toggle_button_color(self.ui.infoBtn))
         self.ui.helpBtn.clicked.connect(lambda: self.ui.centerMenuContainer.slideMenu())
         # CLOSE MENU CENTER WIDGET SIZE
         self.ui.closeMenuCenterBtn.clicked.connect(lambda: self.ui.centerMenuContainer.collapseMenu())
@@ -81,7 +88,21 @@ class MainWindow(QMainWindow):
                 # CLOSE MENU CENTER WIDGET SIZE
         self.ui.pushButton_6.clicked.connect(lambda: self.show_error_notification('Teste de msg notificação', self))
 
-    
+    def toggle_button_color(self, button):
+        self.ui.centerMenuContainer.slideMenu()
+        self.ui.infoBtn.setStyleSheet("background-color: #fff; color: #000")
+        if button.isChecked():
+            self.ui.infoBtn.setStyleSheet("background-color: #fff; color: #000")
+        else:
+            self.ui.infoBtn.setStyleSheet("background-color: #16191d; color: #fff")
+        self.ui.infoBtn.update()
+
+
+
+
+
+
+
     def show_error_notification(self, error_message, is_permanent=False):
         notification = ErrorNotification(error_message)
         notification.setParent(self.ui.centerMenuContainer)  # define QCustomSlideMenu como pai
