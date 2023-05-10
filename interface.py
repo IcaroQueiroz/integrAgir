@@ -34,9 +34,8 @@ class Ui_MainWindow(object):
 "}\n"
 "#leftMenuSubContainer QPushButton{\n"
 "    text-align: left;\n"
-"    padding:2px 10px;\n"
-"    border-top-left-radius:10px;\n"
-"    border-bottom-left-radius:10px;\n"
+"    padding:3px 10px;\n"
+"\n"
 "}\n"
 "#centerMenuSubContainer{\n"
 "    background-color: #2c313c;\n"
@@ -78,11 +77,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.menuBtn = QtWidgets.QPushButton(self.frame)
+        self.menuBtn.setStyleSheet("")
         self.menuBtn.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/icons/align-justify.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.menuBtn.setIcon(icon)
-        self.menuBtn.setIconSize(QtCore.QSize(26, 26))
+        self.menuBtn.setIconSize(QtCore.QSize(28, 28))
         self.menuBtn.setObjectName("menuBtn")
         self.horizontalLayout_2.addWidget(self.menuBtn)
         self.verticalLayout_2.addWidget(self.frame)
@@ -98,7 +98,8 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.homeBtn.setFont(font)
-        self.homeBtn.setStyleSheet("background-color: #1f232a;")
+        self.homeBtn.setStyleSheet("background-color: #1f232a;\n"
+"border-left: 2px solid rgb(255,255,255);")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/icons/home.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.homeBtn.setIcon(icon1)
@@ -367,11 +368,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
-        self.stackedWidget_2 = QtWidgets.QStackedWidget(self.mainContentContainer)
-        self.stackedWidget_2.setObjectName("stackedWidget_2")
+        self.mainPages = QCustomStackedWidget(self.mainContentContainer)
+        self.mainPages.setObjectName("mainPages")
         self.pageHome = QtWidgets.QWidget()
         self.pageHome.setObjectName("pageHome")
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.pageHome)
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.labelHome = QtWidgets.QLabel(self.pageHome)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -385,10 +387,11 @@ class Ui_MainWindow(object):
         self.labelHome.setAlignment(QtCore.Qt.AlignCenter)
         self.labelHome.setObjectName("labelHome")
         self.verticalLayout_15.addWidget(self.labelHome)
-        self.stackedWidget_2.addWidget(self.pageHome)
+        self.mainPages.addWidget(self.pageHome)
         self.pageCartao = QtWidgets.QWidget()
         self.pageCartao.setObjectName("pageCartao")
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.pageCartao)
+        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
         self.labelCarto = QtWidgets.QLabel(self.pageCartao)
         font = QtGui.QFont()
@@ -397,10 +400,11 @@ class Ui_MainWindow(object):
         self.labelCarto.setAlignment(QtCore.Qt.AlignCenter)
         self.labelCarto.setObjectName("labelCarto")
         self.verticalLayout_16.addWidget(self.labelCarto)
-        self.stackedWidget_2.addWidget(self.pageCartao)
+        self.mainPages.addWidget(self.pageCartao)
         self.pageReports = QtWidgets.QWidget()
         self.pageReports.setObjectName("pageReports")
         self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.pageReports)
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_17.setObjectName("verticalLayout_17")
         self.labelReports = QtWidgets.QLabel(self.pageReports)
         font = QtGui.QFont()
@@ -409,8 +413,8 @@ class Ui_MainWindow(object):
         self.labelReports.setAlignment(QtCore.Qt.AlignCenter)
         self.labelReports.setObjectName("labelReports")
         self.verticalLayout_17.addWidget(self.labelReports)
-        self.stackedWidget_2.addWidget(self.pageReports)
-        self.horizontalLayout_9.addWidget(self.stackedWidget_2)
+        self.mainPages.addWidget(self.pageReports)
+        self.horizontalLayout_9.addWidget(self.mainPages)
         self.verticalLayout_11.addWidget(self.mainContentContainer)
         self.verticalLayout_10.addWidget(self.mainBodyContent)
         self.popupNotificationContainer = QCustomSlideMenu(self.mainBodyContainer)
@@ -532,5 +536,5 @@ class Ui_MainWindow(object):
         self.menssageNotification.setText(_translate("MainWindow", "Notification Menssage"))
         self.pushButton_7.setToolTip(_translate("MainWindow", "Fechar Notification"))
         self.label_8.setText(_translate("MainWindow", "   Copyright © 2023."))
-from Custom_Widgets.Widgets import QCustomSlideMenu
+from Custom_Widgets.Widgets import QCustomSlideMenu, QCustomStackedWidget
 import Resources_rc

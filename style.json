@@ -114,6 +114,34 @@
 				"buttonName": "notificationBtn"
 			}]
 
+	}],
+	"QStackedWidget":[
+		{
+			"name":"mainPages",
+			"navigation":[
+				{
+					"navigationButtons":[
+						{
+							"homeBtn": "pageHome",
+							"cardBtn": "pageCartao",
+							"reportBtn": "pageReports"
+						}
+					]
+				}
+			]
+	
+		}
+	],
+	"QPushButtonGroup": [{
+		"Buttons": [
+			"homeBtn",
+			"cardBtn",
+			"reportBtn"
+		],
+		"Style":[{
+			"Active": "background-color: #1f232a; border-left: 2px solid rgb(0,0,255);",
+			"NotActive": "background-color: transparent;"
+		}]
 	}]
 
 }
