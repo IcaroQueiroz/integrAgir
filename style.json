@@ -131,6 +131,19 @@
 				}
 			]
 	
+		},{
+			"name":"menuCenterPages",
+			"navigation":[
+				{
+					"navigationButtons":[
+						{
+							"settingsBtn": "pageSettings",
+							"infoBtn": "pageInformation"
+						}
+					]
+				}
+			]
+	
 		}
 	],
 	"QPushButtonGroup": [{
