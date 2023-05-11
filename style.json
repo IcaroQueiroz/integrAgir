@@ -124,6 +124,7 @@
 						{
 							"homeBtn": "pageHome",
 							"cardBtn": "pageCartao",
+							"appBtn": "pageApp",
 							"reportBtn": "pageReports"
 						}
 					]
@@ -136,6 +137,7 @@
 		"Buttons": [
 			"homeBtn",
 			"cardBtn",
+			"appBtn",
 			"reportBtn"
 		],
 		"Style":[{
