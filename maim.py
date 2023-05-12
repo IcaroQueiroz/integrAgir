@@ -12,7 +12,8 @@ import sys
 from Custom_Widgets.Widgets import *
 
 
-class ErrorNotification(QCustomSlideMenu):
+
+class ErrorNotification(QWidget):
     def __init__(self, error_message, parent=None):
         super().__init__(parent)
         uic.loadUi('interface.ui', self)
@@ -45,50 +46,55 @@ class ErrorNotification(QCustomSlideMenu):
         self.activateWindow()
 
 
+
 #--------------------------------------------------------#
-# CLASS MAIN WINDOWS                                    #
+# CLASS MAIN WINDOWS                                     #
 #--------------------------------------------------------#
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        ########################################################################
-        # APPLY JSON STYLESHEET
-        ########################################################################
-        # self = QMainWindow class
-        # self.ui = Ui_MainWindow / user interface class
+        #--------------------------------------------------------#
+        # APPLY JSON STYLESHEET  Lib.|Custom_Widgets.Widgets|    #
+        #--------------------------------------------------------#
         loadJsonStyle(self, self.ui)
-
         self.show()
-
-        # Define a política de redimensionamento da janela
+        #--------------------------------------------------------#
+        # Redimensionamento da janela e Definições iniciais      #
+        #--------------------------------------------------------#
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-        # Define o tamanho mínimo da janela
         self.setMinimumSize(400, 300)
-
-        # Define o tamanho máximo da janela
-        self.setMaximumSize(800, 600)
-
-
-        # EXPAND MENU CENTER WIDGET SIZE
-
+        self.setMaximumSize(1680, 1050)
+        #--------------------------------------------------------#
+        # Definições de tema                                     #
+        #--------------------------------------------------------#       
         self.current_theme = self.styleSheet()
         self.ui.temaBtn.clicked.connect(self.change_theme)
-        ########################################################################
-        # APPLY JSON STYLESHEET
-        ########################################################################
-        self.ui.settingsBtn.clicked.connect(lambda: self.toggle_button_color(self.ui.settingsBtn))
-        self.ui.infoBtn.clicked.connect(lambda: self.toggle_button_color(self.ui.infoBtn))
-        self.ui.closeCenterBtnSettings.clicked.connect(lambda: self.toggle_button_color(self.ui.closeCenterBtnSettings))
-        self.ui.closeCenterBtnInfo.clicked.connect(lambda: self.toggle_button_color(self.ui.closeCenterBtnInfo))
-        #################################################
+
+        #--------------------------------------------------------#
+        # Funções do botoões Menu                                #
+        #--------------------------------------------------------#        
+        
+        
+        
+        
+        
+        #--------------------------------------------------------#
+        # Funções do botoões MenuTec                             #
+        #--------------------------------------------------------#
+        self.ui.settingsBtn.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.settingsBtn))
+        self.ui.infoBtn.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.infoBtn))
+        self.ui.closeCenterBtnSettings.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.closeCenterBtnSettings))
+        self.ui.closeCenterBtnInfo.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.closeCenterBtnInfo))
+        
+        
+        #--------------------------------------------------------#
+        # Funções do comboBox aba APP                            #
+        #--------------------------------------------------------#        
         # adiciona as opções no comboBox
         self.ui.comboBoxApp.addItem('Home')
         self.ui.comboBoxApp.addItem('Eaj')
-
         # cria as páginas e as adiciona ao stackedWidget
         self.pageHomeApp = QWidget()
         label1 = QLabel('Conteúdo para Home')
@@ -103,16 +109,15 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidgetApp.addWidget(self.pageEaj)
         
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
-        self.ui.comboBoxApp.setStyleSheet('font-size: 16px; color: #fff; font-family: Arial; border-radius:\
-                                             10px; border: 2px solid white; padding-left: 5px;')
+
         self.ui.comboBoxApp.currentIndexChanged.connect(self.handle_combobox_change)
          
         # CLOSE MENU CENTER WIDGET SIZE
         
                 # CLOSE MENU CENTER WIDGET SIZE
-        #self.ui.pushButton_6.clicked.connect(lambda: self.show_error_notification('Teste de msg notificação', self))
+        self.ui.pushButton_6.clicked.connect(lambda: self.show_error_notification('Teste de msg notificação', self))
 
-    def toggle_button_color(self, button):
+    def toggle_button_menuTec(self, button):
         self.buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
         if button == self.ui.closeCenterBtnInfo or button == self.ui.closeCenterBtnSettings:
             self.ui.centerMenuContainer.collapseMenu()
@@ -133,13 +138,13 @@ class MainWindow(QMainWindow):
 
         if self.styleSheet() == self.current_theme:
             if button.isChecked():
-                button.setStyleSheet("background-color: #2c313c;")
+                button.setStyleSheet("background-color: #2c313c;") 
             else:
                 button.setStyleSheet("background-color: transparent;")
 
         else:
             if button.isChecked():
-                button.setStyleSheet("background-color: #004d61;")
+                button.setStyleSheet("background-color: #348498;")
             else:
                 button.setStyleSheet("background-color: transparent;")
     def handle_combobox_change(self, index):
@@ -165,33 +170,36 @@ class MainWindow(QMainWindow):
 
                 }
                 #leftMenuSubContainer{
-                    background-color: #348498;
+                    background-color: #004d61;
                 }
                 #leftMenuSubContainer QPushButton{
-                    background-color: #348498;
+                    background-color: #004d61;
                     text-align: left;
                     padding:3px 10px;
+                    color: #ffffff;
                 }
                 #frame_3 QPushButton{
-                    background-color: #348498;
+                    background-color: #004d61;
                     text-align: left;
                     padding:3px 10px;
                     border-top-left-radius:10px;
                     border-bottom-left-radius:10px;
                 }
                 #centerMenuSubContainer{
-                    background-color: #004d61;
+                    background-color: #348498;
                 }
                 #centerMenuSubContainer QLabel{
                     color: #ffffff;
                 }
                 #widgetInfo, #widgetSettings, #popupNotificationContantContainer{
-                    background-color: #348498;
+                    background-color: #004d61;
                     border-radius:10px;
                 }
-                #headerContainer, #footerContainer{
-                    background-color: #004d61;
+                #headerContainer, #footerContainer ,#footerContainer QLabel{
+                    background-color: #348498;
+                    color: #ffffff;
                 }
+
                 /* Outros seletores de estilo para widgets */
 
             """
@@ -210,7 +218,7 @@ class MainWindow(QMainWindow):
                 if self.styleSheet() == self.current_theme:
                     btn.setStyleSheet("background-color: #2c313c;")
                 else:
-                    btn.setStyleSheet("background-color: #004d61;")
+                    btn.setStyleSheet("background-color: #348498;")
 
 
 

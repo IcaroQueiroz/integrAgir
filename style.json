@@ -34,7 +34,7 @@
 			"height": "parent"
 		}],
 		"expandedSize": [{
-			"width": 144,
+			"width": 143,
 			"height": "parent"
 		}],
 		"toggleButton": [{
@@ -77,43 +77,6 @@
 			}]
 
 		}]
-	},
-	{
-		"name": "popupNotificationContainer",
-		"defaultSize": [{
-			"width": 0,
-			"height": "auto"
-		}],
-		"collapsedSize": [{
-			"width": 0,
-			"height": "auto"
-		}],
-		"expandedSize": [{
-			"width": 500,
-			"height": 150
-		}],
-		"menuTransitionAnimation": [{
-			"animationDuration": 200,
-			"animationEasingCurve": "Linear"
-			}],
-			"floatPosition": [
-				{
-					"relativeTo": "centralwidget",
-					"position": "center-center",
-					"shadow":[
-						{
-							"color": "#000",
-							"blurRadius": 20,
-							"xOffset": 0,
-							"yOffset": 0
-						}
-					]
-				}
-			],
-			"toggleButton": [{
-				"buttonName": "notificationBtn"
-			}]
-
 	}],
 	"QStackedWidget":[
 		{
