@@ -21,8 +21,7 @@ class Ui_MainWindow(object):
 "    background: transparent;\n"
 "    padding:0;\n"
 "    margin:0;\n"
-"    color:#fff;\n"
-"    \n"
+"    color:#fff;    \n"
 "}\n"
 "\n"
 "#centralwidget{\n"
@@ -63,7 +62,17 @@ class Ui_MainWindow(object):
 "    border-radius:10px;\n"
 "    border: 2px solid white;\n"
 "    padding-left: 5px;\n"
-"}")
+"}\n"
+"\n"
+"#mainPages{\n"
+"    border-radius: 10px;\n"
+"    border-top: 2px solid green;\n"
+"}\n"
+"\n"
+"#pageLacon QTabWidget{\n"
+"    background-color: #1f232a;\n"
+"}\n"
+"")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -428,8 +437,8 @@ class Ui_MainWindow(object):
         self.mainContentContainer.setSizePolicy(sizePolicy)
         self.mainContentContainer.setObjectName("mainContentContainer")
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.mainContentContainer)
-        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_9.setSpacing(0)
+        self.horizontalLayout_9.setContentsMargins(9, 9, 9, 9)
+        self.horizontalLayout_9.setSpacing(9)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.mainPages = QCustomStackedWidget(self.mainContentContainer)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -584,8 +593,8 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pageEaj.sizePolicy().hasHeightForWidth())
         self.pageEaj.setSizePolicy(sizePolicy)
         self.pageEaj.setObjectName("pageEaj")
-        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.pageEaj)
-        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.pageEaj)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
         self.frame_4 = QtWidgets.QFrame(self.pageEaj)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -623,7 +632,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setIconSize(QtCore.QSize(96, 96))
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_14.addWidget(self.pushButton_2)
-        self.verticalLayout_9.addWidget(self.frame_4)
+        self.verticalLayout_19.addWidget(self.frame_4)
         self.frame_9 = QtWidgets.QFrame(self.pageEaj)
         self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -644,7 +653,7 @@ class Ui_MainWindow(object):
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_16.addWidget(self.label_6, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
-        self.verticalLayout_9.addWidget(self.frame_9, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_19.addWidget(self.frame_9)
         self.frame_10 = QtWidgets.QFrame(self.pageEaj)
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -654,8 +663,73 @@ class Ui_MainWindow(object):
         self.label_9 = QtWidgets.QLabel(self.frame_10)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_17.addWidget(self.label_9)
-        self.verticalLayout_9.addWidget(self.frame_10)
+        self.verticalLayout_19.addWidget(self.frame_10)
         self.stackedWidgetApp.addWidget(self.pageEaj)
+        self.pageLacon = QtWidgets.QWidget()
+        self.pageLacon.setObjectName("pageLacon")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.pageLacon)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.tabWidget = QtWidgets.QTabWidget(self.pageLacon)
+        self.tabWidget.setTabPosition(QtWidgets.QTabWidget.North)
+        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Triangular)
+        self.tabWidget.setElideMode(QtCore.Qt.ElideRight)
+        self.tabWidget.setUsesScrollButtons(True)
+        self.tabWidget.setDocumentMode(True)
+        self.tabWidget.setTabsClosable(False)
+        self.tabWidget.setMovable(False)
+        self.tabWidget.setTabBarAutoHide(False)
+        self.tabWidget.setObjectName("tabWidget")
+        self.tabLacon = QtWidgets.QWidget()
+        self.tabLacon.setObjectName("tabLacon")
+        self.tabWidget.addTab(self.tabLacon, "")
+        self.contratosLacon = QtWidgets.QWidget()
+        self.contratosLacon.setObjectName("contratosLacon")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.contratosLacon)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.tableViewLacon = QtWidgets.QTableView(self.contratosLacon)
+        self.tableViewLacon.setStyleSheet("QTableView::header {\n"
+"    background-color: #808080;\n"
+"}\n"
+"\n"
+"QTableView QHeaderView::section {\n"
+"    background-color: #808080;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"    background-clip: padding-box; /* Evita a exibição da sombra do campo anterior */\n"
+"}\n"
+"\n"
+"\n"
+"QLineEdit:focus {\n"
+"    color: red; /* Cor do texto ao receber o foco */\n"
+"}")
+        self.tableViewLacon.setSortingEnabled(False)
+        self.tableViewLacon.setObjectName("tableViewLacon")
+        self.verticalLayout_18.addWidget(self.tableViewLacon)
+        self.frame_11 = QtWidgets.QFrame(self.contratosLacon)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_11.sizePolicy().hasHeightForWidth())
+        self.frame_11.setSizePolicy(sizePolicy)
+        self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_11.setObjectName("frame_11")
+        self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.frame_11)
+        self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_18.setSpacing(10)
+        self.horizontalLayout_18.setObjectName("horizontalLayout_18")
+        self.btnDeleteRow = QtWidgets.QPushButton(self.frame_11)
+        self.btnDeleteRow.setObjectName("btnDeleteRow")
+        self.horizontalLayout_18.addWidget(self.btnDeleteRow, 0, QtCore.Qt.AlignBottom)
+        self.btnNewRow = QtWidgets.QPushButton(self.frame_11)
+        self.btnNewRow.setIcon(icon11)
+        self.btnNewRow.setObjectName("btnNewRow")
+        self.horizontalLayout_18.addWidget(self.btnNewRow, 0, QtCore.Qt.AlignBottom)
+        self.verticalLayout_18.addWidget(self.frame_11, 0, QtCore.Qt.AlignRight|QtCore.Qt.AlignBottom)
+        self.tabWidget.addTab(self.contratosLacon, "")
+        self.verticalLayout_9.addWidget(self.tabWidget)
+        self.stackedWidgetApp.addWidget(self.pageLacon)
         self.verticalLayout_14.addWidget(self.stackedWidgetApp)
         self.mainPages.addWidget(self.pageApp)
         self.horizontalLayout_9.addWidget(self.mainPages)
@@ -748,8 +822,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.menuCenterPages.setCurrentIndex(0)
-        self.mainPages.setCurrentIndex(0)
-        self.stackedWidgetApp.setCurrentIndex(1)
+        self.mainPages.setCurrentIndex(3)
+        self.stackedWidgetApp.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -787,6 +862,10 @@ class Ui_MainWindow(object):
 "   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão \"Abrir Excel\".\n"
 "   3 - Clique no botão \"Salvar TXT\" , aguarde alguns instantes e salve o arquivo.\n"
 "   4 - Agora, o arquivo txt pode ser importado no Único."))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabLacon), _translate("MainWindow", "Lacon"))
+        self.btnDeleteRow.setText(_translate("MainWindow", "Apagar Linha"))
+        self.btnNewRow.setText(_translate("MainWindow", "Nova linha"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.contratosLacon), _translate("MainWindow", "Contratos"))
         self.label_7.setText(_translate("MainWindow", "Notification"))
         self.menssageNotification.setText(_translate("MainWindow", "Notification Menssage"))
         self.pushButton_7.setToolTip(_translate("MainWindow", "Fechar Notification"))
