@@ -63,11 +63,6 @@
 	padding-left: 5px;
 }
 
-#mainPages{
-	border-radius: 10px;
-	border-top: 2px solid green;
-}
-
 #pageLacon QTabWidget{
     background-color: #1f232a;
 }
@@ -238,7 +233,7 @@ border-left: 2px solid rgb(255,255,255);</string>
              <item>
               <widget class="QPushButton" name="appBtn">
                <property name="text">
-                <string/>
+                <string>Aplicações</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -547,7 +542,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                    </property>
                    <property name="icon">
                     <iconset resource="Resources.qrc">
-                     <normaloff>:/icons/icons/toggle-right.svg</normaloff>:/icons/icons/toggle-right.svg</iconset>
+                     <normaloff>:/imagens/img/ligar.png</normaloff>:/imagens/img/ligar.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -965,7 +960,7 @@ border-left: 2px solid rgb(255,255,255);</string>
               <number>9</number>
              </property>
              <item>
-              <widget class="QCustomStackedWidget" name="mainPages">
+              <widget class="QStackedWidget" name="mainPages">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -973,7 +968,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="pageHome">
                 <property name="sizePolicy">
@@ -1004,56 +999,6 @@ border-left: 2px solid rgb(255,255,255);</string>
                    </property>
                    <property name="margin">
                     <number>1</number>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QWidget" name="pageCartao">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_16">
-                 <item>
-                  <widget class="QLabel" name="labelCarto">
-                   <property name="font">
-                    <font>
-                     <pointsize>13</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Cartão</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QWidget" name="pageReports">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_17">
-                 <item>
-                  <widget class="QLabel" name="labelReports">
-                   <property name="font">
-                    <font>
-                     <pointsize>13</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Reports</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -1336,7 +1281,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <enum>QTabWidget::Triangular</enum>
                        </property>
                        <property name="currentIndex">
-                        <number>1</number>
+                        <number>0</number>
                        </property>
                        <property name="elideMode">
                         <enum>Qt::ElideRight</enum>
@@ -1357,17 +1302,31 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <bool>false</bool>
                        </property>
                        <widget class="QWidget" name="tabLacon">
+                        <attribute name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/icons/icons/quebra-errada.svg</normaloff>:/icons/icons/quebra-errada.svg</iconset>
+                        </attribute>
                         <attribute name="title">
-                         <string>Lacon</string>
+                         <string>Lacon </string>
                         </attribute>
                        </widget>
                        <widget class="QWidget" name="contratosLacon">
+                        <attribute name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/icons/icons/documento.svg</normaloff>:/icons/icons/documento.svg</iconset>
+                        </attribute>
                         <attribute name="title">
-                         <string>Contratos</string>
+                         <string>Contratos </string>
                         </attribute>
                         <layout class="QVBoxLayout" name="verticalLayout_18">
                          <item>
                           <widget class="QTableView" name="tableViewLacon">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="styleSheet">
                             <string notr="true">QTableView::header {
     background-color: #808080;
@@ -1378,9 +1337,9 @@ QTableView QHeaderView::section {
 }
 
 QLineEdit {
+    color: black; /* Cor padrão do texto */
     background-clip: padding-box; /* Evita a exibição da sombra do campo anterior */
 }
-
 
 QLineEdit:focus {
     color: red; /* Cor do texto ao receber o foco */
@@ -1389,6 +1348,9 @@ QLineEdit:focus {
                            <property name="sortingEnabled">
                             <bool>false</bool>
                            </property>
+                           <attribute name="horizontalHeaderCascadingSectionResizes">
+                            <bool>false</bool>
+                           </attribute>
                           </widget>
                          </item>
                          <item alignment="Qt::AlignRight|Qt::AlignBottom">
@@ -1426,16 +1388,26 @@ QLineEdit:focus {
                               <property name="text">
                                <string>Apagar Linha</string>
                               </property>
+                              <property name="icon">
+                               <iconset resource="Resources.qrc">
+                                <normaloff>:/icons/icons/excluir.svg</normaloff>:/icons/icons/excluir.svg</iconset>
+                              </property>
+                              <property name="iconSize">
+                               <size>
+                                <width>18</width>
+                                <height>17</height>
+                               </size>
+                              </property>
                              </widget>
                             </item>
                             <item alignment="Qt::AlignBottom">
                              <widget class="QPushButton" name="btnNewRow">
                               <property name="text">
-                               <string>Nova linha</string>
+                               <string> Nova linha</string>
                               </property>
                               <property name="icon">
                                <iconset resource="Resources.qrc">
-                                <normaloff>:/icons/icons/minus-square.svg</normaloff>:/icons/icons/minus-square.svg</iconset>
+                                <normaloff>:/icons/icons/mais.svg</normaloff>:/icons/icons/mais.svg</iconset>
                               </property>
                              </widget>
                             </item>
@@ -1452,142 +1424,56 @@ QLineEdit:focus {
                  </item>
                 </layout>
                </widget>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="popupNotificationContainer" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_12" stretch="0">
-          <property name="spacing">
-           <number>9</number>
-          </property>
-          <property name="leftMargin">
-           <number>9</number>
-          </property>
-          <property name="topMargin">
-           <number>9</number>
-          </property>
-          <property name="rightMargin">
-           <number>9</number>
-          </property>
-          <property name="bottomMargin">
-           <number>9</number>
-          </property>
-          <item>
-           <widget class="QWidget" name="popupNotificationContantContainer" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_13">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="label_7">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Notification</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-               <property name="margin">
-                <number>0</number>
-               </property>
-               <property name="indent">
-                <number>8</number>
-               </property>
-               <property name="openExternalLinks">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_8">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_8">
-                <item>
-                 <widget class="QLabel" name="menssageNotification">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>9</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Notification Menssage</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item alignment="Qt::AlignRight">
-                 <widget class="QPushButton" name="pushButton_7">
-                  <property name="toolTip">
-                   <string>Fechar Notification</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="Resources.qrc">
-                    <normaloff>:/icons/icons/x-circle.svg</normaloff>:/icons/icons/x-circle.svg</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>20</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               <widget class="QWidget" name="pageCartao">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_16">
+                 <item>
+                  <widget class="QLabel" name="labelCarto">
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Cartão</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="pageReports">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_17">
+                 <item>
+                  <widget class="QLabel" name="labelReports">
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Reports</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
               </widget>
              </item>
             </layout>
@@ -1664,12 +1550,6 @@ QLineEdit:focus {
   <customwidget>
    <class>QCustomSlideMenu</class>
    <extends>QWidget</extends>
-   <header location="global">Custom_Widgets.Widgets.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QCustomStackedWidget</class>
-   <extends>QStackedWidget</extends>
    <header location="global">Custom_Widgets.Widgets.h</header>
    <container>1</container>
   </customwidget>

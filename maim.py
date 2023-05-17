@@ -97,14 +97,14 @@ class MainWindow(QMainWindow):
         self.ui.temaBtn.clicked.connect(self.change_theme)
 
         #--------------------------------------------------------#
-        # Funções do botoões Menu laco firebase                            #
+        # Conexão firebase e TabelaViwer Lacon                        #
         #--------------------------------------------------------#        
         firebase_url = "https://integragir-default-rtdb.firebaseio.com/Contratos-Lacon"
         self.firebase_api = FirebaseAPI(firebase_url)
         
         # Criar modelo de tabela
         model = QStandardItemModel()
-        model.setHorizontalHeaderLabels(["contrato", "nome", "cpf-cnpj", "imóvel", "inicio", "fim", "valor"])  # Definir rótulos das colunas
+        model.setHorizontalHeaderLabels(["Contrato", "Imóvel", "Locatário", "CPF/CNPJ", "Valor", "Inicio", "Fim"])  # Definir rótulos das colunas
 
         # Carregar dados do Firebase
         data_dict = self.firebase_api.get()
@@ -137,6 +137,10 @@ class MainWindow(QMainWindow):
         self.ui.closeCenterBtnSettings.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.closeCenterBtnSettings))
         self.ui.closeCenterBtnInfo.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.closeCenterBtnInfo))
         
+        self.ui.homeBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.homeBtn, 0))
+        self.ui.appBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.appBtn, 1))
+        self.ui.cardBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.cardBtn, 2))
+        self.ui.reportBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.reportBtn, 3))
         
         #--------------------------------------------------------#
         # Funções do comboBox aba APP                            #
@@ -174,6 +178,9 @@ class MainWindow(QMainWindow):
                 # CLOSE MENU CENTER WIDGET SIZE
         self.ui.pushButton_6.clicked.connect(lambda: self.show_error_notification('Teste de msg notificação', self))
 
+#--------------------------------------------------------#
+# Funçoes do Firebase                                    #
+#--------------------------------------------------------#
     def on_table_data_changed(self, top_left, bottom_right):
         # Obter o modelo da tabela
         model = self.ui.tableViewLacon.model()
@@ -214,7 +221,6 @@ class MainWindow(QMainWindow):
             model.setData(id_index, '')
             return
 
-
     def add_new_row(self):
         # Obter o modelo da tabela
         model = self.ui.tableViewLacon.model()
@@ -247,8 +253,9 @@ class MainWindow(QMainWindow):
         # Excluir os dados correspondentes do Firebase
         self.firebase_api.delete(item_id)
 
-
-
+#--------------------------------------------------------#
+# Funçoes do Menu                                        #
+#--------------------------------------------------------#
     def toggle_button_menuTec(self, button):
         self.buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
         if button == self.ui.closeCenterBtnInfo or button == self.ui.closeCenterBtnSettings:
@@ -279,6 +286,29 @@ class MainWindow(QMainWindow):
                 button.setStyleSheet("background-color: #348498;")
             else:
                 button.setStyleSheet("background-color: transparent;")
+
+    def toggle_button_menuPrincipal(self, button, index):
+        self.buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
+
+        for btn in self.buttons_list:
+            if btn != button:
+                btn.setStyleSheet("background-color: transparent;")
+                if btn.isChecked():
+                    btn.setChecked(False)
+
+        if self.styleSheet() == self.current_theme:
+            if button.isChecked():
+                button.setStyleSheet("background-color: #2c313c;")
+            else:
+                button.setStyleSheet("background-color: transparent;")
+        else:
+            if button.isChecked():
+                button.setStyleSheet("background-color: #348498;")
+            else:
+                button.setStyleSheet("background-color: transparent;")
+
+        self.ui.mainPages.setCurrentIndex(index)
+
     def handle_combobox_change(self, index):
         self.ui.stackedWidgetApp.setCurrentIndex(index)
 
@@ -288,7 +318,7 @@ class MainWindow(QMainWindow):
         
         if self.styleSheet() == self.current_theme:
             # Carregue o arquivo CSS para o novo tema desejado
-            new_icon = QtGui.QIcon(":/icons/icons/toggle-left.svg")
+            new_icon = QtGui.QIcon(":/imagens/img/desligar.png")
             new_theme = """
                 *{
                     border:none;
@@ -340,7 +370,7 @@ class MainWindow(QMainWindow):
         else:
             # Caso contrário, restaure a folha de estilos do tema anterior
             new_theme = self.current_theme
-            new_icon = QtGui.QIcon(":/icons/icons/toggle-right.svg") 
+            new_icon = QtGui.QIcon(":/imagens/img/ligar.png") 
         # Aplique o novo tema para o aplicativo
         self.setStyleSheet(new_theme)
         self.ui.temaBtn.setIcon(new_icon)

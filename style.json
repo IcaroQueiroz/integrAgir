@@ -80,21 +80,6 @@
 	}],
 	"QStackedWidget":[
 		{
-			"name":"mainPages",
-			"navigation":[
-				{
-					"navigationButtons":[
-						{
-							"homeBtn": "pageHome",
-							"cardBtn": "pageCartao",
-							"appBtn": "pageApp",
-							"reportBtn": "pageReports"
-						}
-					]
-				}
-			]
-	
-		},{
 			"name":"menuCenterPages",
 			"navigation":[
 				{

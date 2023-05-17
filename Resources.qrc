@@ -1,57 +1,11 @@
 <RCC>
   <qresource prefix="icons">
-    <file>icons/align-justify.svg</file>
-    <file>icons/bell.svg</file>
-    <file>icons/chevron-left.svg</file>
-    <file>icons/copy.svg</file>
-    <file>icons/credit-card.svg</file>
-    <file>icons/download.svg</file>
-    <file>icons/edit.svg</file>
-    <file>icons/edit-3.svg</file>
-    <file>icons/file-text.svg</file>
-    <file>icons/grid.svg</file>
-    <file>icons/help-circle.svg</file>
-    <file>icons/home.svg</file>
-    <file>icons/info.svg</file>
-    <file>icons/layout.svg</file>
-    <file>icons/maximize.svg</file>
-    <file>icons/minus-square.svg</file>
-    <file>icons/more-horizontal.svg</file>
-    <file>icons/pie-chart.svg</file>
-    <file>icons/printer.svg</file>
-    <file>icons/settings.svg</file>
-    <file>icons/square.svg</file>
-    <file>icons/toggle-left.svg</file>
+    <file>icons/quebra-errada.svg</file>
+    <file>icons/documento.svg</file>
+    <file>icons/excluir.svg</file>
+    <file>icons/cancelar.svg</file>
+    <file>icons/mais.svg</file>
     <file>icons/toggle-right.svg</file>
-    <file>icons/trending-up.svg</file>
-    <file>icons/x-circle.svg</file>
-    <file>icons/x-square.svg</file>
-    <file>icons/align-justify.svg</file>
-    <file>icons/bell.svg</file>
-    <file>icons/chevron-left.svg</file>
-    <file>icons/copy.svg</file>
-    <file>icons/credit-card.svg</file>
-    <file>icons/download.svg</file>
-    <file>icons/edit.svg</file>
-    <file>icons/edit-3.svg</file>
-    <file>icons/file-text.svg</file>
-    <file>icons/grid.svg</file>
-    <file>icons/help-circle.svg</file>
-    <file>icons/home.svg</file>
-    <file>icons/info.svg</file>
-    <file>icons/layout.svg</file>
-    <file>icons/maximize.svg</file>
-    <file>icons/minus-square.svg</file>
-    <file>icons/more-horizontal.svg</file>
-    <file>icons/pie-chart.svg</file>
-    <file>icons/printer.svg</file>
-    <file>icons/settings.svg</file>
-    <file>icons/square.svg</file>
-    <file>icons/toggle-left.svg</file>
-    <file>icons/toggle-right.svg</file>
-    <file>icons/trending-up.svg</file>
-    <file>icons/x-circle.svg</file>
-    <file>icons/x-square.svg</file>
     <file>icons/chevron-left.svg</file>
     <file>icons/align-justify.svg</file>
     <file>icons/bell.svg</file>
@@ -73,33 +27,14 @@
     <file>icons/printer.svg</file>
     <file>icons/settings.svg</file>
     <file>icons/square.svg</file>
+    <file>icons/trending-up.svg</file>
+    <file>icons/x-circle.svg</file>
+    <file>icons/x-square.svg</file>
     <file>icons/toggle-left.svg</file>
-    <file>icons/toggle-right.svg</file>
-    <file>icons/trending-up.svg</file>
-    <file>icons/x-circle.svg</file>
-    <file>icons/x-square.svg</file>
-    <file>icons/x-circle.svg</file>
-    <file>icons/align-justify.svg</file>
-    <file>icons/help-circle.svg</file>
-    <file>icons/home.svg</file>
-    <file>icons/info.svg</file>
-    <file>icons/maximize.svg</file>
-    <file>icons/minus-square.svg</file>
-    <file>icons/printer.svg</file>
-    <file>icons/settings.svg</file>
-    <file>icons/square.svg</file>
-    <file>icons/trending-up.svg</file>
-    <file>icons/x-square.svg</file>
-    <file>icons/align-justify.svg</file>
-    <file>icons/help-circle.svg</file>
-    <file>icons/home.svg</file>
-    <file>icons/info.svg</file>
-    <file>icons/printer.svg</file>
-    <file>icons/settings.svg</file>
-    <file>icons/trending-up.svg</file>
-    <file>icons/x-square.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/desligar.png</file>
+    <file>img/ligar.png</file>
     <file>img/excel.png</file>
     <file>img/apartamento.png</file>
     <file>img/atualizações-disponíveis.png</file>
