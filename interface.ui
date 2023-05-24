@@ -27,7 +27,7 @@
 	background-color: #1f232a;
 }
 
-#leftMenuSubContainer{
+#leftMenuContainer #leftMenuSubContainer{
 	background-color: #16191d;
 }
 #leftMenuSubContainer QPushButton{
@@ -86,7 +86,10 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QCustomSlideMenu" name="leftMenuContainer" native="true">
+     <widget class="QWidget" name="leftMenuContainer" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="maximumSize">
        <size>
         <width>45</width>
@@ -111,6 +114,18 @@
        </property>
        <item alignment="Qt::AlignLeft">
         <widget class="QWidget" name="leftMenuSubContainer" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="spacing">
            <number>0</number>
@@ -412,8 +427,8 @@ border-left: 2px solid rgb(255,255,255);</string>
       </property>
       <property name="maximumSize">
        <size>
-        <width>900</width>
-        <height>900</height>
+        <width>1600000</width>
+        <height>1600000</height>
        </size>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">

@@ -1,7 +1,7 @@
 from interface import *
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QWidget , QSizePolicy, QStackedWidget, QLabel, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QWidget , QSizePolicy, QStackedWidget, QLabel, QVBoxLayout, QSizeGrip
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QPropertyAnimation
 from PyQt5 import uic, QtCore
 import iconify as ico
 from iconify.qt import QtGui, QtWidgets, QtCore
@@ -11,40 +11,9 @@ import sys
 from Custom_Widgets.Widgets import *
 import requests
 
-
-class ErrorNotification(QWidget):
-    def __init__(self, error_message, parent=None):
-        super().__init__(parent)
-        uic.loadUi('interface.ui', self)
-
-        # Configure widget appearance
-        self.setWindowFlag(Qt.FramelessWindowHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
-
-        # Find the popupNotificationContantContainer widget and the messageNotification label
-        self.popup_container = self.findChild(QWidget, "popupNotificationContantContainer")
-        self.message_label = self.findChild(QLabel, "messageNotification")
-
-        # Set the error message to the label
-        self.message_label.setText(error_message)
-
-        # Set widget to be hidden by default
-        self.hide()
-
-    def show_as_notification(self):
-        # Calculate widget position
-        parent_geometry = self.parent().geometry()
-        x = parent_geometry.x() + parent_geometry.width() - self.width() - 10
-        y = parent_geometry.y() + parent_geometry.height() - self.height() - 10
-        self.move(x, y)
-
-        # Show widget
-        self.popup_container.show()
-        self.show()
-        self.raise_()
-        self.activateWindow()
-
-
+##########################################################
+# CLASS API FIREBASE                                     #
+##########################################################
 class FirebaseAPI():
     def __init__(self, firebase_url):
         self.firebase_url = firebase_url
@@ -70,10 +39,9 @@ class FirebaseAPI():
         return response.json()
 
 
-
-#--------------------------------------------------------#
+##########################################################
 # CLASS MAIN WINDOWS                                     #
-#--------------------------------------------------------#
+##########################################################
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -82,8 +50,23 @@ class MainWindow(QMainWindow):
         #--------------------------------------------------------#
         # APPLY JSON STYLESHEET  Lib.|Custom_Widgets.Widgets|    #
         #--------------------------------------------------------#
-        loadJsonStyle(self, self.ui)
+        #loadJsonStyle(self, self.ui)
+        #self.show()
+        
+        # Personalização da barra de navegação
+        self.ui.minimizeBtn.clicked.connect(self.showMinimized)
+        self.ui.closeBtn.clicked.connect(self.close)
+        self.ui.restoreBtn.clicked.connect(self.toggle_maximized)
+        self.ui.restoreBtn.setCheckable(True)
+        self.ui.restoreBtn.setChecked(self.isMaximized())
+        # Ocultar a janela do Windows
+        self.setWindowFlag(Qt.WindowTitleHint, False)
+        self.setWindowFlag(Qt.FramelessWindowHint)
         self.show()
+        # Permitir arrastar a janela ao clicar e arrastar no topo
+        self.draggable = True
+        self.draggable_area_height = 40  # Altura da área superior onde a janela pode ser arrastada
+        
         #--------------------------------------------------------#
         # Redimensionamento da janela e Definições iniciais      #
         #--------------------------------------------------------#
@@ -127,21 +110,38 @@ class MainWindow(QMainWindow):
         self.ui.btnNewRow.clicked.connect(self.add_new_row)
         self.ui.btnDeleteRow.clicked.connect(self.delete_row)
         
-        
-        
         #--------------------------------------------------------#
-        # Funções do botoões MenuTec                             #
+        # Funções do botoões MenuPrincipal                       #
         #--------------------------------------------------------#
-        self.ui.settingsBtn.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.settingsBtn))
-        self.ui.infoBtn.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.infoBtn))
-        self.ui.closeCenterBtnSettings.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.closeCenterBtnSettings))
-        self.ui.closeCenterBtnInfo.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.closeCenterBtnInfo))
-        
+        # Conecta o clique do botão à função de animação
+        self.ui.menuBtn.clicked.connect(self.animate_menu)
+
+        # Definir a geometria inicial do widget leftMenuContainer
+        self.left_menu_width = 45
+        self.ui.leftMenuSubContainer.setGeometry(0, 0, self.left_menu_width, self.height())
+
+        # Conecta o clique dos botões do Menu aos Widget
         self.ui.homeBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.homeBtn, 0))
         self.ui.appBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.appBtn, 1))
         self.ui.cardBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.cardBtn, 2))
         self.ui.reportBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.reportBtn, 3))
-        
+
+        #--------------------------------------------------------#
+        # Funções do botoões MenuTec                             #
+        #--------------------------------------------------------#
+        # Definir a geometria e configuração inicial do menu central como invisível
+        self.center_menu_width = 200
+        self.ui.centerMenuContainer.setMaximumWidth(0)
+        self.ui.centerMenuContainer.setMinimumWidth(0)
+        self.ui.centerMenuSubContainer.setGeometry(-self.center_menu_width, 0, 0, self.height())
+        self.center_menu_visible = False
+
+        # Conecta o clique dos botões aos Widget
+        self.ui.settingsBtn.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.settingsBtn, 0))
+        self.ui.infoBtn.clicked.connect(lambda: self.toggle_button_menuTec(self.ui.infoBtn, 1))
+        self.ui.closeCenterBtnSettings.clicked.connect(self.animate_center_menu)
+        self.ui.closeCenterBtnInfo.clicked.connect(self.animate_center_menu)
+                
         #--------------------------------------------------------#
         # Funções do comboBox aba APP                            #
         #--------------------------------------------------------#        
@@ -171,151 +171,46 @@ class MainWindow(QMainWindow):
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
         self.ui.comboBoxApp.currentIndexChanged.connect(self.handle_combobox_change)
-         
-        
+                 
         # CLOSE MENU CENTER WIDGET SIZE
         
-                # CLOSE MENU CENTER WIDGET SIZE
-        self.ui.pushButton_6.clicked.connect(lambda: self.show_error_notification('Teste de msg notificação', self))
 
-#--------------------------------------------------------#
-# Funçoes do Firebase                                    #
-#--------------------------------------------------------#
-    def on_table_data_changed(self, top_left, bottom_right):
-        # Obter o modelo da tabela
-        model = self.ui.tableViewLacon.model()
 
-        # Obter os novos dados editados
-        for row in range(top_left.row(), bottom_right.row() + 1):
-            # Obter o ID do item
-            id_index = model.index(row, 0)
-            item_id = id_index.data(Qt.DisplayRole)
-            print("id_item", item_id)
-
-            # Verificar se o campo de ID está vazio
-            if item_id == '':
-                QMessageBox.warning(self, 'Aviso', 'O campo CONTRATO não pode ser vazio.')
-            else:
-                # Verificar se o ID já existe em outro item
-                for other_row in range(model.rowCount()):
-                    if other_row != row:  # Ignorar a linha atual
-                        other_id_index = model.index(other_row, 0)
-                        other_item_id = other_id_index.data(Qt.DisplayRole)
-                        if item_id == other_item_id:
-                            QMessageBox.warning(self, 'Aviso', 'Já existe outro CONTRATO com o mesmo numero.')
-                            break
-                else:
-                    # Obter as informações do item a ser atualizado
-                    row_data = {}
-                    for col in range(1, model.columnCount()):
-                        column_name = model.headerData(col, Qt.Horizontal)
-                        item_index = model.index(row, col)
-                        item_data = item_index.data(Qt.DisplayRole)
-                        row_data[column_name] = item_data
-
-                    # Atualizar os dados no Firebase
-                    self.firebase_api.patch(item_id, row_data)
-                    continue
-
-            # Limpar o campo ID
-            model.setData(id_index, '')
-            return
-
-    def add_new_row(self):
-        # Obter o modelo da tabela
-        model = self.ui.tableViewLacon.model()
-
-        # Obter a quantidade de colunas na tabela
-        column_count = model.columnCount()
-
-        # Criar uma nova linha com células vazias
-        new_row = []
-        for col in range(column_count):
-            item = QStandardItem("")
-            new_row.append(item)
-
-        # Adicionar a nova linha ao modelo da tabela
-        model.appendRow(new_row)
-    
-    def delete_row(self):
-        # Obter o modelo da tabela
-        model = self.ui.tableViewLacon.model()
-
-        # Obter o índice da linha selecionada
-        selected_index = self.ui.tableViewLacon.selectedIndexes()[0]
-
-        # Obter o ID do item a ser excluído
-        id_index = model.index(selected_index.row(), 0)
-        item_id = id_index.data(Qt.DisplayRole)
-        # Remover a linha selecionada da tabela
-        model.removeRow(selected_index.row())
-
-        # Excluir os dados correspondentes do Firebase
-        self.firebase_api.delete(item_id)
-
-#--------------------------------------------------------#
-# Funçoes do Menu                                        #
-#--------------------------------------------------------#
-    def toggle_button_menuTec(self, button):
-        self.buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
-        if button == self.ui.closeCenterBtnInfo or button == self.ui.closeCenterBtnSettings:
-            self.ui.centerMenuContainer.collapseMenu()
-            for btn in self.buttons_list:
-                btn.setStyleSheet("background-color: transparent;")
-                btn.setChecked(False)
-            return
-
-        for btn in self.buttons_list:
-            if btn != button:
-                btn.setStyleSheet("background-color: transparent;")
-                print(btn.isChecked())
-                if btn.isChecked():
-                    print('checagem do btn')
-                    self.ui.centerMenuContainer.collapseMenu()
-                    btn.setChecked(False)
-        self.ui.centerMenuContainer.slideMenu()
-
-        if self.styleSheet() == self.current_theme:
-            if button.isChecked():
-                button.setStyleSheet("background-color: #2c313c;") 
-            else:
-                button.setStyleSheet("background-color: transparent;")
-
+#========================================================#
+# Funçoes da Interface                                   #
+#========================================================#
+    def toggle_maximized(self):
+        if self.isMaximized():
+            self.showNormal()
+            self.ui.restoreBtn.setIcon(QIcon(":/icons/icons/square.svg"))
         else:
-            if button.isChecked():
-                button.setStyleSheet("background-color: #348498;")
-            else:
-                button.setStyleSheet("background-color: transparent;")
+            self.showMaximized()
+            self.ui.restoreBtn.setIcon(QIcon(":/icons/icons/copy.svg"))
 
-    def toggle_button_menuPrincipal(self, button, index):
-        self.buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
-
-        for btn in self.buttons_list:
-            if btn != button:
-                btn.setStyleSheet("background-color: transparent;")
-                if btn.isChecked():
-                    btn.setChecked(False)
-
-        if self.styleSheet() == self.current_theme:
-            if button.isChecked():
-                button.setStyleSheet("background-color: #2c313c;")
-            else:
-                button.setStyleSheet("background-color: transparent;")
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton and self.is_top_draggable_area(event.pos()):
+            self.draggable = True
+            self.offset = event.pos()
         else:
-            if button.isChecked():
-                button.setStyleSheet("background-color: #348498;")
-            else:
-                button.setStyleSheet("background-color: transparent;")
+            QMainWindow.mousePressEvent(self, event)
 
-        self.ui.mainPages.setCurrentIndex(index)
+    def mouseMoveEvent(self, event):
+        if hasattr(self, 'offset') and self.draggable and event.buttons() == Qt.LeftButton:
+            self.move(event.globalPos() - self.offset)
+            event.accept()
+        else:
+            QMainWindow.mouseMoveEvent(self, event)     
 
-    def handle_combobox_change(self, index):
-        self.ui.stackedWidgetApp.setCurrentIndex(index)
+    def mouseReleaseEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.draggable = False
 
+    def is_top_draggable_area(self, pos):
+        return pos.y() <= self.draggable_area_height
+        pass
 
     def change_theme(self):
-        self.buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
-        
+     
         if self.styleSheet() == self.current_theme:
             # Carregue o arquivo CSS para o novo tema desejado
             new_icon = QtGui.QIcon(":/imagens/img/desligar.png")
@@ -375,29 +270,256 @@ class MainWindow(QMainWindow):
         self.setStyleSheet(new_theme)
         self.ui.temaBtn.setIcon(new_icon)
         # Atualizar o estilo dos botões ativados
-        for btn in self.buttons_list:
-            if btn.isChecked():
+        buttons_list = [self.ui.settingsBtn, self.ui.infoBtn, self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
+        for btn in buttons_list:
+            if btn.isChecked() or btn.setChecked(True):
                 if self.styleSheet() == self.current_theme:
                     btn.setStyleSheet("background-color: #2c313c;")
                 else:
                     btn.setStyleSheet("background-color: #348498;")
+ 
+#========================================================#
+# Funçoes do Menu                                        #
+#========================================================#
+    def animate_menu(self):
+        # Verificar se o menu está recolhido ou expandido
+        if self.left_menu_width == 45:
+            # Criar uma animação para expandir o widget
+            anim = QPropertyAnimation(self.ui.leftMenuContainer, b'geometry')
+            anim.setDuration(500)  # Duração da animação em milissegundos
+            anim.setStartValue(QRect(0, 0, self.left_menu_width, self.height()))
+            anim.setEndValue(QRect(0, 0, 190, self.height()))  # Definir a geometria desejada
+            self.left_menu_width = 190
+
+            # Criar uma animação para ajustar a posição do leftMenuContainer
+            pos_animation = QPropertyAnimation(self.ui.leftMenuContainer, b'pos')
+            pos_animation.setDuration(500)  # Duração da animação em milissegundos
+            pos_animation.setStartValue(QPoint(0, 0))
+            pos_animation.setEndValue(QPoint(145, 0))  # Definir a posição desejada
+
+            # Redimensionar o leftMenuSubContainer
+            self.ui.leftMenuContainer.setMaximumWidth(190)
+            self.ui.leftMenuContainer.setMinimumWidth(190)
+            self.ui.leftMenuSubContainer.setMaximumWidth(190)
+            self.ui.leftMenuSubContainer.setMinimumWidth(190)
+
+            # Iniciar as animações
+            anim.start()
+            pos_animation.start()
+            self.ui.menuBtn.setIcon(QIcon(":/icons/icons/chevron-left.svg"))
+
+        else:
+            # Criar uma animação para recolher o widget
+            anim = QPropertyAnimation(self.ui.leftMenuContainer, b'geometry')
+            anim.setDuration(500)  # Duração da animação em milissegundos
+            anim.setStartValue(QRect(0, 0, self.left_menu_width, self.height()))
+            anim.setEndValue(QRect(0, 0, 45, self.height()))  # Definir a geometria desejada
+            self.left_menu_width = 45
+
+            # Criar uma animação para ajustar a posição do leftMenuContainer
+            pos_animation = QPropertyAnimation(self.ui.leftMenuContainer, b'pos')
+            pos_animation.setDuration(500)  # Duração da animação em milissegundos
+            pos_animation.setStartValue(QPoint(145, 0))
+            pos_animation.setEndValue(QPoint(0, 0))  # Definir a posição desejada
+
+            # Redimensionar o leftMenuSubContainer
+            self.ui.leftMenuContainer.setMaximumWidth(45)
+            self.ui.leftMenuContainer.setMinimumWidth(45)
+            self.ui.leftMenuSubContainer.setMaximumWidth(45)
+            self.ui.leftMenuSubContainer.setMinimumWidth(45)
+
+            # Iniciar as animações
+            anim.start()
+            pos_animation.start()
+            self.ui.menuBtn.setIcon(QIcon(":/icons/icons/align-justify.svg"))
+
+    def toggle_button_menuPrincipal(self, button, index):
+        buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
+
+        for btn in buttons_list:
+            if btn != button:
+                btn.setStyleSheet("background-color: transparent;")
+                if btn.isChecked():
+                    btn.setChecked(False)
+
+        if self.styleSheet() == self.current_theme:
+            print('chegou a verificar == self.current_theme ')
+            if button.isChecked():
+                button.setStyleSheet("background-color: transparent;")
+            else:
+                button.setStyleSheet("background-color: #2c313c;  border-left: 2px solid rgb(255,255,255);")             
+        else:
+            if button.isChecked():
+                button.setStyleSheet("background-color: transparent;")
+            else:
+                button.setStyleSheet("background-color: #348498;  border-left: 2px solid rgb(255,255,255);")
+        self.ui.mainPages.setCurrentIndex(index)
+
+    def animate_center_menu(self):
+        # Verificar se o menu central está visível ou oculto
+        if self.center_menu_visible:
+            # Criar uma animação para ocultar o widget
+            print('animação menu == visivel // entaão define false pois vai recolher')
+            anim = QPropertyAnimation(self.ui.centerMenuSubContainer, b'geometry')
+            anim.setDuration(500)  # Duração da animação em milissegundos
+            anim.setStartValue(QRect(0, 0, self.center_menu_width, self.height()))
+            anim.setEndValue(QRect(-self.center_menu_width, 0, self.center_menu_width, self.height()))  # Definir a geometria desejada
+
+            # Redimensionar o centerMenuContainer e outros widgets
+            self.ui.centerMenuContainer.setMaximumWidth(0)
+            self.ui.centerMenuContainer.setMinimumWidth(0)
+            # Ajustar outros widgets conforme necessário
+            self.ui.centerMenuSubContainer.setMaximumWidth(0)
+            self.ui.centerMenuSubContainer.setMinimumWidth(0)
+            # Iniciar a animação
+            anim.start()
+            self.center_menu_visible = False
+            buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
+            for btn in buttons_list:
+                btn.setChecked(False)
+
+        else:
+            print('animação menu == invisivel // entaão define true pois vai expandi')
+            # Criar uma animação para exibir o widget
+            anim = QPropertyAnimation(self.ui.centerMenuSubContainer, b'geometry')
+            anim.setDuration(500)  # Duração da animação em milissegundos
+            anim.setStartValue(QRect(-self.center_menu_width, 0, self.center_menu_width, self.height()))
+            anim.setEndValue(QRect(0, 0, self.center_menu_width, self.height()))  # Definir a geometria desejada
+
+            # Redimensionar o centerMenuContainer e outros widgets
+            self.ui.centerMenuContainer.setMaximumWidth(self.center_menu_width)
+            self.ui.centerMenuContainer.setMinimumWidth(self.center_menu_width)
+            # Ajustar outros widgets conforme necessário
+            self.ui.centerMenuSubContainer.setMaximumWidth(self.center_menu_width)
+            self.ui.centerMenuSubContainer.setMinimumWidth(self.center_menu_width)
+            # Iniciar a animação
+            anim.start()
+            self.center_menu_visible = True
+
+    def toggle_button_menuTec(self, button, index):
+        self.buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
+        
+        if button.isChecked() == True:
+            for btn in self.buttons_list:
+                if btn != button:
+                    btn.setStyleSheet("background-color: transparent;")
+                    if btn.isChecked():
+                        print('if que checa botão')
+                        btn.setChecked(False)
+                        self.ui.menuCenterPages.setCurrentIndex(index)
+                    else:
+                        print('else que checa botão')
+                        self.animate_center_menu()
+                        self.ui.menuCenterPages.setCurrentIndex(index)
+        else:
+            print("foi para else")
+            self.animate_center_menu()
+
+
+        if self.styleSheet() == self.current_theme:
+            if button.isChecked():
+                button.setStyleSheet("background-color: #2c313c;")
+            else:
+                button.setStyleSheet("background-color: transparent;")
+        else:
+            if button.isChecked():
+                button.setStyleSheet("background-color: #348498;")
+            else:
+                button.setStyleSheet("background-color: transparent;")
 
 
 
+    def handle_combobox_change(self, index):
+        self.ui.stackedWidgetApp.setCurrentIndex(index)
 
-    def show_error_notification(self, error_message, is_permanent=False):
-        notification = ErrorNotification(error_message)
-        notification.setParent(self.ui.centerMenuContainer)  # define QCustomSlideMenu como pai
-        notification.show_as_notification()
-        if not is_permanent:
-            # Esconde a notificação após 5 segundos
-            QtCore.QTimer.singleShot(15000, notification.hide)
+#========================================================#
+# Funçoes do Firebase                                    #
+#========================================================#
+    def on_table_data_changed(self, top_left, bottom_right):
+        # Obter o modelo da tabela
+        model = self.ui.tableViewLacon.model()
+        field_mapping = {
+                "Contrato": None,
+                "Imóvel": "01-imovel",
+                "Locatário": "02-locatario",
+                "CPF/CNPJ": "03-cpf-cnpj",
+                "Valor": "04-valor",
+                "Inicio": "05-inicio",
+                "Fim": "06-fim"  } 
+        # Obter os novos dados editados
+        for row in range(top_left.row(), bottom_right.row() + 1):
+            # Obter o ID do item
+            id_index = model.index(row, 0)
+            item_id = id_index.data(Qt.DisplayRole)
+            print("id_item", item_id)
 
-   
+            # Verificar se o campo de ID está vazio
+            if item_id == '':
+                QMessageBox.warning(self, 'Aviso', 'O campo CONTRATO não pode ser vazio.')
+            else:
+                # Verificar se o ID já existe em outro item
+                for other_row in range(model.rowCount()):
+                    if other_row != row:  # Ignorar a linha atual
+                        other_id_index = model.index(other_row, 0)
+                        other_item_id = other_id_index.data(Qt.DisplayRole)
+                        if item_id == other_item_id:
+                            QMessageBox.warning(self, 'Aviso', 'Já existe outro CONTRATO com o mesmo numero.')
+                            break
+                else:
+                    # Obter as informações do item a ser atualizado
+                    row_data = {}
+                    for col in range(1, model.columnCount()):
+                        column_name = model.headerData(col, Qt.Horizontal)
+                        firebase_key = field_mapping.get(column_name)
+                        if firebase_key:
+                            item_index = model.index(row, col)
+                            item_data = item_index.data(Qt.DisplayRole)
+                            row_data[firebase_key] = item_data
 
-#--------------------------------------------------------#
+                    # Atualizar os dados no Firebase
+                    self.firebase_api.patch(item_id, row_data)
+                    continue
+
+            # Limpar o campo ID
+            model.setData(id_index, '')
+            return
+
+    def add_new_row(self):
+        # Obter o modelo da tabela
+        model = self.ui.tableViewLacon.model()
+
+        # Obter a quantidade de colunas na tabela
+        column_count = model.columnCount()
+
+        # Criar uma nova linha com células vazias
+        new_row = []
+        for col in range(column_count):
+            item = QStandardItem("")
+            new_row.append(item)
+
+        # Adicionar a nova linha ao modelo da tabela
+        model.appendRow(new_row)
+    
+    def delete_row(self):
+        # Obter o modelo da tabela
+        model = self.ui.tableViewLacon.model()
+
+        # Obter o índice da linha selecionada
+        selected_index = self.ui.tableViewLacon.selectedIndexes()[0]
+
+        # Obter o ID do item a ser excluído
+        id_index = model.index(selected_index.row(), 0)
+        item_id = id_index.data(Qt.DisplayRole)
+        # Remover a linha selecionada da tabela
+        model.removeRow(selected_index.row())
+
+        # Excluir os dados correspondentes do Firebase
+        self.firebase_api.delete(item_id)
+
+
+##########################################################
 # EXECUÇÃO DA APLICAÇÃO                                  #
-#--------------------------------------------------------#
+##########################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()

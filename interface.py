@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
 "    background-color: #1f232a;\n"
 "}\n"
 "\n"
-"#leftMenuSubContainer{\n"
+"#leftMenuContainer #leftMenuSubContainer{\n"
 "    background-color: #16191d;\n"
 "}\n"
 "#leftMenuSubContainer QPushButton{\n"
@@ -74,7 +74,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.leftMenuContainer = QCustomSlideMenu(self.centralwidget)
+        self.leftMenuContainer = QtWidgets.QWidget(self.centralwidget)
+        self.leftMenuContainer.setEnabled(True)
         self.leftMenuContainer.setMaximumSize(QtCore.QSize(45, 16777215))
         self.leftMenuContainer.setObjectName("leftMenuContainer")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.leftMenuContainer)
@@ -82,6 +83,12 @@ class Ui_MainWindow(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.leftMenuSubContainer = QtWidgets.QWidget(self.leftMenuContainer)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.leftMenuSubContainer.sizePolicy().hasHeightForWidth())
+        self.leftMenuSubContainer.setSizePolicy(sizePolicy)
+        self.leftMenuSubContainer.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.leftMenuSubContainer.setObjectName("leftMenuSubContainer")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.leftMenuSubContainer)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -190,7 +197,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.leftMenuContainer)
         self.centerMenuContainer = QCustomSlideMenu(self.centralwidget)
         self.centerMenuContainer.setMinimumSize(QtCore.QSize(0, 0))
-        self.centerMenuContainer.setMaximumSize(QtCore.QSize(900, 900))
+        self.centerMenuContainer.setMaximumSize(QtCore.QSize(1600000, 1600000))
         self.centerMenuContainer.setObjectName("centerMenuContainer")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.centerMenuContainer)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
