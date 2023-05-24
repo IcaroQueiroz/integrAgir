@@ -40,7 +40,7 @@ class Ui_MainWindow(object):
 "#frame_3 QPushButton{\n"
 "    text-align: left;\n"
 "    padding:3px 10px;\n"
-"    border-top-left-radius:10px;\n"
+"    border-top-left-radius:8px;\n"
 "    border-bottom-left-radius:10px;\n"
 "}\n"
 "#centerMenuSubContainer{\n"
@@ -56,6 +56,7 @@ class Ui_MainWindow(object):
 "        \n"
 "}\n"
 "#comboBoxApp{\n"
+"    background-color:#1f232a;\n"
 "    font-size: 16px;\n"
 "    color: #fff;\n"
 "    font-family: Arial;\n"
@@ -550,7 +551,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15.addWidget(self.label_2)
         self.stackedWidgetApp.addWidget(self.pageHomeApp)
         self.pageEaj = QtWidgets.QWidget()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pageEaj.sizePolicy().hasHeightForWidth())
@@ -564,6 +565,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
         self.frame_4.setSizePolicy(sizePolicy)
+        self.frame_4.setMaximumSize(QtCore.QSize(650, 190))
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
@@ -577,9 +579,9 @@ class Ui_MainWindow(object):
         self.pushButton.setSizePolicy(sizePolicy)
         self.pushButton.setText("")
         icon14 = QtGui.QIcon()
-        icon14.addPixmap(QtGui.QPixmap(":/imagens/img/excel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon14.addPixmap(QtGui.QPixmap(":/imagens/img/excel-btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon14)
-        self.pushButton.setIconSize(QtCore.QSize(96, 96))
+        self.pushButton.setIconSize(QtCore.QSize(170, 170))
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_14.addWidget(self.pushButton)
         self.pushButton_2 = QtWidgets.QPushButton(self.frame_4)
@@ -590,33 +592,12 @@ class Ui_MainWindow(object):
         self.pushButton_2.setSizePolicy(sizePolicy)
         self.pushButton_2.setText("")
         icon15 = QtGui.QIcon()
-        icon15.addPixmap(QtGui.QPixmap(":/imagens/img/notas.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon15.addPixmap(QtGui.QPixmap(":/imagens/img/txt-btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_2.setIcon(icon15)
-        self.pushButton_2.setIconSize(QtCore.QSize(96, 96))
+        self.pushButton_2.setIconSize(QtCore.QSize(170, 170))
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_14.addWidget(self.pushButton_2)
         self.verticalLayout_19.addWidget(self.frame_4)
-        self.frame_9 = QtWidgets.QFrame(self.pageEaj)
-        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_9.setObjectName("frame_9")
-        self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.frame_9)
-        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
-        self.label_3 = QtWidgets.QLabel(self.frame_9)
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
-        self.horizontalLayout_16.addWidget(self.label_3, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
-        self.label_6 = QtWidgets.QLabel(self.frame_9)
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_6.setFont(font)
-        self.label_6.setObjectName("label_6")
-        self.horizontalLayout_16.addWidget(self.label_6, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
-        self.verticalLayout_19.addWidget(self.frame_9)
         self.frame_10 = QtWidgets.QFrame(self.pageEaj)
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -624,8 +605,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_17 = QtWidgets.QHBoxLayout(self.frame_10)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
         self.label_9 = QtWidgets.QLabel(self.frame_10)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setUnderline(False)
+        font.setStrikeOut(False)
+        self.label_9.setFont(font)
         self.label_9.setObjectName("label_9")
-        self.horizontalLayout_17.addWidget(self.label_9)
+        self.horizontalLayout_17.addWidget(self.label_9, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_19.addWidget(self.frame_10)
         self.stackedWidgetApp.addWidget(self.pageEaj)
         self.pageLacon = QtWidgets.QWidget()
@@ -774,8 +760,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.menuCenterPages.setCurrentIndex(0)
-        self.mainPages.setCurrentIndex(0)
-        self.stackedWidgetApp.setCurrentIndex(2)
+        self.mainPages.setCurrentIndex(1)
+        self.stackedWidgetApp.setCurrentIndex(1)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -796,7 +782,7 @@ class Ui_MainWindow(object):
         self.infoBtn.setText(_translate("MainWindow", "  Informações  "))
         self.labelWidgetSettings.setText(_translate("MainWindow", "Configurações"))
         self.closeCenterBtnSettings.setToolTip(_translate("MainWindow", "Close Menu"))
-        self.label.setText(_translate("MainWindow", "Modo Escuro:"))
+        self.label.setText(_translate("MainWindow", "Tema Dark"))
         self.labelWedgetInfo.setText(_translate("MainWindow", "Informações"))
         self.closeCenterBtnInfo.setToolTip(_translate("MainWindow", "Close Menu"))
         self.labelInformation.setText(_translate("MainWindow", "Information"))
@@ -806,8 +792,6 @@ class Ui_MainWindow(object):
         self.labelHome.setText(_translate("MainWindow", "Home"))
         self.labelApp.setText(_translate("MainWindow", "Empresa: "))
         self.label_2.setText(_translate("MainWindow", "Modulo APP selecione uma empresa."))
-        self.label_3.setText(_translate("MainWindow", "ABRIR EXCEL"))
-        self.label_6.setText(_translate("MainWindow", "SALVAR TXT"))
         self.label_9.setText(_translate("MainWindow", "Para utilizar essa ferramenta, siga os seguintes passos:\n"
 "   1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.\n"
 "   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão \"Abrir Excel\".\n"

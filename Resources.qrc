@@ -33,6 +33,8 @@
     <file>icons/toggle-left.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/txt-btn.png</file>
+    <file>img/excel-btn.png</file>
     <file>img/desligar.png</file>
     <file>img/ligar.png</file>
     <file>img/excel.png</file>

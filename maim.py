@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
         self.ui.temaBtn.clicked.connect(self.change_theme)
 
         #--------------------------------------------------------#
-        # Conexão firebase e TabelaViwer Lacon                        #
+        # Conexão firebase e TabelaViwer Lacon                   #
         #--------------------------------------------------------#        
         firebase_url = "https://integragir-default-rtdb.firebaseio.com/Contratos-Lacon"
         self.firebase_api = FirebaseAPI(firebase_url)
@@ -113,6 +113,12 @@ class MainWindow(QMainWindow):
         #--------------------------------------------------------#
         # Funções do botoões MenuPrincipal                       #
         #--------------------------------------------------------#
+        self.button_states = {
+            self.ui.homeBtn: True,
+            self.ui.appBtn: False,
+            self.ui.cardBtn: False,
+            self.ui.reportBtn: False}
+    
         # Conecta o clique do botão à função de animação
         self.ui.menuBtn.clicked.connect(self.animate_menu)
 
@@ -248,6 +254,15 @@ class MainWindow(QMainWindow):
                 #centerMenuSubContainer QLabel{
                     color: #ffffff;
                 }
+                #comboBoxApp{
+                    background-color:#fff;
+                    font-size: 16px;
+                    color: #348498;
+                    font-family: Arial;
+                    border-radius:10px;
+                    border: 2px solid #348498;
+                    padding-left: 5px;
+                }
                 #widgetInfo, #widgetSettings, #popupNotificationContantContainer{
                     background-color: #004d61;
                     border-radius:10px;
@@ -263,21 +278,23 @@ class MainWindow(QMainWindow):
         
         
         else:
-            # Caso contrário, restaure a folha de estilos do tema anterior
+        # Caso contrário, restaure a folha de estilos do tema anterior
             new_theme = self.current_theme
             new_icon = QtGui.QIcon(":/imagens/img/ligar.png") 
         # Aplique o novo tema para o aplicativo
         self.setStyleSheet(new_theme)
         self.ui.temaBtn.setIcon(new_icon)
         # Atualizar o estilo dos botões ativados
-        buttons_list = [self.ui.settingsBtn, self.ui.infoBtn, self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
+        buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
         for btn in buttons_list:
-            if btn.isChecked() or btn.setChecked(True):
+            if self.button_states[btn]:
                 if self.styleSheet() == self.current_theme:
-                    btn.setStyleSheet("background-color: #2c313c;")
+                    btn.setStyleSheet("background-color: #2c313c; border-left: 2px solid rgb(255,255,255);")
+                    self.ui.settingsBtn.setStyleSheet("background-color: #2c313c;")
                 else:
-                    btn.setStyleSheet("background-color: #348498;")
- 
+                    btn.setStyleSheet("background-color: #348498; border-left: 2px solid rgb(255,255,255);")
+                    self.ui.settingsBtn.setStyleSheet("background-color: #348498;")
+        self.ui.infoBtn.setStyleSheet("background-color: transparent;")
 #========================================================#
 # Funçoes do Menu                                        #
 #========================================================#
@@ -336,18 +353,21 @@ class MainWindow(QMainWindow):
     def toggle_button_menuPrincipal(self, button, index):
         buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
 
+        self.button_states[button] = True
         for btn in buttons_list:
             if btn != button:
                 btn.setStyleSheet("background-color: transparent;")
+                self.button_states[btn] = False
                 if btn.isChecked():
                     btn.setChecked(False)
+                    
 
         if self.styleSheet() == self.current_theme:
             print('chegou a verificar == self.current_theme ')
             if button.isChecked():
                 button.setStyleSheet("background-color: transparent;")
             else:
-                button.setStyleSheet("background-color: #2c313c;  border-left: 2px solid rgb(255,255,255);")             
+                button.setStyleSheet("background-color: #1f232a;  border-left: 2px solid rgb(255,255,255);")             
         else:
             if button.isChecked():
                 button.setStyleSheet("background-color: transparent;")
@@ -374,9 +394,6 @@ class MainWindow(QMainWindow):
             # Iniciar a animação
             anim.start()
             self.center_menu_visible = False
-            buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
-            for btn in buttons_list:
-                btn.setChecked(False)
 
         else:
             print('animação menu == invisivel // entaão define true pois vai expandi')
@@ -398,36 +415,66 @@ class MainWindow(QMainWindow):
 
     def toggle_button_menuTec(self, button, index):
         self.buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
-        
+
+        if self.center_menu_visible == True:
+            if self.ui.infoBtn.isChecked() == False and self.ui.settingsBtn.isChecked() == True:
+                self.ui.menuCenterPages.setCurrentIndex(index)
+                print('entrou no returne e fim')
+                for btn in self.buttons_list:
+                    if self.styleSheet() == self.current_theme:
+                        button.setStyleSheet("background-color: #2c313c;")
+                    else:
+                        button.setStyleSheet("background-color: #348498;")                   
+                    if btn != button:
+                        btn.setStyleSheet("background-color: transparent;")
+                        if btn.isChecked():
+                            btn.setChecked(False)
+                            
+                print('No verificação antes do retur ------------------------------')
+                print('info', self.ui.infoBtn.isChecked())
+                print('setting', self.ui.settingsBtn.isChecked())                    
+                return
+
+        print('No inicio de tudo ------------------------------')
+        print('info', self.ui.infoBtn.isChecked())
+        print('setting', self.ui.settingsBtn.isChecked())    
         if button.isChecked() == True:
             for btn in self.buttons_list:
                 if btn != button:
                     btn.setStyleSheet("background-color: transparent;")
                     if btn.isChecked():
-                        print('if que checa botão')
+                        print('if que checa botão antes ---------------------------------')
+                        print('info', self.ui.infoBtn.isChecked())
+                        print('setting', self.ui.settingsBtn.isChecked())
                         btn.setChecked(False)
+                        print('if que checa botão Depois ---------------------------------')
+                        print('info', self.ui.infoBtn.isChecked())
+                        print('setting', self.ui.settingsBtn.isChecked())
                         self.ui.menuCenterPages.setCurrentIndex(index)
                     else:
                         print('else que checa botão')
+                        btn.setChecked(False)
                         self.animate_center_menu()
                         self.ui.menuCenterPages.setCurrentIndex(index)
         else:
-            print("foi para else")
+            print('info', self.ui.infoBtn.isChecked())
+            print('setting', self.ui.settingsBtn.isChecked())
+            print(button)
+            print(button.isChecked())
+            print("foi para else final")
             self.animate_center_menu()
 
 
         if self.styleSheet() == self.current_theme:
-            if button.isChecked():
+            if button.isChecked() == True:
                 button.setStyleSheet("background-color: #2c313c;")
             else:
                 button.setStyleSheet("background-color: transparent;")
         else:
-            if button.isChecked():
+            if button.isChecked() == True:
                 button.setStyleSheet("background-color: #348498;")
             else:
                 button.setStyleSheet("background-color: transparent;")
-
-
 
     def handle_combobox_change(self, index):
         self.ui.stackedWidgetApp.setCurrentIndex(index)

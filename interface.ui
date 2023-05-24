@@ -39,7 +39,7 @@
 #frame_3 QPushButton{
 	text-align: left;
 	padding:3px 10px;
-	border-top-left-radius:10px;
+	border-top-left-radius:8px;
 	border-bottom-left-radius:10px;
 }
 #centerMenuSubContainer{
@@ -55,6 +55,7 @@
 		
 }
 #comboBoxApp{
+	background-color:#1f232a;
 	font-size: 16px;
 	color: #fff;
 	font-family: Arial;
@@ -546,7 +547,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </font>
                    </property>
                    <property name="text">
-                    <string>Modo Escuro:</string>
+                    <string>Tema Dark</string>
                    </property>
                   </widget>
                  </item>
@@ -983,7 +984,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="pageHome">
                 <property name="sizePolicy">
@@ -1122,7 +1123,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </sizepolicy>
                    </property>
                    <property name="currentIndex">
-                    <number>2</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="pageHomeApp">
                     <property name="sizePolicy">
@@ -1152,7 +1153,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                    </widget>
                    <widget class="QWidget" name="pageEaj">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
@@ -1165,6 +1166,12 @@ border-left: 2px solid rgb(255,255,255);</string>
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>650</width>
+                         <height>190</height>
+                        </size>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -1186,12 +1193,12 @@ border-left: 2px solid rgb(255,255,255);</string>
                           </property>
                           <property name="icon">
                            <iconset resource="Resources.qrc">
-                            <normaloff>:/imagens/img/excel.png</normaloff>:/imagens/img/excel.png</iconset>
+                            <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
-                            <width>96</width>
-                            <height>96</height>
+                            <width>170</width>
+                            <height>170</height>
                            </size>
                           </property>
                          </widget>
@@ -1209,51 +1216,13 @@ border-left: 2px solid rgb(255,255,255);</string>
                           </property>
                           <property name="icon">
                            <iconset resource="Resources.qrc">
-                            <normaloff>:/imagens/img/notas.png</normaloff>:/imagens/img/notas.png</iconset>
+                            <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
-                            <width>96</width>
-                            <height>96</height>
+                            <width>170</width>
+                            <height>170</height>
                            </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QFrame" name="frame_9">
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Raised</enum>
-                       </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_16">
-                        <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-                         <widget class="QLabel" name="label_3">
-                          <property name="font">
-                           <font>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>ABRIR EXCEL</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-                         <widget class="QLabel" name="label_6">
-                          <property name="font">
-                           <font>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>SALVAR TXT</string>
                           </property>
                          </widget>
                         </item>
@@ -1269,8 +1238,15 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_17">
-                        <item>
+                        <item alignment="Qt::AlignTop">
                          <widget class="QLabel" name="label_9">
+                          <property name="font">
+                           <font>
+                            <pointsize>10</pointsize>
+                            <underline>false</underline>
+                            <strikeout>false</strikeout>
+                           </font>
+                          </property>
                           <property name="text">
                            <string>Para utilizar essa ferramenta, siga os seguintes passos:
    1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.
