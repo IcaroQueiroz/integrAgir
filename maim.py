@@ -1,15 +1,17 @@
 from interface import *
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QWidget , QSizePolicy, QStackedWidget, QLabel, QVBoxLayout, QSizeGrip
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtCore import Qt, QPropertyAnimation
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QWidget, QSizePolicy, QStackedWidget, QLabel, QVBoxLayout, QSizeGrip, QFileDialog, QMessageBox
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
+from PyQt5.QtCore import Qt, QPropertyAnimation, QRect, QPoint
 from PyQt5 import uic, QtCore
+from PyQt5.QtWidgets import QTableView
 import iconify as ico
 from iconify.qt import QtGui, QtWidgets, QtCore
-from PySide2.QtCore import *
 import os
 import sys
-from Custom_Widgets.Widgets import *
 import requests
+import pandas as pd
+from datetime import datetime
+
 
 ##########################################################
 # CLASS API FIREBASE                                     #
@@ -38,11 +40,149 @@ class FirebaseAPI():
         response = requests.delete(url)
         return response.json()
 
+##########################################################
+# CLASS API FIREBASE                                     #
+##########################################################
+class Aplicacao():
+    def caminho_arquivo(self, caminho_relativo):
+        """ Obtém o caminho absoluto para o recurso, para PyInstaller """
+        try:
+            caminho_base = sys._MEIPASS
+        except Exception:
+            caminho_base = os.path.abspath(".")
+
+        return os.path.join(caminho_base, caminho_relativo)    
+
+    def file_open(self):
+        filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx)')
+        if filename:
+            self.df = pd.read_excel(filename)
+            print(self.df)
+            print(type(self.df))
+            self.eaj()
+
+    def file_salve(self):
+        filename, _ = QFileDialog.getSaveFileName(self, 'Salvar arquivo', 'C://file', 'Arquivos de Texto (*.txt)')
+        if filename:
+            with open(filename, 'w') as file:
+                file.write(self.txt)
+            self.exibir_caixa_dialogo('info', 'Info', 'TXT salvo com sucesso!')
+
+    def eaj(self):       
+        try:
+            self.txt = ''
+            self.txtM = ''
+            contador = 0
+            meu_dict = {}
+            for i, controlador in enumerate (self.df['AGIR']):
+                data_timestamp = self.df.loc[i,'Data de Crédito ou Débito (No Extrato)']
+                data_str = data_timestamp.strftime("%Y-%m-%d %H:%M:%S")
+                data_data = datetime.strptime(data_str, "%Y-%m-%d %H:%M:%S")
+                data_txt = f"{data_data:%Y%m%d}"
+                cpfoucnpj = self.df.loc[i,'CNPJ/CPF']
+                cpfoucnpj = cpfoucnpj.replace('.','').replace('/','').replace('-','')
+                ValoresSimples = ['simples','Simples']
+                banco = self.df.loc[i,'Conta Corrente']
+                if banco == 'Itaú Unibanco':
+                    bancoConta = '1597'
+                elif banco == 'Caixinha':
+                    bancoConta = '5'
+                elif banco == 'Caixa Econômica Federal 777-1':
+                    bancoConta = '1577'
+                else:
+                    bancoConta = '5'
+
+                if controlador in ValoresSimples:
+                    if int(self.df.loc[i,'Juros']) > 0 or int(self.df.loc[i,'Desconto']) > 0 or int(self.df.loc[i,'Multa']) > 0:
+                        lanMult = "000001," + str(data_txt) + ","+ bancoConta + ",0," + str(self.df.loc[i,'Recebido']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                        lanMult += "000002," + str(data_txt) + ",0," + "16," + str(self.df.loc[i,'Recebido']-self.df.loc[i,'Juros']-self.df.loc[i,'Multa']+self.df.loc[i,'Desconto']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,"+ cpfoucnpj + "," + "\n"
+                        if int(self.df.loc[i,'Juros']) > 0:
+                            lanMult += "000003," + str(data_txt) + ",0" + ",296," + str(self.df.loc[i,'Juros']) + ",00000000," + "Juros s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                        if int(self.df.loc[i,'Multa']) > 0:
+                            lanMult += "000003," + str(data_txt) + ",1469" + ",0," + str(self.df.loc[i,'Multa']) + ",00000000," + "Multa s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                        if int(self.df.loc[i,'Desconto']) > 0:
+                            lanMult += "000003," + str(data_txt) + ",0," + "564," + str(self.df.loc[i,'Desconto']) + ",00000000," + "Desconto s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                        self.txt += str(lanMult)
+                    else:
+                        lanSimp = "000001," + str(data_txt) + ","+ bancoConta + "," + "16," + str(self.df.loc[i,'Recebido']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,"+ cpfoucnpj + "," + "\n"       
+                        self.txt += str(lanSimp)
+                else:
+                    MultVerificação = str(self.df.loc[i,'AGIR']) + str(self.df.loc[i,'Data de Crédito ou Débito (No Extrato)'])
+                    try:
+                        self.txtM = meu_dict[MultVerificação][0]
+                        contador = meu_dict[MultVerificação][2]
+                        valorSoma = float(meu_dict[MultVerificação][1])
+                        if float(self.df.loc[i,'Juros']) > 0 or float(self.df.loc[i,'Desconto']) > 0 or float(self.df.loc[i,'Multa']) > 0:
+                            contador = contador+1
+                            lanMult = str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0," + "16," + str(self.df.loc[i,'Recebido']-self.df.loc[i,'Juros']-self.df.loc[i,'Multa']+self.df.loc[i,'Desconto']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,"+ cpfoucnpj + "," + "\n"
+                            if float(self.df.loc[i,'Juros']) > 0:
+                                contador = contador+1
+                                lanMult += str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0" + ",296," + str(self.df.loc[i,'Juros']) + ",00000000," + "Juros s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                            if float(self.df.loc[i,'Multa']) > 0:
+                                contador = contador+1
+                                lanMult += str('{:06d}'.format(contador)) +","+ str(data_txt) + ",1469" + ",0," + str(self.df.loc[i,'Multa']) + ",00000000," + "Multa s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                            if float(self.df.loc[i,'Desconto']) > 0:
+                                contador = contador+1
+                                lanMult += str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0," + "564," + str(self.df.loc[i,'Desconto']) + ",00000000," + "Desconto s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                            self.txtM += str(lanMult)
+                            valorSoma = valorSoma + float(self.df.loc[i,'Recebido'])
+                            meu_dict[MultVerificação] = [self.txtM,valorSoma,contador,bancoConta,data_txt]
+                        else:
+                            contador = contador+1
+                            lanSimp = str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0," + "16," + str(self.df.loc[i,'Recebido']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,"+ cpfoucnpj + "," + "\n"         
+                            self.txtM += str(lanSimp)
+                            valorSoma = valorSoma + float(self.df.loc[i,'Recebido'])
+                            meu_dict[MultVerificação] = [self.txtM,valorSoma,contador,bancoConta,data_txt]
+                    except:
+                        self.txtM = ''
+                        contador = 0
+                        valorSoma = 0.0
+                        if float(self.df.loc[i,'Juros']) > 0 or float(self.df.loc[i,'Desconto']) > 0 or float(self.df.loc[i,'Multa']) > 0:
+                            contador = contador+1
+                            lanMult = str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0," + "16," + str(self.df.loc[i,'Recebido']-self.df.loc[i,'Juros']-self.df.loc[i,'Multa']+self.df.loc[i,'Desconto']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,"+ cpfoucnpj + "," + "\n"
+                            if float(self.df.loc[i,'Juros']) > 0:
+                                contador = contador+1
+                                lanMult += str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0" + ",296," + str(self.df.loc[i,'Juros']) + ",00000000," + "Juros s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                            if float(self.df.loc[i,'Multa']) > 0:
+                                contador = contador+1
+                                lanMult += str('{:06d}'.format(contador)) +","+ str(data_txt) + ",1469" + ",0," + str(self.df.loc[i,'Multa']) + ",00000000," + "Multa s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                            if float(self.df.loc[i,'Desconto']) > 0:
+                                contador = contador+1
+                                lanMult += str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0," + "564," + str(self.df.loc[i,'Desconto']) + ",00000000," + "Desconto s/valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,," + "\n"
+                            self.txtM += str(lanMult)
+                            valorSoma = float(self.df.loc[i,'Recebido'])
+                            meu_dict[MultVerificação] = [self.txtM,valorSoma,contador,bancoConta,data_txt]
+                        else:
+                            contador = contador+1
+                            lanSimp = str('{:06d}'.format(contador)) +","+ str(data_txt) + ",0," + "16," + str(self.df.loc[i,'Recebido']) + ",00000000," + "Valor Recebido " + str(self.df.loc[i,'Projeto']) + " " + str(self.df.loc[i,'Nota Fiscal']) + " Parcela "+ str(self.df.loc[i,'Parcela']) + " - " + str(self.df.loc[i,'Cliente']) + ",,"+ cpfoucnpj + "," + "\n"         
+                            self.txtM += str(lanSimp)
+                            valorSoma = float(self.df.loc[i,'Recebido'])
+                            meu_dict[MultVerificação] = [self.txtM,valorSoma,contador,bancoConta,data_txt]
+
+            for valor in meu_dict.values():
+                self.txt += valor[0]
+                valorNoFor = valor[1]
+                contadorX =  valor[2]
+                bancoNoFor = valor[3]
+                data_txtX = valor[4]
+                self.txt += str('{:06d}'.format(contadorX+1)) +","+ str(data_txtX) + ","+ bancoNoFor +"," + "0," + str(valorNoFor) + ",00000000," + "Valor Referente a Varios Recebimentos - Mov Tít Cob" + ",,," + "\n"
+                
+            print(self.txt)
+            QMessageBox.warning(self, 'Info', 'Excel carregado com Sucesso')  
+        except KeyError as erro:
+            QMessageBox.warning(self, 'KeyError', 'Não foi localizado a coluna: '+ str(erro))
+        except ValueError as erro:
+            QMessageBox.warning(self, 'ValueError', 'Retire o filtor da planilha.')                   
+        except Exception as erro:
+            QMessageBox.warning(self, 'Error', 'Erro ao tentar carregar o aquivo. - '+ str(erro))    
+
+
+
 
 ##########################################################
 # CLASS MAIN WINDOWS                                     #
 ##########################################################
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Aplicacao):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
@@ -60,8 +200,7 @@ class MainWindow(QMainWindow):
         self.ui.restoreBtn.setCheckable(True)
         self.ui.restoreBtn.setChecked(self.isMaximized())
         # Ocultar a janela do Windows
-        self.setWindowFlag(Qt.WindowTitleHint, False)
-        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.show()
         # Permitir arrastar a janela ao clicar e arrastar no topo
         self.draggable = True
@@ -177,7 +316,15 @@ class MainWindow(QMainWindow):
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
         self.ui.comboBoxApp.currentIndexChanged.connect(self.handle_combobox_change)
-                 
+        #--------------------------------------------------------#
+        # Funções na ABA Eaj do APP                              #
+        #--------------------------------------------------------#
+        self.ui.excelEajBtn.clicked.connect(self.file_open)
+        self.ui.txtEajBtn.clicked.connect(self.file_salve)
+
+
+
+
         # CLOSE MENU CENTER WIDGET SIZE
         
 
@@ -219,7 +366,7 @@ class MainWindow(QMainWindow):
      
         if self.styleSheet() == self.current_theme:
             # Carregue o arquivo CSS para o novo tema desejado
-            new_icon = QtGui.QIcon(":/imagens/img/desligar.png")
+            new_icon = QIcon(":/imagens/img/desligar.png")
             new_theme = """
                 *{
                     border:none;
@@ -280,7 +427,7 @@ class MainWindow(QMainWindow):
         else:
         # Caso contrário, restaure a folha de estilos do tema anterior
             new_theme = self.current_theme
-            new_icon = QtGui.QIcon(":/imagens/img/ligar.png") 
+            new_icon = QIcon(":/imagens/img/ligar.png") 
         # Aplique o novo tema para o aplicativo
         self.setStyleSheet(new_theme)
         self.ui.temaBtn.setIcon(new_icon)
@@ -295,6 +442,47 @@ class MainWindow(QMainWindow):
                     btn.setStyleSheet("background-color: #348498; border-left: 2px solid rgb(255,255,255);")
                     self.ui.settingsBtn.setStyleSheet("background-color: #348498;")
         self.ui.infoBtn.setStyleSheet("background-color: transparent;")
+
+    def exibir_caixa_dialogo(self, tipo, titulo, mensagem):
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle(titulo)
+        msg_box.setText(mensagem)
+
+        # Definir o ícone e o tipo da caixa de diálogo
+        if tipo == 'warning':
+            msg_box.setIcon(QMessageBox.Warning)
+        elif tipo == 'info':
+            msg_box.setIcon(QMessageBox.Information)
+        elif tipo == 'error':
+            msg_box.setIcon(QMessageBox.Critical)
+
+        # Aplicar estilo personalizado usando folhas de estilo
+        msg_box.setStyleSheet("""
+            QMessageBox {
+                background-color: #FFFFFF;  /* Cor de fundo */
+                color: #000000;  /* Cor do texto */
+                font-size: 12pt;  /* Tamanho da fonte */
+            }
+
+            QMessageBox QLabel {
+                font-weight: bold;  /* Texto em negrito */
+            }
+
+            QMessageBox QPushButton {
+                background-color: #E0E0E0;  /* Cor de fundo do botão */
+                color: #000000;  /* Cor do texto do botão */
+                font-size: 11pt;  /* Tamanho da fonte do botão */
+                padding: 5px;  /* Espaçamento interno do botão */
+                border: none;  /* Remover borda do botão */
+            }
+
+            QMessageBox QPushButton:hover {
+                background-color: #C0C0C0;  /* Cor de fundo do botão ao passar o mouse */
+            }
+        """)
+
+        msg_box.exec_()
+
 #========================================================#
 # Funçoes do Menu                                        #
 #========================================================#
@@ -394,7 +582,11 @@ class MainWindow(QMainWindow):
             # Iniciar a animação
             anim.start()
             self.center_menu_visible = False
-
+            buttons_list = [self.ui.settingsBtn, self.ui.infoBtn]
+            for btn in buttons_list:
+                btn.setChecked(False)
+                btn.setStyleSheet("background-color: transparent;")
+                btn.setStyleSheet("background-color: transparent;")
         else:
             print('animação menu == invisivel // entaão define true pois vai expandi')
             # Criar uma animação para exibir o widget
