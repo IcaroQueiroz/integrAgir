@@ -11,7 +11,7 @@ import sys
 import requests
 import pandas as pd
 from datetime import datetime
-
+from theme import Theme
 
 ##########################################################
 # CLASS API FIREBASE                                     #
@@ -182,7 +182,7 @@ class Aplicacao():
 ##########################################################
 # CLASS MAIN WINDOWS                                     #
 ##########################################################
-class MainWindow(QMainWindow, Aplicacao):
+class MainWindow(QMainWindow, Aplicacao, Theme):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
@@ -323,6 +323,41 @@ class MainWindow(QMainWindow, Aplicacao):
         self.ui.txtEajBtn.clicked.connect(self.file_salve)
 
 
+        #--------------------------------------------------------#
+        # Funções do comboBox aba Cartão                         #
+        #--------------------------------------------------------#        
+        # adiciona as opções no comboBox
+        self.ui.comboBoxCartao.addItem('Cielo')
+        self.ui.comboBoxCartao.addItem('Stone')
+        self.ui.comboBoxCartao.addItem('Redecard')
+        # cria as páginas e as adiciona ao stackedWidget
+        self.pageHomeCartao = QWidget()
+        label1 = QLabel('Conteúdo para Home')
+        layout1 = QVBoxLayout(self.pageHomeCartao)
+        layout1.addWidget(label1)
+        self.ui.stackedWidgetCartao.addWidget(self.pageHomeCartao)
+
+        self.pageCielo = QWidget()
+        label2 = QLabel('Conteúdo para Cielo')
+        layout2 = QVBoxLayout(self.pageEaj)
+        layout2.addWidget(label2)
+        self.ui.stackedWidgetCartao.addWidget(self.pageCielo)
+
+        self.pageStone = QWidget()
+        label3 = QLabel('Conteúdo para Stone')
+        layout3 = QVBoxLayout(self.pageStone)
+        layout3.addWidget(label3)
+        self.ui.stackedWidgetCartao.addWidget(self.pageStone)
+
+        self.pageRedecard = QWidget()
+        label4 = QLabel('Conteúdo para Redecard')
+        layout4 = QVBoxLayout(self.pageRedecard)
+        layout4.addWidget(label4)
+        self.ui.stackedWidgetCartao.addWidget(self.pageRedecard)
+
+        # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
+
+        self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change)
 
 
         # CLOSE MENU CENTER WIDGET SIZE
@@ -361,96 +396,6 @@ class MainWindow(QMainWindow, Aplicacao):
     def is_top_draggable_area(self, pos):
         return pos.y() <= self.draggable_area_height
         pass
-
-    def change_theme(self):
-     
-        if self.styleSheet() == self.current_theme:
-            # Carregue o arquivo CSS para o novo tema desejado
-            new_icon = QIcon(":/imagens/img/desligar.png")
-            new_theme = """
-                *{
-                    border:none;
-                    background-color: transparent;
-                    background: transparent;
-                    padding:0;
-                    margin:0;
-                }
-                #centralwidget{
-                    background-color: #F5FFFA;
-
-                }
-                #leftMenuSubContainer{
-                    background-color: #004d61;
-                }
-                #leftMenuSubContainer QPushButton{
-                    background-color: #004d61;
-                    text-align: left;
-                    padding:3px 10px;
-                    color: #ffffff;
-                }
-                #frame_3 QPushButton{
-                    background-color: #004d61;
-                    text-align: left;
-                    padding:3px 10px;
-                    border-top-left-radius:10px;
-                    border-bottom-left-radius:10px;
-                }
-                #centerMenuSubContainer{
-                    background-color: #348498;
-                }
-                #centerMenuSubContainer QLabel{
-                    color: #ffffff;
-                }
-                #comboBoxApp{
-                    background-color:#fff;
-                    font-size: 16px;
-                    color: #348498;
-                    font-family: Arial;
-                    border-radius:10px;
-                    border: 2px solid #348498;
-                    padding-left: 5px;
-                }
-
-                #pageLacon QTabWidget::pane {
-                    background: transparent;
-                    border:none;
-                }
-                #pageLacon QTabBar::tab:selected {
-                    background-color: #d8d0bd;
-                    color: #34292a;
-                }
-                #widgetInfo, #widgetSettings, #popupNotificationContantContainer{
-                    background-color: #004d61;
-                    border-radius:10px;
-                }
-                #headerContainer, #footerContainer ,#footerContainer QLabel{
-                    background-color: #348498;
-                    color: #ffffff;
-                }
-
-                /* Outros seletores de estilo para widgets */
-
-            """
-        
-        
-        else:
-        # Caso contrário, restaure a folha de estilos do tema anterior
-            new_theme = self.current_theme
-            new_icon = QIcon(":/imagens/img/ligar.png") 
-        # Aplique o novo tema para o aplicativo
-        self.setStyleSheet(new_theme)
-        self.ui.temaBtn.setIcon(new_icon)
-        # Atualizar o estilo dos botões ativados
-        buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
-        for btn in buttons_list:
-            if self.button_states[btn]:
-                if self.styleSheet() == self.current_theme:
-                    btn.setStyleSheet("background-color: #2c313c; border-left: 2px solid rgb(255,255,255);")
-                    self.ui.settingsBtn.setStyleSheet("background-color: #2c313c;")
-                else:
-                    btn.setStyleSheet("background-color: #348498; border-left: 2px solid rgb(255,255,255);")
-                    self.ui.settingsBtn.setStyleSheet("background-color: #348498;")
-        self.ui.infoBtn.setStyleSheet("background-color: transparent;")
 
     def exibir_caixa_dialogo(self, tipo, titulo, mensagem):
         msg_box = QMessageBox()

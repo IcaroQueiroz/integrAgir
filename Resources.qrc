@@ -33,6 +33,9 @@
     <file>icons/toggle-left.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/parcelamento.png</file>
+    <file>img/financiamento.png</file>
+    <file>img/emprestimo.png</file>
     <file>img/txt-btn.png</file>
     <file>img/excel-btn.png</file>
     <file>img/desligar.png</file>
