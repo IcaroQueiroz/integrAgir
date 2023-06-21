@@ -410,6 +410,15 @@ class MainWindow(QMainWindow, Aplicacao):
                     border: 2px solid #348498;
                     padding-left: 5px;
                 }
+
+                #pageLacon QTabWidget::pane {
+                    background: transparent;
+                    border:none;
+                }
+                #pageLacon QTabBar::tab:selected {
+                    background-color: #d8d0bd;
+                    color: #34292a;
+                }
                 #widgetInfo, #widgetSettings, #popupNotificationContantContainer{
                     background-color: #004d61;
                     border-radius:10px;

@@ -55,20 +55,31 @@ class Ui_MainWindow(object):
 "    background-color: #2c313c;\n"
 "        \n"
 "}\n"
-"#comboBoxApp{\n"
-"    background-color:#1f232a;\n"
+"#comboBoxApp {\n"
+"    background-color: #16191d;\n"
 "    font-size: 16px;\n"
 "    color: #fff;\n"
 "    font-family: Arial;\n"
-"    border-radius:10px;\n"
+"    border-radius: 10px;\n"
 "    border: 2px solid white;\n"
 "    padding-left: 5px;\n"
 "}\n"
-"\n"
-"#pageLacon QTabWidget{\n"
+"#comboBoxApp QListView {\n"
 "    background-color: #1f232a;\n"
+"    color: #fff;\n"
 "}\n"
-"\n"
+"#comboBoxApp QComboBox::drop-down {\n"
+"    background: transparent;\n"
+"    border-radius: 15px;\n"
+"}\n"
+"#pageLacon QTabWidget::pane {\n"
+"    background: transparent;\n"
+"    border:none;\n"
+"}\n"
+"#pageLacon QTabBar::tab:selected {\n"
+"    background-color: #16191d;\n"
+"    color: #fff;\n"
+"}\n"
 "#label_9 {\n"
 "    border-radius:14px;\n"
 "    border: white;\n"
@@ -519,6 +530,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.comboBoxApp.sizePolicy().hasHeightForWidth())
         self.comboBoxApp.setSizePolicy(sizePolicy)
         self.comboBoxApp.setMaximumSize(QtCore.QSize(16777214, 16777215))
+        self.comboBoxApp.setIconSize(QtCore.QSize(16, 16))
         self.comboBoxApp.setObjectName("comboBoxApp")
         self.horizontalLayout_11.addWidget(self.comboBoxApp)
         self.verticalLayout_14.addWidget(self.widget)
@@ -634,12 +646,15 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Triangular)
         self.tabWidget.setElideMode(QtCore.Qt.ElideRight)
         self.tabWidget.setUsesScrollButtons(True)
-        self.tabWidget.setDocumentMode(True)
+        self.tabWidget.setDocumentMode(False)
         self.tabWidget.setTabsClosable(False)
         self.tabWidget.setMovable(False)
         self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
         self.tabLacon = QtWidgets.QWidget()
+        self.tabLacon.setEnabled(True)
+        self.tabLacon.setStatusTip("")
+        self.tabLacon.setInputMethodHints(QtCore.Qt.ImhNone)
         self.tabLacon.setObjectName("tabLacon")
         icon14 = QtGui.QIcon()
         icon14.addPixmap(QtGui.QPixmap(":/icons/icons/quebra-errada.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -771,8 +786,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.menuCenterPages.setCurrentIndex(0)
-        self.mainPages.setCurrentIndex(0)
-        self.stackedWidgetApp.setCurrentIndex(0)
+        self.mainPages.setCurrentIndex(1)
+        self.stackedWidgetApp.setCurrentIndex(2)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

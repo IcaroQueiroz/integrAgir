@@ -54,20 +54,31 @@
 	background-color: #2c313c;
 		
 }
-#comboBoxApp{
-	background-color:#1f232a;
-	font-size: 16px;
-	color: #fff;
-	font-family: Arial;
-	border-radius:10px;
-	border: 2px solid white;
-	padding-left: 5px;
+#comboBoxApp {
+    background-color: #16191d;
+    font-size: 16px;
+    color: #fff;
+    font-family: Arial;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding-left: 5px;
 }
-
-#pageLacon QTabWidget{
+#comboBoxApp QListView {
     background-color: #1f232a;
+    color: #fff;
 }
-
+#comboBoxApp QComboBox::drop-down {
+    background: transparent;
+    border-radius: 15px;
+}
+#pageLacon QTabWidget::pane {
+    background: transparent;
+	border:none;
+}
+#pageLacon QTabBar::tab:selected {
+    background-color: #16191d;
+    color: #fff;
+}
 #label_9 {
 	border-radius:14px;
 	border: white;
@@ -805,7 +816,7 @@ border-left: 2px solid rgb(255,255,255);</string>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="">
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
              <property name="spacing">
               <number>0</number>
              </property>
@@ -971,7 +982,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="pageHome">
                 <property name="sizePolicy">
@@ -1096,6 +1107,12 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <height>16777215</height>
                        </size>
                       </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>16</width>
+                        <height>16</height>
+                       </size>
+                      </property>
                      </widget>
                     </item>
                    </layout>
@@ -1110,7 +1127,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </sizepolicy>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>2</number>
                    </property>
                    <widget class="QWidget" name="pageHomeApp">
                     <property name="sizePolicy">
@@ -1306,7 +1323,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <bool>true</bool>
                        </property>
                        <property name="documentMode">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="tabsClosable">
                         <bool>false</bool>
@@ -1318,6 +1335,15 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <bool>false</bool>
                        </property>
                        <widget class="QWidget" name="tabLacon">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="statusTip">
+                         <string/>
+                        </property>
+                        <property name="inputMethodHints">
+                         <set>Qt::ImhNone</set>
+                        </property>
                         <attribute name="icon">
                          <iconset resource="Resources.qrc">
                           <normaloff>:/icons/icons/quebra-errada.svg</normaloff>:/icons/icons/quebra-errada.svg</iconset>
@@ -1564,7 +1590,6 @@ QLineEdit:focus {
  </widget>
  <resources>
   <include location="Resources.qrc"/>
-  <include location="../../../.designer/backup/Resources.qrc"/>
  </resources>
  <connections/>
 </ui>
