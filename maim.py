@@ -1,11 +1,12 @@
 from interface import *
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QWidget, QSizePolicy, QStackedWidget, QLabel, QVBoxLayout, QSizeGrip, QFileDialog, QMessageBox
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
-from PyQt5.QtCore import Qt, QPropertyAnimation, QRect, QPoint
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QDateEdit, QWidget, QSizePolicy, QStackedWidget, QLabel, QVBoxLayout, QSizeGrip, QFileDialog, QMessageBox, QLineEdit
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon, QRegExpValidator, QValidator, QKeyEvent
+from PyQt5.QtCore import Qt, QPropertyAnimation, QRect, QPoint, QRegExp, QDate
 from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QTableView
 import iconify as ico
 from iconify.qt import QtGui, QtWidgets, QtCore
+import re
 import os
 import sys
 import requests
@@ -13,9 +14,9 @@ import pandas as pd
 from datetime import datetime
 from theme import Theme
 
-##########################################################
-# CLASS API FIREBASE                                     #
-##########################################################
+##############################################################################
+# CLASS API FIREBASE                                                         #
+##############################################################################
 class FirebaseAPI():
     def __init__(self, firebase_url):
         self.firebase_url = firebase_url
@@ -40,9 +41,9 @@ class FirebaseAPI():
         response = requests.delete(url)
         return response.json()
 
-##########################################################
-# CLASS API FIREBASE                                     #
-##########################################################
+##############################################################################
+# CLASS API FIREBASE                                                         #
+##############################################################################
 class Aplicacao():
     def caminho_arquivo(self, caminho_relativo):
         """ Obtém o caminho absoluto para o recurso, para PyInstaller """
@@ -176,51 +177,47 @@ class Aplicacao():
         except Exception as erro:
             QMessageBox.warning(self, 'Error', 'Erro ao tentar carregar o aquivo. - '+ str(erro))    
 
-
-
-
-##########################################################
-# CLASS MAIN WINDOWS                                     #
-##########################################################
+##############################################################################
+# CLASS MAIN WINDOWS                                                         #
+##############################################################################
 class MainWindow(QMainWindow, Aplicacao, Theme):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        #--------------------------------------------------------#
-        # APPLY JSON STYLESHEET  Lib.|Custom_Widgets.Widgets|    #
-        #--------------------------------------------------------#
-        #loadJsonStyle(self, self.ui)
-        #self.show()
-        
+        #--------------------------------------------------------------------------#
+        # Personalização MainWindows                                               #
+        #--------------------------------------------------------------------------#
+
         # Personalização da barra de navegação
         self.ui.minimizeBtn.clicked.connect(self.showMinimized)
         self.ui.closeBtn.clicked.connect(self.close)
         self.ui.restoreBtn.clicked.connect(self.toggle_maximized)
         self.ui.restoreBtn.setCheckable(True)
         self.ui.restoreBtn.setChecked(self.isMaximized())
-        # Ocultar a janela do Windows
+        # Ocultar a janela(Windows)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.show()
         # Permitir arrastar a janela ao clicar e arrastar no topo
         self.draggable = True
         self.draggable_area_height = 40  # Altura da área superior onde a janela pode ser arrastada
         
-        #--------------------------------------------------------#
-        # Redimensionamento da janela e Definições iniciais      #
-        #--------------------------------------------------------#
+        #--------------------------------------------------------------------------#
+        # Redimensionamento da janela e Definições iniciais                        #
+        #--------------------------------------------------------------------------#
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setMinimumSize(400, 300)
         self.setMaximumSize(1680, 1050)
-        #--------------------------------------------------------#
-        # Definições de tema                                     #
-        #--------------------------------------------------------#       
+
+        #--------------------------------------------------------------------------#
+        # Definições de tema                                                       #
+        #--------------------------------------------------------------------------#       
         self.current_theme = self.styleSheet()
         self.ui.temaBtn.clicked.connect(self.change_theme)
 
-        #--------------------------------------------------------#
-        # Conexão firebase e TabelaViwer Lacon                   #
-        #--------------------------------------------------------#        
+        #--------------------------------------------------------------------------#
+        # Conexão firebase e TabelaViwer Lacon                                     #
+        #--------------------------------------------------------------------------#        
         firebase_url = "https://integragir-default-rtdb.firebaseio.com/Contratos-Lacon"
         self.firebase_api = FirebaseAPI(firebase_url)
         
@@ -249,9 +246,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.btnNewRow.clicked.connect(self.add_new_row)
         self.ui.btnDeleteRow.clicked.connect(self.delete_row)
         
-        #--------------------------------------------------------#
-        # Funções do botoões MenuPrincipal                       #
-        #--------------------------------------------------------#
+        #--------------------------------------------------------------------------#
+        # Funções do botoões MenuPrincipal                                         #
+        #--------------------------------------------------------------------------#
         self.button_states = {
             self.ui.homeBtn: True,
             self.ui.appBtn: False,
@@ -271,9 +268,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.cardBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.cardBtn, 2))
         self.ui.reportBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.reportBtn, 3))
 
-        #--------------------------------------------------------#
-        # Funções do botoões MenuTec                             #
-        #--------------------------------------------------------#
+        #--------------------------------------------------------------------------#
+        # Funções do botoões MenuTec                                               #
+        #--------------------------------------------------------------------------#
         # Definir a geometria e configuração inicial do menu central como invisível
         self.center_menu_width = 200
         self.ui.centerMenuContainer.setMaximumWidth(0)
@@ -287,9 +284,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.closeCenterBtnSettings.clicked.connect(self.animate_center_menu)
         self.ui.closeCenterBtnInfo.clicked.connect(self.animate_center_menu)
                 
-        #--------------------------------------------------------#
-        # Funções do comboBox aba APP                            #
-        #--------------------------------------------------------#        
+        #--------------------------------------------------------------------------#
+        # Funções do comboBox aba APP                                              #
+        #--------------------------------------------------------------------------#        
         # adiciona as opções no comboBox
         self.ui.comboBoxApp.addItem('Home')
         self.ui.comboBoxApp.addItem('Eaj')
@@ -316,16 +313,33 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
         self.ui.comboBoxApp.currentIndexChanged.connect(self.handle_combobox_change)
-        #--------------------------------------------------------#
-        # Funções na ABA Eaj do APP                              #
-        #--------------------------------------------------------#
+        #--------------------------------------------------------------------------#
+        # Funções na ABA Eaj do APP                                                #
+        #--------------------------------------------------------------------------#
         self.ui.excelEajBtn.clicked.connect(self.file_open)
         self.ui.txtEajBtn.clicked.connect(self.file_salve)
+        
+        #--------------------------------------------------------------------------#
+        # Funções dos Entry ABA emprestimo                                         #
+        #--------------------------------------------------------------------------#        
+        # ------------  Aceita Datas --------------
+        regex_data = QRegExp(r'^\d{2}/?\d{2}/?\d{4}$') # Expressão regular para datas
+        validator_data = QRegExpValidator(regex_data)
+        self.ui.entryDataEmp.setValidator(validator_data)        
+        # ------------  Aceita Inteiros ------------ 
+        regex_inteiro = QRegExp(r'^[0-9]+$') # Expressão regular para números inteiros
+        validator_inteiro = QRegExpValidator(regex_inteiro)
+        self.ui.entryParcelaEmp.setValidator(validator_inteiro)
+        self.ui.entryParcelaEmp.installEventFilter(self)
+        # ------------  Aceita Valores ------------ 
+        regex_valor = QRegExp(r'^[0-9]*\.?[0-9]+$') # Expressão regular para números inteiros
+        validator_valor = QRegExpValidator(regex_valor)
+        self.ui.entryIoEmp.setValidator(validator_valor)
 
 
-        #--------------------------------------------------------#
-        # Funções do comboBox aba Cartão                         #
-        #--------------------------------------------------------#        
+        #--------------------------------------------------------------------------#
+        # Funções do comboBox aba Cartão                                           #
+        #--------------------------------------------------------------------------#        
         # adiciona as opções no comboBox
         self.ui.comboBoxCartao.addItem('Cielo')
         self.ui.comboBoxCartao.addItem('Stone')
@@ -360,8 +374,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change)
 
 
-        # CLOSE MENU CENTER WIDGET SIZE
-        
+        # CLOSE MENU CENTER WIDGET SIZE  
 
 
 #========================================================#
@@ -436,7 +449,17 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         """)
 
         msg_box.exec_()
+    
+    def eventFilter(self, obj, event):
+        if obj == self.ui.entryParcelaEmp and event.type() == event.KeyPress:
+            if event.key() == Qt.Key_Enter or event.key() == Qt.Key_Return:
+                self.moverFoco()
+                return True
 
+        return super().eventFilter(obj, event)
+
+    def moverFoco(self):
+        self.focusNextChild()
 #========================================================#
 # Funçoes do Menu                                        #
 #========================================================#
@@ -709,10 +732,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         # Excluir os dados correspondentes do Firebase
         self.firebase_api.delete(item_id)
 
-
-##########################################################
-# EXECUÇÃO DA APLICAÇÃO                                  #
-##########################################################
+##############################################################################
+# EXECUÇÃO DA APLICAÇÃO                                                      #
+##############################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
