@@ -136,6 +136,25 @@ class Ui_MainWindow(object):
 "  border-top-left-radius: 3px; /* Cantos arredondados do título */\n"
 "  border-top-right-radius: 3px;\n"
 "}\n"
+"\n"
+"QMessageBox {\n"
+"    background-color: #2c313c;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QMessageBox QLabel {\n"
+"    color: red;\n"
+"}\n"
+"\n"
+"QMessageBox QHeaderView {\n"
+"    background-color: #16191d;\n"
+"}\n"
+"\n"
+"QMessageBox QPushButton {\n"
+"        background-color: red;\n"
+"        color: white;\n"
+"    }\n"
+"\n"
 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -1161,7 +1180,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.menuCenterPages.setCurrentIndex(0)
         self.mainPages.setCurrentIndex(3)
-        self.stackedWidgetApp.setCurrentIndex(1)
+        self.stackedWidgetApp.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(1)
         self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1228,6 +1247,6 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "PushButton"))
         self.emprestimoBtn_2.setText(_translate("MainWindow", "Emprestimo"))
         self.label_8.setText(_translate("MainWindow", "   Copyright © 2023."))
-from CustomDateLineEdit import CustomDateLineEdit
-from CustomLineEdit import CustomLineEdit
+from custom.CustomDateLineEdit import CustomDateLineEdit
+from custom.CustomLineEdit import CustomLineEdit
 import Resources_rc

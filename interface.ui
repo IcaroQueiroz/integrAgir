@@ -135,6 +135,25 @@ QGroupBox::title {
   border-top-left-radius: 3px; /* Cantos arredondados do título */
   border-top-right-radius: 3px;
 }
+
+QMessageBox {
+	background-color: #2c313c;
+	border-radius: 10px;
+}
+
+QMessageBox QLabel {
+	color: red;
+}
+
+QMessageBox QHeaderView {
+	background-color: #16191d;
+}
+
+QMessageBox QPushButton {
+        background-color: red;
+        color: white;
+    }
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -1174,7 +1193,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </sizepolicy>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="pageHomeApp">
                     <property name="sizePolicy">
@@ -2333,12 +2352,12 @@ QLineEdit:focus {
   <customwidget>
    <class>CustomLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>CustomLineEdit</header>
+   <header>custom.CustomLineEdit</header>
   </customwidget>
   <customwidget>
    <class>CustomDateLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">CustomDateLineEdit</header>
+   <header location="global">custom.CustomDateLineEdit</header>
   </customwidget>
  </customwidgets>
  <resources>
