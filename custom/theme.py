@@ -1,10 +1,12 @@
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 
 class Theme:
     def change_theme(self):
         if self.styleSheet() == self.current_theme:
             # Carregue o arquivo CSS para o novo tema desejado
             new_icon = QIcon(":/imagens/img/desligar.png")
+            new_home = QPixmap(":/imagens/img/home_t.png")
+            new_home68 = QPixmap(":/imagens/img/home68-t.png")
             new_theme = """
                 *{
                     border:none;
@@ -74,11 +76,16 @@ class Theme:
         else:
             # Caso contrário, restaure a folha de estilos do tema anterior
             new_theme = self.current_theme
-            new_icon = QIcon(":/imagens/img/ligar.png") 
+            new_icon = QIcon(":/imagens/img/ligar.png")
+            new_home = QPixmap(":/imagens/img/home.png")
+            new_home68 = QPixmap(":/imagens/img/home68-.png")
 
         # Aplique o novo tema para o aplicativo
         self.setStyleSheet(new_theme)
         self.ui.temaBtn.setIcon(new_icon)
+        self.ui.labelHome.setPixmap(new_home)
+        self.ui.labelHome1.setPixmap(new_home68)
+        self.ui.labelHome2.setPixmap(new_home68)
 
         # Atualizar o estilo dos botões ativados
         buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]

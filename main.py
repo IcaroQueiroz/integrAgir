@@ -159,26 +159,20 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         # Funções do comboBox aba APP                                              #
         #--------------------------------------------------------------------------#        
         # adiciona as opções no comboBox
-        self.ui.comboBoxApp.addItem('Home')
-        self.ui.comboBoxApp.addItem('Eaj')
-        self.ui.comboBoxApp.addItem('Lacon')
+        self.ui.comboBoxApp.addItem('Selecione uma empresa...')
+        self.ui.comboBoxApp.addItem('EAJ ENGENHARIA LTDA EPP')
+        self.ui.comboBoxApp.addItem('LACON EMPREENDIMENTOS IMOBILIARIOS')
         # cria as páginas e as adiciona ao stackedWidget
         self.pageHomeApp = QWidget()
-        label1 = QLabel('Conteúdo para Home')
         layout1 = QVBoxLayout(self.pageHomeApp)
-        layout1.addWidget(label1)
         self.ui.stackedWidgetApp.addWidget(self.pageHomeApp)
 
         self.pageEaj = QWidget()
-        label2 = QLabel('Conteúdo para Eaj')
         layout2 = QVBoxLayout(self.pageEaj)
-        layout2.addWidget(label2)
         self.ui.stackedWidgetApp.addWidget(self.pageEaj)
 
         self.pageLacon = QWidget()
-        label3 = QLabel('Conteúdo para lacon')
         layout3 = QVBoxLayout(self.pageLacon)
-        layout3.addWidget(label3)
         self.ui.stackedWidgetApp.addWidget(self.pageLacon)
         
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
@@ -212,37 +206,30 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         # Funções do comboBox aba Cartão                                           #
         #--------------------------------------------------------------------------#        
         # adiciona as opções no comboBox
+        self.ui.comboBoxCartao.addItem('Selecione uma operadora ...')
         self.ui.comboBoxCartao.addItem('Cielo')
         self.ui.comboBoxCartao.addItem('Stone')
         self.ui.comboBoxCartao.addItem('Redecard')
         # cria as páginas e as adiciona ao stackedWidget
         self.pageHomeCartao = QWidget()
-        label1 = QLabel('Conteúdo para Home')
         layout1 = QVBoxLayout(self.pageHomeCartao)
-        layout1.addWidget(label1)
         self.ui.stackedWidgetCartao.addWidget(self.pageHomeCartao)
 
         self.pageCielo = QWidget()
-        label2 = QLabel('Conteúdo para Cielo')
         layout2 = QVBoxLayout(self.pageEaj)
-        layout2.addWidget(label2)
         self.ui.stackedWidgetCartao.addWidget(self.pageCielo)
 
         self.pageStone = QWidget()
-        label3 = QLabel('Conteúdo para Stone')
         layout3 = QVBoxLayout(self.pageStone)
-        layout3.addWidget(label3)
         self.ui.stackedWidgetCartao.addWidget(self.pageStone)
 
         self.pageRedecard = QWidget()
-        label4 = QLabel('Conteúdo para Redecard')
         layout4 = QVBoxLayout(self.pageRedecard)
-        layout4.addWidget(label4)
         self.ui.stackedWidgetCartao.addWidget(self.pageRedecard)
 
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
-        self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change)
+        self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change_cartao)
 
 
         # CLOSE MENU CENTER WIDGET SIZE  
@@ -478,6 +465,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
 
     def handle_combobox_change(self, index):
         self.ui.stackedWidgetApp.setCurrentIndex(index)
+ 
+    def handle_combobox_change_cartao(self, index):
+        self.ui.stackedWidgetCartao.setCurrentIndex(index)
 
 #========================================================#
 # Funçoes do Firebase                                    #

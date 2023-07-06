@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/stone.svg</file>
+    <file>icons/cielo.svg</file>
     <file>icons/quebra-errada.svg</file>
     <file>icons/documento.svg</file>
     <file>icons/excluir.svg</file>
@@ -33,6 +35,10 @@
     <file>icons/toggle-left.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/home68-t.png</file>
+    <file>img/home68-.png</file>
+    <file>img/home.png</file>
+    <file>img/home_t.png</file>
     <file>img/parcelamento.png</file>
     <file>img/financiamento.png</file>
     <file>img/emprestimo.png</file>

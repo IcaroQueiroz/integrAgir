@@ -98,12 +98,19 @@
 #pageLacon QTabBar::tab:selected {
     color: #fff;
 }
-#label_9 {
+#passoApassoEaj, #passoApassoLacon, #passoApassoCielo {
 	border-radius:14px;
 	border: white;
 	border-style: dotted;
 	border-width: 1.5px;
 	padding: 3px 15px 9px 9px;
+}
+
+#frame_12 {
+	border-radius:15px;
+	border: white;
+	border-style: dotted;
+	border-width: 1.5px;
 }
 
 QLineEdit {
@@ -344,7 +351,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 <string>Integrações</string>
                </property>
                <property name="text">
-                <string> Aplicações</string>
+                <string>   Integrações</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -369,7 +376,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 <string>Cartão de Credito</string>
                </property>
                <property name="text">
-                <string>  Cartão</string>
+                <string>  Cartões</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -1048,7 +1055,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="pageHome">
                 <property name="sizePolicy">
@@ -1072,7 +1079,10 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </font>
                    </property>
                    <property name="text">
-                    <string>Home</string>
+                    <string/>
+                   </property>
+                   <property name="pixmap">
+                    <pixmap resource="Resources.qrc">:/imagens/img/home.png</pixmap>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -1193,7 +1203,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </sizepolicy>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>2</number>
                    </property>
                    <widget class="QWidget" name="pageHomeApp">
                     <property name="sizePolicy">
@@ -1203,8 +1213,11 @@ border-left: 2px solid rgb(255,255,255);</string>
                      </sizepolicy>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_15">
+                     <property name="topMargin">
+                      <number>6</number>
+                     </property>
                      <item>
-                      <widget class="QLabel" name="label_2">
+                      <widget class="QLabel" name="labelHome1">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                          <horstretch>0</horstretch>
@@ -1212,7 +1225,10 @@ border-left: 2px solid rgb(255,255,255);</string>
                         </sizepolicy>
                        </property>
                        <property name="text">
-                        <string>Modulo APP selecione uma empresa.</string>
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap resource="Resources.qrc">:/imagens/img/home68-.png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -1342,7 +1358,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_17">
                         <item alignment="Qt::AlignTop">
-                         <widget class="QLabel" name="label_9">
+                         <widget class="QLabel" name="passoApassoEaj">
                           <property name="font">
                            <font>
                             <pointsize>11</pointsize>
@@ -1380,7 +1396,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <enum>QTabWidget::Triangular</enum>
                        </property>
                        <property name="currentIndex">
-                        <number>1</number>
+                        <number>0</number>
                        </property>
                        <property name="elideMode">
                         <enum>Qt::ElideRight</enum>
@@ -1417,6 +1433,120 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <attribute name="title">
                          <string>Lacon </string>
                         </attribute>
+                        <widget class="QPushButton" name="txtLaconBtn">
+                         <property name="geometry">
+                          <rect>
+                           <x>360</x>
+                           <y>20</y>
+                           <width>338</width>
+                           <height>164</height>
+                          </rect>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string>Salvar TXT</string>
+                         </property>
+                         <property name="text">
+                          <string>Salvar TXT</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="Resources.qrc">
+                           <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>160</width>
+                           <height>160</height>
+                          </size>
+                         </property>
+                        </widget>
+                        <widget class="QPushButton" name="excelLaconBtn">
+                         <property name="geometry">
+                          <rect>
+                           <x>16</x>
+                           <y>20</y>
+                           <width>338</width>
+                           <height>164</height>
+                          </rect>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                           <stylestrategy>PreferDefault</stylestrategy>
+                          </font>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Abrir Excel</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="Resources.qrc">
+                           <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>160</width>
+                           <height>160</height>
+                          </size>
+                         </property>
+                         <property name="autoRepeat">
+                          <bool>false</bool>
+                         </property>
+                        </widget>
+                        <widget class="QLabel" name="passoApassoLacon">
+                         <property name="geometry">
+                          <rect>
+                           <x>10</x>
+                           <y>190</y>
+                           <width>716</width>
+                           <height>142</height>
+                          </rect>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>11</pointsize>
+                           <underline>false</underline>
+                           <strikeout>false</strikeout>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string>Abrir Excel</string>
+                         </property>
+                         <property name="text">
+                          <string>
+ Para utilizar essa ferramenta, siga os seguintes passos:
+   1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.
+   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão &quot;Abrir Excel&quot;.
+   3 - Clique no botão &quot;Salvar TXT&quot; , aguarde alguns instantes e salve o arquivo.
+   4 - Agora, o arquivo txt pode ser importado no Único.
+</string>
+                         </property>
+                        </widget>
                        </widget>
                        <widget class="QWidget" name="contratosLacon">
                         <attribute name="icon">
@@ -1543,6 +1673,9 @@ QLineEdit:focus {
                  <item>
                   <widget class="QWidget" name="widget_3" native="true">
                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <property name="sizeConstraint">
+                     <enum>QLayout::SetMinimumSize</enum>
+                    </property>
                     <item>
                      <widget class="QLabel" name="label_7">
                       <property name="minimumSize">
@@ -1619,8 +1752,217 @@ QLineEdit:focus {
                  </item>
                  <item>
                   <widget class="QStackedWidget" name="stackedWidgetCartao">
-                   <widget class="QWidget" name="pageHomeCartao"/>
-                   <widget class="QWidget" name="pageCielo"/>
+                   <property name="currentIndex">
+                    <number>1</number>
+                   </property>
+                   <widget class="QWidget" name="pageHomeCartao">
+                    <layout class="QVBoxLayout" name="verticalLayout_21">
+                     <property name="topMargin">
+                      <number>2</number>
+                     </property>
+                     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+                      <widget class="QLabel" name="labelHome2">
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap resource="Resources.qrc">:/imagens/img/home68-.png</pixmap>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="pageCielo">
+                    <layout class="QHBoxLayout" name="horizontalLayout_16">
+                     <item>
+                      <widget class="QFrame" name="frame_13">
+                       <property name="minimumSize">
+                        <size>
+                         <width>364</width>
+                         <height>365</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QPushButton" name="cieloLogo">
+                        <property name="geometry">
+                         <rect>
+                          <x>80</x>
+                          <y>10</y>
+                          <width>181</width>
+                          <height>71</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/icons/icons/cielo.svg</normaloff>:/icons/icons/cielo.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>170</width>
+                          <height>170</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="cieloExcelBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>20</x>
+                          <y>90</y>
+                          <width>151</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                          <stylestrategy>PreferDefault</stylestrategy>
+                         </font>
+                        </property>
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string>EXCEL</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="cieloTxtBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>190</x>
+                          <y>90</y>
+                          <width>141</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Salvar TXT</string>
+                        </property>
+                        <property name="text">
+                         <string>TXT</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="passoApassoCielo">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>200</y>
+                          <width>351</width>
+                          <height>142</height>
+                         </rect>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>11</pointsize>
+                          <underline>false</underline>
+                          <strikeout>false</strikeout>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Abrir Excel</string>
+                        </property>
+                        <property name="text">
+                         <string>
+ Para utilizar o módulo, siga os seguintes passos:
+   1 - Salve o arquivo no site, formato Excel.
+   2 - Clique no botão &quot;Excel&quot;, e abre o aquivo.
+   3 - Clique no botão &quot;Salvar TXT&quot; , aguarde.
+   4 - Agora, importe no Único.
+</string>
+                        </property>
+                       </widget>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_14">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_20">
+                        <item>
+                         <widget class="QWidget" name="widget_4" native="true">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">	border-radius:15px;
+	border: white;
+	border-style: dotted;
+	border-width: 1.5px;</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
                    <widget class="QWidget" name="pageStone"/>
                    <widget class="QWidget" name="pageRedecard"/>
                   </widget>
@@ -1638,7 +1980,7 @@ QLineEdit:focus {
                  <item>
                   <widget class="QStackedWidget" name="stackedWidget">
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="pageHomeEmp">
                     <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1648,17 +1990,34 @@ QLineEdit:focus {
                      <property name="topMargin">
                       <number>0</number>
                      </property>
-                     <item>
+                     <item alignment="Qt::AlignTop">
                       <widget class="QFrame" name="frame_12">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>1</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>743</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
                        </property>
                        <property name="frameShadow">
                         <enum>QFrame::Raised</enum>
                        </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_21">
+                       <layout class="QVBoxLayout" name="verticalLayout_22">
                         <item>
                          <widget class="QLabel" name="label_3">
+                          <property name="font">
+                           <font>
+                            <pointsize>8</pointsize>
+                           </font>
+                          </property>
                           <property name="toolTip">
                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                           </property>
@@ -1666,93 +2025,148 @@ QLineEdit:focus {
                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                           </property>
                           <property name="text">
-                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Selecione um modulo abaixo:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QFrame" name="frame_8">
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Raised</enum>
-                       </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_19">
-                        <item>
-                         <widget class="QPushButton" name="emprestimoBtn">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>12</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                            <stylestrategy>PreferDefault</stylestrategy>
-                           </font>
-                          </property>
-                          <property name="layoutDirection">
-                           <enum>Qt::LeftToRight</enum>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
-                          <property name="text">
-                           <string>Emprestimo</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="Resources.qrc">
-                            <normaloff>:/imagens/img/emprestimo.png</normaloff>:/imagens/img/emprestimo.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>160</width>
-                            <height>160</height>
-                           </size>
-                          </property>
-                          <property name="autoRepeat">
-                           <bool>false</bool>
+                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Selecione um modulo abaixo:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="financiamentiBtn">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
+                         <widget class="QFrame" name="frame_8">
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
                           </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>12</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
                           </property>
-                          <property name="toolTip">
-                           <string>Salvar TXT</string>
-                          </property>
-                          <property name="text">
-                           <string>Financiamento</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="Resources.qrc">
-                            <normaloff>:/imagens/img/financiamento.png</normaloff>:/imagens/img/financiamento.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>160</width>
-                            <height>160</height>
-                           </size>
-                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_19">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="emprestimoBtn">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <weight>75</weight>
+                               <bold>true</bold>
+                               <stylestrategy>PreferDefault</stylestrategy>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Emprestimo</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="Resources.qrc">
+                               <normaloff>:/imagens/img/emprestimo.png</normaloff>:/imagens/img/emprestimo.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>80</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="autoRepeat">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="parcelamentoBtn">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <weight>75</weight>
+                               <bold>true</bold>
+                               <stylestrategy>PreferDefault</stylestrategy>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Parcelamento</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="Resources.qrc">
+                               <normaloff>:/imagens/img/parcelamento.png</normaloff>:/imagens/img/parcelamento.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>80</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                             <property name="autoRepeat">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="financiamentiBtn">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                               <weight>75</weight>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="toolTip">
+                              <string>Salvar TXT</string>
+                             </property>
+                             <property name="text">
+                              <string>Financiamento</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="Resources.qrc">
+                               <normaloff>:/imagens/img/financiamento.png</normaloff>:/imagens/img/financiamento.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>80</width>
+                               <height>80</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
                          </widget>
                         </item>
                        </layout>
@@ -1766,64 +2180,29 @@ QLineEdit:focus {
                        <property name="frameShadow">
                         <enum>QFrame::Raised</enum>
                        </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_20">
-                        <item>
-                         <widget class="QFrame" name="frame_13">
-                          <property name="frameShape">
-                           <enum>QFrame::StyledPanel</enum>
-                          </property>
-                          <property name="frameShadow">
-                           <enum>QFrame::Raised</enum>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="parcelamentoBtn">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>12</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                            <stylestrategy>PreferDefault</stylestrategy>
-                           </font>
-                          </property>
-                          <property name="layoutDirection">
-                           <enum>Qt::LeftToRight</enum>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_23">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>9</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>72</number>
+                        </property>
+                        <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+                         <widget class="QLabel" name="label_2">
                           <property name="text">
-                           <string>Parcelamento</string>
+                           <string/>
                           </property>
-                          <property name="icon">
-                           <iconset resource="Resources.qrc">
-                            <normaloff>:/imagens/img/parcelamento.png</normaloff>:/imagens/img/parcelamento.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>160</width>
-                            <height>160</height>
-                           </size>
-                          </property>
-                          <property name="autoRepeat">
-                           <bool>false</bool>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QFrame" name="frame_14">
-                          <property name="frameShape">
-                           <enum>QFrame::StyledPanel</enum>
-                          </property>
-                          <property name="frameShadow">
-                           <enum>QFrame::Raised</enum>
+                          <property name="pixmap">
+                           <pixmap resource="Resources.qrc">:/imagens/img/home68-.png</pixmap>
                           </property>
                          </widget>
                         </item>
