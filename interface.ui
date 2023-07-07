@@ -1203,7 +1203,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                     </sizepolicy>
                    </property>
                    <property name="currentIndex">
-                    <number>2</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="pageHomeApp">
                     <property name="sizePolicy">
@@ -1753,7 +1753,7 @@ QLineEdit:focus {
                  <item>
                   <widget class="QStackedWidget" name="stackedWidgetCartao">
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="pageHomeCartao">
                     <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1791,11 +1791,14 @@ QLineEdit:focus {
                        <widget class="QPushButton" name="cieloLogo">
                         <property name="geometry">
                          <rect>
-                          <x>80</x>
-                          <y>10</y>
-                          <width>181</width>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>341</width>
                           <height>71</height>
                          </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string/>
@@ -1806,8 +1809,8 @@ QLineEdit:focus {
                         </property>
                         <property name="iconSize">
                          <size>
-                          <width>170</width>
-                          <height>170</height>
+                          <width>140</width>
+                          <height>140</height>
                          </size>
                         </property>
                        </widget>
@@ -1943,7 +1946,7 @@ QLineEdit:focus {
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_20">
                         <item>
-                         <widget class="QWidget" name="widget_4" native="true">
+                         <widget class="QWidget" name="widgetRelatorioCielo" native="true">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>

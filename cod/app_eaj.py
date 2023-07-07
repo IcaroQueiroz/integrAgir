@@ -17,7 +17,7 @@ class AppEaj():
                 data_txt = f"{data_data:%Y%m%d}"
                 cpfoucnpj = self.df.loc[i,'CNPJ/CPF']
                 cpfoucnpj = cpfoucnpj.replace('.','').replace('/','').replace('-','')
-                ValoresSimples = ['simples','Simples']
+                ValoresSimples = ['simples','Simples', 'SIMPLES']
                 banco = self.df.loc[i,'Conta Corrente']
                 if banco == 'Itaú Unibanco':
                     bancoConta = '1597'

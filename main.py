@@ -227,6 +227,14 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         layout4 = QVBoxLayout(self.pageRedecard)
         self.ui.stackedWidgetCartao.addWidget(self.pageRedecard)
 
+        #--------------------------------------------------------------------------#
+        # Funções CIELO                                                            #
+        #--------------------------------------------------------------------------#
+        self.ui.cieloExcelBtn.clicked.connect(lambda: self.file_open_excel(self.cielo))
+        self.ui.cieloTxtBtn.clicked.connect(self.file_salve)
+
+
+
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
         self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change_cartao)

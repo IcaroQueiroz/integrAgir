@@ -3,9 +3,10 @@ import os
 import sys
 import pandas as pd
 from cod.app_eaj import AppEaj
+from cod.cielo import AppCielo
 
 
-class Aplicacao(AppEaj):
+class Aplicacao(AppEaj, AppCielo):
     def caminho_arquivo(self, caminho_relativo):
         """ Obtém o caminho absoluto para o recurso, para PyInstaller """
         try:
@@ -16,7 +17,7 @@ class Aplicacao(AppEaj):
         return os.path.join(caminho_base, caminho_relativo)    
 
     def file_open_excel(self, funcionalidade):
-        filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx)')
+        filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx; *.xls)')
         if filename:
             self.df = pd.read_excel(filename)
             print(self.df)
