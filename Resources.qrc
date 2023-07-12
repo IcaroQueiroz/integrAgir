@@ -35,6 +35,7 @@
     <file>icons/toggle-left.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/rede-logo.png</file>
     <file>img/home68-t.png</file>
     <file>img/home68-.png</file>
     <file>img/home.png</file>

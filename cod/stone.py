@@ -3,37 +3,19 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBo
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 
-class AppCielo():
-    def cielo(self):
+class AppStone():
+    def stone(self):
         try: 
-            # Identificar a linha do título da coluna
-            if self.df.iloc[:, 0].str.contains('Data da venda').any():
-                linha_titulo = self.df[self.df.iloc[:, 0] == 'Data da venda'].index[0]
-                data_venda = 'Data da venda'
-                valor_venda = 'Valor da venda'
-                valor_liquido = 'Valor líquido da venda'
-                self.df = self.df.iloc[linha_titulo:]
-                print('############################################## ok ############################################')
-                print(self.df) 
+            data_venda = 'HORA DA VENDA'
+            valor_venda = 'VALOR BRUTO'
+            valor_liquido = 'VALOR LÍQUIDO'
+            bandeira = 'BANDEIRA'
 
-            else:
-                linha_titulo = self.df[self.df.iloc[:, 0] == 'Data de venda'].index[0]
-                data_venda = 'Data de venda'
-                valor_venda = 'Valor bruto'
-                valor_liquido = 'Valor líquido'
-                self.df = self.df.iloc[linha_titulo:]
-                print('############################################## não localizado ############################################')
-                print(self.df) 
 
-            #self.df = self.df.iloc[linha_titulo:] # Definir o DataFrame para incluir apenas as colunas relevantes
-            self.df = self.df.reset_index(drop=True) # Renumera as linhas a partir de 1 e remove a primeira linha duplicada do cabeçalho
-            self.df = self.df.rename(columns=self.df.iloc[0]) # Definir a linha 0 como cabeçalho do DataFrame
-            self.df = self.df[1:] # Descartar a linha 0, pois ela foi usada como cabeçalho
-
-            self.df['Natureza'] = self.df['Forma de pagamento'].apply(self.analisar_forma_pagamento)
+            self.df['Natureza'] = self.df['TIPO'].apply(self.analisar_forma_pagamento)
             self.df[data_venda] = pd.to_datetime(self.df[data_venda])  # Converta a coluna para o tipo de dados datetime, se ainda não estiver
             self.df[data_venda] = self.df[data_venda].dt.date  # Extraia apenas a parte da data, excluindo a hora
-            self.df['DataNat'] = self.df[data_venda].astype(str) + self.df['Bandeira'].astype(str) + self.df['Natureza'].astype(str) # Concatene a data (sem hora) com a coluna 'Natureza'
+            self.df['DataNat'] = self.df[data_venda].astype(str) + self.df[bandeira].astype(str) + self.df['Natureza'].astype(str) # Concatene a data (sem hora) com a coluna 'Natureza'
 
             # Converter as colunas para o tipo de dados numérico
             self.df[valor_venda] = pd.to_numeric(self.df[valor_venda], errors='coerce')
@@ -41,7 +23,7 @@ class AppCielo():
 
 
             # Agrupando e somando os valores
-            self.df_agrupado = self.df.groupby([data_venda, 'Bandeira', 'Natureza', 'DataNat']).agg({valor_venda: 'sum', valor_liquido: 'sum', 'DataNat': 'count'}).rename(columns={'DataNat': 'Quantidade'}).reset_index()
+            self.df_agrupado = self.df.groupby([data_venda, bandeira, 'Natureza', 'DataNat']).agg({valor_venda: 'sum', valor_liquido: 'sum', 'DataNat': 'count'}).rename(columns={'DataNat': 'Quantidade'}).reset_index()
             self.df_agrupado['Taxa'] = self.df_agrupado.apply(lambda row: row[valor_venda] - row[valor_liquido], axis=1)
 
             print(self.df_agrupado)
@@ -101,12 +83,12 @@ class AppCielo():
                     conta_ativo = '1615'
                     conta_despesa = '1428'
                 
-                lanSimp = "000001,"+ str(data_txt) + ","+str(conta_ativo)+",18," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,'Bandeira'])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
-                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,'Bandeira'])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
+                lanSimp = "000001,"+ str(data_txt) + ","+str(conta_ativo)+",18," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
+                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
                 self.txt += str(lanSimp)
                 self.txt += str(lanSimpT)
 
-            self.exibir_relatorio(self.relatorio)
+            self.exibir_relatorio_stone(self.relatorio)
             print(self.txt)
             QMessageBox.warning(self, 'Info', 'Excel carregado com Sucesso')  
         except KeyError as erro:
@@ -127,7 +109,7 @@ class AppCielo():
         else:
             return 'Voucher'
 
-    def exibir_relatorio(self, relatorio):
+    def exibir_relatorio_stone(self, relatorio):
         # Criar os componentes do layout
         # fonte_titulo = QFont('Arial', 14, QFont.Bold)
         # fonte_conteudo = QFont('Arial', 8)
@@ -151,7 +133,7 @@ class AppCielo():
         geral_label.setStyleSheet(estilo_conteudo)
         
         # Criar o layout vertical
-        layout = QVBoxLayout(self.ui.widgetRelatorioCielo)
+        layout = QVBoxLayout(self.ui.widgetRelatorioStone)
         layout.setContentsMargins(2, 2, 2, 2)  # Remover espaçamento interno
         layout.setSpacing(5)  # Definir espaçamento entre os widgets
         layout.setAlignment(Qt.AlignTop)  # Alinhar os widgets no topo
@@ -162,4 +144,4 @@ class AppCielo():
         layout.addWidget(voucher_label)
         layout.addWidget(geral_label)
                 
-        self.ui.widgetRelatorioCielo.show()
+        self.ui.widgetRelatorioStone.show()

@@ -232,7 +232,8 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         #--------------------------------------------------------------------------#
         self.ui.cieloExcelBtn.clicked.connect(lambda: self.file_open_excel(self.cielo))
         self.ui.cieloTxtBtn.clicked.connect(self.file_salve)
-
+        self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_excel(self.stone))
+        self.ui.stoneTxtBtn.clicked.connect(self.file_salve)
 
 
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change

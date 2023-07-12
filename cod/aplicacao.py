@@ -4,9 +4,9 @@ import sys
 import pandas as pd
 from cod.app_eaj import AppEaj
 from cod.cielo import AppCielo
+from cod.stone import AppStone
 
-
-class Aplicacao(AppEaj, AppCielo):
+class Aplicacao(AppEaj, AppCielo, AppStone):
     def caminho_arquivo(self, caminho_relativo):
         """ Obtém o caminho absoluto para o recurso, para PyInstaller """
         try:
