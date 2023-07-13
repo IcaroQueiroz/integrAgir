@@ -201,6 +201,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         validator_valor = QRegExpValidator(regex_valor)
         self.ui.entryIoEmp.setValidator(validator_valor)
 
+        self.ui.pushButton.clicked.connect(self.file_open_pdf)
+        
+
 
         #--------------------------------------------------------------------------#
         # Funções do comboBox aba Cartão                                           #
@@ -228,13 +231,14 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.stackedWidgetCartao.addWidget(self.pageRedecard)
 
         #--------------------------------------------------------------------------#
-        # Funções CIELO                                                            #
+        # Funções dos Cartão de Credito                                            #
         #--------------------------------------------------------------------------#
         self.ui.cieloExcelBtn.clicked.connect(lambda: self.file_open_excel(self.cielo))
         self.ui.cieloTxtBtn.clicked.connect(self.file_salve)
         self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_excel(self.stone))
         self.ui.stoneTxtBtn.clicked.connect(self.file_salve)
-
+        self.ui.redeExcelBtn.clicked.connect(lambda: self.file_open_excel(self.rede))
+        self.ui.redeTxtBtn.clicked.connect(self.file_salve)
 
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 

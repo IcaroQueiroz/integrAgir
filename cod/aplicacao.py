@@ -5,8 +5,10 @@ import pandas as pd
 from cod.app_eaj import AppEaj
 from cod.cielo import AppCielo
 from cod.stone import AppStone
+from cod.rede import AppRede
+from cod.emprestimo import FuncoesEmpretimo
 
-class Aplicacao(AppEaj, AppCielo, AppStone):
+class Aplicacao(AppEaj, AppCielo, AppStone, AppRede, FuncoesEmpretimo):
     def caminho_arquivo(self, caminho_relativo):
         """ Obtém o caminho absoluto para o recurso, para PyInstaller """
         try:
@@ -29,7 +31,10 @@ class Aplicacao(AppEaj, AppCielo, AppStone):
         if filename:
             with open(filename, 'w') as file:
                 file.write(self.txt)
-            QMessageBox.information(self, 'Info', 'TXT salvo com sucesso!')    
+            QMessageBox.information(self, 'Info', 'TXT salvo com sucesso!')   
+
+    def file_open_pdf(self):
+        self.Criar_pdf() 
             
             
 

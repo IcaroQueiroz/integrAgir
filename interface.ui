@@ -1049,7 +1049,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="pageHome">
                 <property name="sizePolicy">
@@ -2383,7 +2383,7 @@ QLineEdit:focus {
                  <item>
                   <widget class="QStackedWidget" name="stackedWidget">
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="pageHomeEmp">
                     <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -3047,7 +3047,7 @@ QLineEdit:focus {
                             </property>
                            </widget>
                           </widget>
-                          <widget class="QWidget" name="widgetRelatorioRede_2" native="true">
+                          <widget class="QWidget" name="widgetRelatorioEmprestimo" native="true">
                            <property name="geometry">
                             <rect>
                              <x>390</x>

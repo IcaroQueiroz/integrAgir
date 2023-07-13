@@ -1455,18 +1455,18 @@ class Ui_MainWindow(object):
         self.emprestimoBtn_2.setIconSize(QtCore.QSize(60, 60))
         self.emprestimoBtn_2.setAutoRepeat(False)
         self.emprestimoBtn_2.setObjectName("emprestimoBtn_2")
-        self.widgetRelatorioRede_2 = QtWidgets.QWidget(self.frame_19)
-        self.widgetRelatorioRede_2.setGeometry(QtCore.QRect(390, 10, 346, 431))
+        self.widgetRelatorioEmprestimo = QtWidgets.QWidget(self.frame_19)
+        self.widgetRelatorioEmprestimo.setGeometry(QtCore.QRect(390, 10, 346, 431))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widgetRelatorioRede_2.sizePolicy().hasHeightForWidth())
-        self.widgetRelatorioRede_2.setSizePolicy(sizePolicy)
-        self.widgetRelatorioRede_2.setStyleSheet("    border-radius:15px;\n"
+        sizePolicy.setHeightForWidth(self.widgetRelatorioEmprestimo.sizePolicy().hasHeightForWidth())
+        self.widgetRelatorioEmprestimo.setSizePolicy(sizePolicy)
+        self.widgetRelatorioEmprestimo.setStyleSheet("    border-radius:15px;\n"
 "    border: white;\n"
 "    border-style: dotted;\n"
 "    border-width: 1.5px;")
-        self.widgetRelatorioRede_2.setObjectName("widgetRelatorioRede_2")
+        self.widgetRelatorioEmprestimo.setObjectName("widgetRelatorioEmprestimo")
         self.horizontalLayout_22.addWidget(self.frame_19)
         self.verticalLayout_13.addWidget(self.frame_18)
         self.stackedWidget.addWidget(self.pageEmprestimo)
@@ -1501,11 +1501,11 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.menuCenterPages.setCurrentIndex(0)
-        self.mainPages.setCurrentIndex(0)
+        self.mainPages.setCurrentIndex(3)
         self.stackedWidgetApp.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         self.stackedWidgetCartao.setCurrentIndex(0)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
