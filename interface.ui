@@ -2991,7 +2991,7 @@ QLineEdit:focus {
                                 <item>
                                  <widget class="QPushButton" name="pushButton">
                                   <property name="text">
-                                   <string>PushButton</string>
+                                   <string>Calcular e gerar relatorio</string>
                                   </property>
                                  </widget>
                                 </item>

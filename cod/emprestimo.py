@@ -5,9 +5,10 @@ from time import strptime, struct_time, localtime, mktime, strftime
 import pandas as pd
 import getpass
 import os
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QWidget
-from PyQt5.QtGui import QFont
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QWidget, QPushButton
+from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt5.QtCore import Qt, QSize
+
 
 
 
@@ -27,6 +28,21 @@ class FuncoesEmpretimo():
         cnv.setFont("Helvetica-Oblique", 10)
         x = 50
         y = 810
+        #variaveis
+        self.txt = ''
+        cpfoucnpj = ''
+        banco = '555555555555555555555555555'
+        taxa = ''
+        iof = ''
+        emprestimo_CP = ''
+        encargo_CP = ''
+        emprestimo_LP = ''
+        encargo_LP = ''        
+        self.hitorico = ''
+        data_txt = f"{self.data:%Y%m%d}"
+        contador = 1
+        contador_formatado = "{:06d}".format(contador)
+
         cnv.drawString(x, y-4, "_________________________________________________________________________________________")
         cnv.drawString(x+170, y-20, "RESUMO DE EMPRESTIMO")
         cnv.drawString(x, y-26, "_________________________________________________________________________________________")
@@ -42,22 +58,48 @@ class FuncoesEmpretimo():
         cnv.drawString(x, y-147, "_________________________________________________________________________________________")
         cnv.drawString(x+20, y-171, "---------------------------------------------------- Banco e Taxas ----------------------------------------------------------")
         cnv.drawString(x+70, y-201, str(str(data_formatada) + "   D - Emprestimo"+ "  ...................................................."+ "R$ " + str(round(self.valor, 2))))
+        lanSimp = contador_formatado + "," + str(data_txt) + ","+str(banco)+",0," + str(self.valor) + ",00000000," + "Vlr. Ref. Emprestimo "+ str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+        self.txt += str(lanSimp)
+        contador += 1        
+        
         if int(self.taxa_contrato) > 0:
             cnv.drawString(x+70, y-216, str(str(data_formatada) + "   D - Taxa Contrato"+ "  ................................................"+ "R$ " + str(round(self.taxa_contrato, 2))))
             y = y-216       
+            lanSimp = contador_formatado + "," + str(data_txt) + ","+str(taxa)+",0," + str(self.taxa_contrato) + ",00000000," + "Vlr. Ref. taxas s/Emprestimo "+ str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+            self.txt += str(lanSimp)
+            contador += 1 
+        
         if int(self.iof) > 0:
             cnv.drawString(x+70, y-15, str(str(data_formatada) + "   D - IOF"+ "  ................................................................."+ "R$ " + str(round(self.iof, 2))))
             y = y-15
+            lanSimp = contador_formatado + "," +  str(data_txt) + ","+str(iof)+",0," + str(self.iof) + ",00000000," + "Vlr. Ref. IOF s/Emprestimo "+ str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+            self.txt += str(lanSimp)
+            contador += 1
+
         if int(self.longoPrazo) >= 1:
             cnv.drawString(x+20, y-25, "------------------------------------------------------ Curto Prazo ------------------------------------------------------------")
             cnv.drawString(x+20, y-35, str("   [ Total de Parcelas: "+str(self.CurtoPrazo)+"]"))
             cnv.drawString(x+300, y-35, str("  [Ano "+str(self.ano)+": "+str((int(self.CurtoPrazo) - 12))+"]  [Ano "+str((int(self.ano) + 1))+ ": 12 ]"))
             cnv.drawString(x+70, y-60, str(str(data_formatada) + "  D- (-) Encargos Emprestimo CP"+ "  ........................"+ "R$ " + str(round(self.encargosParcelas * self.CurtoPrazo, 2))))
             cnv.drawString(x+70, y-75, str(str(data_formatada) + "  C - Emprestimo CP"+ "  .............................................."+ "R$ " + str(round(self.emprestimoParcelas * self.CurtoPrazo, 2))))
+            lanSimp = contador_formatado + "," + str(data_txt) + ","+str(encargo_CP)+",0," + str(self.encargosParcelas * self.CurtoPrazo) + ",00000000," + "Vlr. Ref. Encargos CP s/Emprestimo Parcelas:"+ str(self.CurtoPrazo)+" "+  str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+            self.txt += str(lanSimp)
+            contador += 1
+            lanSimp = contador_formatado + "," + str(data_txt) + ",0,"+str(emprestimo_CP)+"," + str(self.emprestimoParcelas * self.CurtoPrazo) + ",00000000," + "Vlr. Ref. Emprestimo CP Parcelas:"+ str(self.CurtoPrazo)+" " + str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+            self.txt += str(lanSimp)
+            contador += 1        
+       
             cnv.drawString(x+20, y-100, "------------------------------------------------------ Longo Prazo ------------------------------------------------------------")
             cnv.drawString(x+20, y-110, str("   [ Total de Parcelas: "+str(int(self.longoPrazo))+"]"))
             cnv.drawString(x+70, y-135, str(str(data_formatada) + "  D - (-) Encargos Emprestimo LP"+ "  ........................"+ "R$ " + str(round(self.encargosParcelas * self.longoPrazo, 2))))
             cnv.drawString(x+70, y-150, str(str(data_formatada) + "  C - Emprestimo LP"+ "  .............................................."+ "R$ " + str(round(self.emprestimoParcelas * self.longoPrazo, 2))))
+            lanSimp = contador_formatado + "," + str(data_txt) + ","+str(encargo_LP)+",0," + str(self.encargosParcelas * self.longoPrazo) + ",00000000," + "Vlr. Ref. Encargos CP s/Emprestimo Parcelas:"+ str(self.longoPrazo)+" "+  str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+            self.txt += str(lanSimp)
+            contador += 1
+            lanSimp = contador_formatado + "," + str(data_txt) + ",0,"+str(emprestimo_LP)+"," + str(self.emprestimoParcelas * self.longoPrazo) + ",00000000," + "Vlr. Ref. Emprestimo CP Parcelas:"+ str(self.longoPrazo)+" " + str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+            self.txt += str(lanSimp)
+            contador += 1  
+            
             cnv.drawString(x, y-174, "_________________________________________________________________________________________")
             cnv.drawString(x+210, y-190, "APROPRIAÇÃO")
             cnv.drawString(x, y-196, "_________________________________________________________________________________________")           
@@ -65,6 +107,10 @@ class FuncoesEmpretimo():
             cnv.drawString(x+30, y-36, str(" [ Apropriação Mensal do Juros: "+str(self.parcelas)+"x ] "))
             cnv.drawString(x+236, y-28, str(" | D - Juros Passivo"+"............................."+ "R$ " + str(round(self.encargosParcelas, 2)) ))
             cnv.drawString(x+236, y-40, str(" | C - (-) Encargos Emprestimo CP"+"....."+ "R$ " + str(round(self.encargosParcelas, 2)) ))              
+            #for i in range(self.parcelas):
+           
+        
+            
             y = y-36
             self.AnoApropriação = int(self.ano) + 2
             self.dataIn = "01/01/"
@@ -90,17 +136,17 @@ class FuncoesEmpretimo():
                 self.longoPrazo = self.longoPrazo - 12
                 self.AnoApropriação = self.AnoApropriação + 1
                 y = y-30     
-        
-        cnv.drawString(x+70, y-15, str(str(data_formatada) + "  D- (-) Encargos Emprestimo CP"+ "  ........................"+ "R$ " + str(round(self.encargos, 2))))
-        cnv.drawString(x+70, y-30, str(str(data_formatada) + "  C - Emprestimo CP"+ "  .............................................."+ "R$ " + str(round(self.emprestimo, 2))))
+        else:
+            cnv.drawString(x+70, y-15, str(str(data_formatada) + "  D- (-) Encargos Emprestimo CP"+ "  ........................"+ "R$ " + str(round(self.encargos, 2))))
+            cnv.drawString(x+70, y-30, str(str(data_formatada) + "  C - Emprestimo CP"+ "  .............................................."+ "R$ " + str(round(self.emprestimo, 2))))
 
-        cnv.drawString(x, y-54, "_________________________________________________________________________________________")
-        cnv.drawString(x+210, y-70, "APROPRIAÇÃO")
-        cnv.drawString(x, y-76, "_________________________________________________________________________________________")           
-        y = y-76
-        cnv.drawString(x+30, y-36, str(" [ Apropriação Mensal do Juros: "+str(self.parcelas)+"x ] "))
-        cnv.drawString(x+236, y-28, str(" | D - Juros Passivo"+"............................."+ "R$ " + str(round(self.encargosParcelas, 2)) ))
-        cnv.drawString(x+236, y-40, str(" | C - (-) Encargos Emprestimo CP"+"....."+ "R$ " + str(round(self.encargosParcelas, 2)) ))              
+            cnv.drawString(x, y-54, "_________________________________________________________________________________________")
+            cnv.drawString(x+210, y-70, "APROPRIAÇÃO")
+            cnv.drawString(x, y-76, "_________________________________________________________________________________________")           
+            y = y-76
+            cnv.drawString(x+30, y-36, str(" [ Apropriação Mensal do Juros: "+str(self.parcelas)+"x ] "))
+            cnv.drawString(x+236, y-28, str(" | D - Juros Passivo"+"............................."+ "R$ " + str(round(self.encargosParcelas, 2)) ))
+            cnv.drawString(x+236, y-40, str(" | C - (-) Encargos Emprestimo CP"+"....."+ "R$ " + str(round(self.encargosParcelas, 2)) ))              
        
         cnv.setFont("Helvetica-Oblique", 7)
         self.usuario = getpass.getuser()
@@ -121,7 +167,6 @@ class FuncoesEmpretimo():
         encargo_CP = ''
         emprestimo_LP = ''
         encargo_LP = ''
-
 
         self.hitorico = ''
         data_txt = f"{self.data:%Y%m%d}"
@@ -204,12 +249,23 @@ class FuncoesEmpretimo():
         taxa_contrato_label = QLabel(f"<b>Taxa Contrato:</b> R$ {self.taxa_contrato}")
         iof_label = QLabel(f"<b>IOF:</b> R$ {self.iof}")
         total_emprestimo_label = QLabel(f"<b>Total Empréstimo:</b> R$ {self.parcelas}")
-        parcelas_label = QLabel(f"<b>Parcelas:</b> {self.parcelas}")
-        valor_parcela_label = QLabel(f"<b>Valor Parcela:</b> R$ {self.valorParcelas}")
+        font = QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        icon13 = QIcon()
+        icon13.addPixmap(QPixmap(":/imagens/img/txt-btn.png"), QIcon.Normal, QIcon.Off)
+        txt_emprestimo_btn = QPushButton("txt Único")
+        txt_emprestimo_btn.setIcon(icon13)  # Configure o ícone conforme necessário
+        txt_emprestimo_btn.setIconSize(QSize(80, 80))  # Defina o tamanho do ícone conforme necessário
+        txt_emprestimo_btn.setFont(font)  # Defina a fonte do botão conforme necessário
+        txt_emprestimo_btn.setObjectName("txtEmprestimo")  # Defina o nome do objeto conforme necessário
+ 
 
         # Definir os estilos CSS
         estilo_titulo = "QLabel { border: none; font-size: 14pt; font-weight: bold; margin: 20px; margin-left: 35px }"
         estilo_conteudo = "QLabel { border: none; font-size: 10pt; margin: 8px }"
+        estilo_botão = "QPushButton { border: none; font-size: 10pt; margin: 8px }"
 
         # Aplicar os estilos aos QLabels
         titulo_label.setStyleSheet(estilo_titulo)
@@ -219,8 +275,8 @@ class FuncoesEmpretimo():
         taxa_contrato_label.setStyleSheet(estilo_conteudo)
         iof_label.setStyleSheet(estilo_conteudo)
         total_emprestimo_label.setStyleSheet(estilo_conteudo)
-        parcelas_label.setStyleSheet(estilo_conteudo)
-        valor_parcela_label.setStyleSheet(estilo_conteudo)
+        txt_emprestimo_btn.setStyleSheet(estilo_botão)
+
 
         # Criar o layout vertical
         layout = QVBoxLayout(self.ui.widgetRelatorioEmprestimo)
@@ -236,7 +292,8 @@ class FuncoesEmpretimo():
         layout.addWidget(iof_label)
         layout.addWidget(total_emprestimo_label)
         layout.addWidget(titulo_label2)  # Título
-        layout.addWidget(parcelas_label)
-        layout.addWidget(valor_parcela_label)
+        layout.addWidget(txt_emprestimo_btn)
+
+
 
         self.ui.widgetRelatorioEmprestimo.show()
