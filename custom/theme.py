@@ -69,6 +69,52 @@ class Theme:
                     color: #ffffff;
                 }
 
+                #passoApassoEaj, #passoApassoLacon, #passoApassoCielo, 
+                #passoApassoRede, #passoApassoStone{
+                    border-radius:14px;
+                    border: black;
+                    border-style: dotted;
+                    border-width: 1.5px;
+                    padding: 3px 15px 9px 9px;
+                }
+
+                QLineEdit {
+                    background-color: #ffffff; /* Cor de fundo */
+                    color: #000000; /* Cor do texto */
+                    border: 1px solid #cccccc; /* Borda */
+                    border-radius: 2px; /* Cantos arredondados */
+                    padding: 6px; /* Espaçamento interno */
+                }
+
+                QLineEdit:focus {
+                    border-color: #0000ff; /* Cor da borda quando em foco */
+                    outline: none; /* Remove a linha de contorno padrão */
+                }
+
+                QGroupBox {
+                    background-color: rgba(128, 128, 128, 0.3);
+                    border: 1px; /* Borda */
+                    border-radius: 4px; /* Cantos arredondados */
+                    margin-top: 6px; /* Espaçamento superior */
+                }
+
+                QGroupBox::title {
+                    subcontrol-origin: margin;
+                    subcontrol-position: top left;
+                    padding: 0 5px; /* Espaçamento interno */
+                    background-color: #16191d; /* Cor de fundo do título */
+                    color: #ffffff; /* Cor do texto do título */
+                    border-top-left-radius: 3px; /* Cantos arredondados do título */
+                    border-top-right-radius: 3px;
+                }
+
+                #widgetRelatorioEmprestimo, #widgetRelatorioCielo, #widgetRelatorioRede, #widgetRelatorioStone {
+                    border-radius:15px;
+                    border: black;
+                    border-style: dotted;
+                    border-width: 1.5px;
+                }
+
                 /* Outros seletores de estilo para widgets */
 
             """

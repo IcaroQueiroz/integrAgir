@@ -235,7 +235,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         #--------------------------------------------------------------------------#
         self.ui.cieloExcelBtn.clicked.connect(lambda: self.file_open_excel(self.cielo))
         self.ui.cieloTxtBtn.clicked.connect(self.file_salve)
-        self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_excel(self.stone))
+        self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_csv_stone(self.stone))
         self.ui.stoneTxtBtn.clicked.connect(self.file_salve)
         self.ui.redeExcelBtn.clicked.connect(lambda: self.file_open_excel(self.rede))
         self.ui.redeTxtBtn.clicked.connect(self.file_salve)

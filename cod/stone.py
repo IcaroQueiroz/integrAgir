@@ -2,8 +2,16 @@ import pandas as pd
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QWidget
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
+import re
 
 class AppStone():
+    # Função para remover caracteres não numéricos e converter para float
+    def convert_to_float(self, value):
+        cleaned_value = value.replace(',', '.') # Remove tudo que não é dígito nem ponto
+        try:
+            return float(cleaned_value)
+        except:
+            return None
     def stone(self):
         try: 
             data_venda = 'HORA DA VENDA'
@@ -17,9 +25,20 @@ class AppStone():
             self.df[data_venda] = self.df[data_venda].dt.date  # Extraia apenas a parte da data, excluindo a hora
             self.df['DataNat'] = self.df[data_venda].astype(str) + self.df[bandeira].astype(str) + self.df['Natureza'].astype(str) # Concatene a data (sem hora) com a coluna 'Natureza'
 
+            print(self.df[valor_liquido])
+
+            print(self.df)
+
             # Converter as colunas para o tipo de dados numérico
-            self.df[valor_venda] = pd.to_numeric(self.df[valor_venda], errors='coerce')
-            self.df[valor_liquido] = pd.to_numeric(self.df[valor_liquido], errors='coerce')
+            # Aplicar a função de conversão às colunas
+            self.df[valor_venda] = self.df[valor_venda].apply(self.convert_to_float)
+            self.df[valor_liquido] = self.df[valor_liquido].apply(self.convert_to_float)
+
+
+            print("self.df[valor_venda]------------------------------------------------------------------------")
+            print(self.df[valor_venda])
+            print("self.df[valor_liquido]-----------------------------------------------------------------------")
+            print(self.df[valor_liquido])
 
 
             # Agrupando e somando os valores
@@ -84,7 +103,7 @@ class AppStone():
                     conta_despesa = '1428'
                 
                 lanSimp = "000001,"+ str(data_txt) + ","+str(conta_ativo)+",18," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
-                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
+                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, 'Taxa']) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
                 self.txt += str(lanSimp)
                 self.txt += str(lanSimpT)
 

@@ -155,7 +155,12 @@ QMessageBox QPushButton {
         color: white;
     }
 
-</string>
+#widgetRelatorioEmprestimo, #widgetRelatorioCielo, #widgetRelatorioRede, #widgetRelatorioStone {
+	border-radius:15px;
+	border: white;
+	border-style: dotted;
+	border-width: 1.5px;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -1049,7 +1054,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="pageHome">
                 <property name="sizePolicy">
@@ -1948,10 +1953,7 @@ QLineEdit:focus {
                            </sizepolicy>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">	border-radius:15px;
-	border: white;
-	border-style: dotted;
-	border-width: 1.5px;</string>
+                           <string notr="true"/>
                           </property>
                          </widget>
                         </item>
@@ -2154,10 +2156,7 @@ QLineEdit:focus {
                          </sizepolicy>
                         </property>
                         <property name="styleSheet">
-                         <string notr="true">	border-radius:15px;
-	border: white;
-	border-style: dotted;
-	border-width: 1.5px;</string>
+                         <string notr="true"/>
                         </property>
                        </widget>
                       </item>
@@ -2196,10 +2195,7 @@ QLineEdit:focus {
                          </sizepolicy>
                         </property>
                         <property name="styleSheet">
-                         <string notr="true">	border-radius:15px;
-	border: white;
-	border-style: dotted;
-	border-width: 1.5px;</string>
+                         <string notr="true"/>
                         </property>
                        </widget>
                       </item>
@@ -2991,7 +2987,7 @@ QLineEdit:focus {
                                 <item>
                                  <widget class="QPushButton" name="pushButton">
                                   <property name="text">
-                                   <string>Calcular e gerar relatorio</string>
+                                   <string>CALCULAR E GERAR RELATÓRIO</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -3063,10 +3059,7 @@ QLineEdit:focus {
                             </sizepolicy>
                            </property>
                            <property name="styleSheet">
-                            <string notr="true">	border-radius:15px;
-	border: white;
-	border-style: dotted;
-	border-width: 1.5px;</string>
+                            <string notr="true"/>
                            </property>
                           </widget>
                          </widget>

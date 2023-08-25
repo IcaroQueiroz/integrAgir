@@ -156,7 +156,12 @@ class Ui_MainWindow(object):
 "        color: white;\n"
 "    }\n"
 "\n"
-"")
+"#widgetRelatorioEmprestimo, #widgetRelatorioCielo, #widgetRelatorioRede, #widgetRelatorioStone {\n"
+"    border-radius:15px;\n"
+"    border: white;\n"
+"    border-style: dotted;\n"
+"    border-width: 1.5px;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -976,10 +981,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widgetRelatorioCielo.sizePolicy().hasHeightForWidth())
         self.widgetRelatorioCielo.setSizePolicy(sizePolicy)
-        self.widgetRelatorioCielo.setStyleSheet("    border-radius:15px;\n"
-"    border: white;\n"
-"    border-style: dotted;\n"
-"    border-width: 1.5px;")
+        self.widgetRelatorioCielo.setStyleSheet("")
         self.widgetRelatorioCielo.setObjectName("widgetRelatorioCielo")
         self.horizontalLayout_20.addWidget(self.widgetRelatorioCielo)
         self.horizontalLayout_16.addWidget(self.frame_14)
@@ -1061,10 +1063,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widgetRelatorioStone.sizePolicy().hasHeightForWidth())
         self.widgetRelatorioStone.setSizePolicy(sizePolicy)
-        self.widgetRelatorioStone.setStyleSheet("    border-radius:15px;\n"
-"    border: white;\n"
-"    border-style: dotted;\n"
-"    border-width: 1.5px;")
+        self.widgetRelatorioStone.setStyleSheet("")
         self.widgetRelatorioStone.setObjectName("widgetRelatorioStone")
         self.horizontalLayout_21.addWidget(self.widgetRelatorioStone)
         self.stackedWidgetCartao.addWidget(self.pageStone)
@@ -1088,10 +1087,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widgetRelatorioRede.sizePolicy().hasHeightForWidth())
         self.widgetRelatorioRede.setSizePolicy(sizePolicy)
-        self.widgetRelatorioRede.setStyleSheet("    border-radius:15px;\n"
-"    border: white;\n"
-"    border-style: dotted;\n"
-"    border-width: 1.5px;")
+        self.widgetRelatorioRede.setStyleSheet("")
         self.widgetRelatorioRede.setObjectName("widgetRelatorioRede")
         self.horizontalLayout_23.addWidget(self.widgetRelatorioRede)
         self.frame_28 = QtWidgets.QFrame(self.pageRedecard)
@@ -1462,10 +1458,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widgetRelatorioEmprestimo.sizePolicy().hasHeightForWidth())
         self.widgetRelatorioEmprestimo.setSizePolicy(sizePolicy)
-        self.widgetRelatorioEmprestimo.setStyleSheet("    border-radius:15px;\n"
-"    border: white;\n"
-"    border-style: dotted;\n"
-"    border-width: 1.5px;")
+        self.widgetRelatorioEmprestimo.setStyleSheet("")
         self.widgetRelatorioEmprestimo.setObjectName("widgetRelatorioEmprestimo")
         self.horizontalLayout_22.addWidget(self.frame_19)
         self.verticalLayout_13.addWidget(self.frame_18)
@@ -1501,7 +1494,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.menuCenterPages.setCurrentIndex(0)
-        self.mainPages.setCurrentIndex(3)
+        self.mainPages.setCurrentIndex(0)
         self.stackedWidgetApp.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         self.stackedWidgetCartao.setCurrentIndex(0)
@@ -1609,7 +1602,7 @@ class Ui_MainWindow(object):
         self.labelIofEmp.setText(_translate("MainWindow", "IOF:"))
         self.labelVParcEmp.setText(_translate("MainWindow", "Parcelas:"))
         self.labelBancoEmp.setText(_translate("MainWindow", "Banco:"))
-        self.pushButton.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton.setText(_translate("MainWindow", "CALCULAR E GERAR RELATÓRIO"))
         self.emprestimoBtn_2.setText(_translate("MainWindow", "Emprestimo"))
         self.label_8.setText(_translate("MainWindow", "   Copyright © 2023."))
 from custom.CustomDateLineEdit import CustomDateLineEdit

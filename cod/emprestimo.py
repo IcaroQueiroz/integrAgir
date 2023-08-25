@@ -5,7 +5,7 @@ from time import strptime, struct_time, localtime, mktime, strftime
 import pandas as pd
 import getpass
 import os
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QWidget, QPushButton
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton
 from PyQt5.QtGui import QFont, QIcon, QPixmap
 from PyQt5.QtCore import Qt, QSize
 
@@ -34,6 +34,7 @@ class FuncoesEmpretimo():
         banco = '555555555555555555555555555'
         taxa = ''
         iof = ''
+        juros_passivo = ''
         emprestimo_CP = ''
         encargo_CP = ''
         emprestimo_LP = ''
@@ -107,9 +108,30 @@ class FuncoesEmpretimo():
             cnv.drawString(x+30, y-36, str(" [ Apropriação Mensal do Juros: "+str(self.parcelas)+"x ] "))
             cnv.drawString(x+236, y-28, str(" | D - Juros Passivo"+"............................."+ "R$ " + str(round(self.encargosParcelas, 2)) ))
             cnv.drawString(x+236, y-40, str(" | C - (-) Encargos Emprestimo CP"+"....."+ "R$ " + str(round(self.encargosParcelas, 2)) ))              
-            #for i in range(self.parcelas):
-           
-        
+            for i in range(self.parcelas):
+                mes = self.data.month + i
+                ano = self.data.year + mes // 12
+                mes = mes % 12 or 12  # Lida com a troca de ano
+                ultimo_dia = {
+                    1: 31,
+                    2: 29 if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0) else 28,
+                    3: 31,
+                    4: 30,
+                    5: 31,
+                    6: 30,
+                    7: 31,
+                    8: 31,
+                    9: 30,
+                    10: 31,
+                    11: 30,
+                    12: 31,
+                }[mes]
+                nova_data = self.data.replace(year=ano, month=mes, day=ultimo_dia)
+                d_txt = f"{nova_data:%Y%m%d}"
+                
+                lanSimp = '000001' + "," + str(d_txt) + ","+str(encargo_CP)+","+str(juros_passivo)+"," + str(self.encargosParcelas) + ",00000000," + "Vlr. Ref. Apropriação do Encargos "+ str(self.hitorico)+",,"+ cpfoucnpj + "," + "\n"
+                self.txt += str(lanSimp)
+                print(self.txt)
             
             y = y-36
             self.AnoApropriação = int(self.ano) + 2
@@ -240,7 +262,7 @@ class FuncoesEmpretimo():
 
         titulo_label = QLabel('RESUMO DE EMPRÉSTIMO')
         titulo_label.setFont(fonte_titulo)
-        titulo_label2 = QLabel('RESUMO DE EMPRÉSTIMO')
+        titulo_label2 = QLabel('RELATÓRIOS')
         titulo_label2.setFont(fonte_titulo)
 
         # Criar o QLabel para cada informação
@@ -255,27 +277,44 @@ class FuncoesEmpretimo():
         font.setWeight(75)
         icon13 = QIcon()
         icon13.addPixmap(QPixmap(":/imagens/img/txt-btn.png"), QIcon.Normal, QIcon.Off)
-        txt_emprestimo_btn = QPushButton("txt Único")
+        icon14 = QIcon()
+        icon14.addPixmap(QPixmap(":/imagens/img/pdf-btn.png"), QIcon.Normal, QIcon.Off)
+        txt_emprestimo_btn = QPushButton("TXT")
         txt_emprestimo_btn.setIcon(icon13)  # Configure o ícone conforme necessário
         txt_emprestimo_btn.setIconSize(QSize(80, 80))  # Defina o tamanho do ícone conforme necessário
         txt_emprestimo_btn.setFont(font)  # Defina a fonte do botão conforme necessário
         txt_emprestimo_btn.setObjectName("txtEmprestimo")  # Defina o nome do objeto conforme necessário
- 
+        pdf_emprestimo_btn = QPushButton("PDF")
+        pdf_emprestimo_btn.setIcon(icon14)  # Configure o ícone conforme necessário
+        pdf_emprestimo_btn.setIconSize(QSize(80, 80))  # Defina o tamanho do ícone conforme necessário
+        pdf_emprestimo_btn.setFont(font)  # Defina a fonte do botão conforme necessário
+        pdf_emprestimo_btn.setObjectName("pdfEmprestimo")  # Defina o nome do objeto conforme necessário 
+
 
         # Definir os estilos CSS
         estilo_titulo = "QLabel { border: none; font-size: 14pt; font-weight: bold; margin: 20px; margin-left: 35px }"
+        estilo_titulo2 = "QLabel { border: none; font-size: 14pt; font-weight: bold; margin: 5px; margin-left: 105px; margin-top: 25px }"
         estilo_conteudo = "QLabel { border: none; font-size: 10pt; margin: 8px }"
         estilo_botão = "QPushButton { border: none; font-size: 10pt; margin: 8px }"
 
         # Aplicar os estilos aos QLabels
         titulo_label.setStyleSheet(estilo_titulo)
-        titulo_label2.setStyleSheet(estilo_titulo)
+        titulo_label2.setStyleSheet(estilo_titulo2)
         data_label.setStyleSheet(estilo_conteudo)
         valor_emprestimo_label.setStyleSheet(estilo_conteudo)
         taxa_contrato_label.setStyleSheet(estilo_conteudo)
         iof_label.setStyleSheet(estilo_conteudo)
         total_emprestimo_label.setStyleSheet(estilo_conteudo)
         txt_emprestimo_btn.setStyleSheet(estilo_botão)
+        pdf_emprestimo_btn.setStyleSheet(estilo_botão)
+
+
+        # Criar o layout horizontal
+        layout_horizontal = QHBoxLayout()
+        # Adicionar os botões ao layout horizontal
+        layout_horizontal.addWidget(txt_emprestimo_btn)
+        layout_horizontal.addWidget(pdf_emprestimo_btn)
+
 
 
         # Criar o layout vertical
@@ -292,7 +331,7 @@ class FuncoesEmpretimo():
         layout.addWidget(iof_label)
         layout.addWidget(total_emprestimo_label)
         layout.addWidget(titulo_label2)  # Título
-        layout.addWidget(txt_emprestimo_btn)
+        layout.addLayout(layout_horizontal)  # Adicionar o layout horizontal ao layout vertical
 
 
 

@@ -19,9 +19,25 @@ class Aplicacao(AppEaj, AppCielo, AppStone, AppRede, FuncoesEmpretimo):
         return os.path.join(caminho_base, caminho_relativo)    
 
     def file_open_excel(self, funcionalidade):
-        filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx; *.xls)')
+        filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx; *.xls; *.csv)')
         if filename:
-            self.df = pd.read_excel(filename)
+            if filename.endswith('.csv'):
+                self.df = pd.read_csv(filename)
+            else:
+                self.df = pd.read_excel(filename)
+            
+            print(self.df)
+            print(type(self.df))
+            funcionalidade()
+
+    def file_open_csv_stone(self, funcionalidade):
+        filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx; *.xls; *.csv)')
+        if filename:
+            if filename.endswith('.csv'):
+                self.df = pd.read_csv(filename, sep=';', encoding='utf-8')
+            else:
+                self.df = pd.read_excel(filename)
+            
             print(self.df)
             print(type(self.df))
             funcionalidade()
