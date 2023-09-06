@@ -3,12 +3,13 @@ import os
 import sys
 import pandas as pd
 from cod.app_eaj import AppEaj
+from cod.app_agir import AppAgir
 from cod.cielo import AppCielo
 from cod.stone import AppStone
 from cod.rede import AppRede
 from cod.emprestimo import FuncoesEmpretimo
 
-class Aplicacao(AppEaj, AppCielo, AppStone, AppRede, FuncoesEmpretimo):
+class Aplicacao(AppEaj, AppAgir, AppCielo, AppStone, AppRede, FuncoesEmpretimo):
     def caminho_arquivo(self, caminho_relativo):
         """ Obtém o caminho absoluto para o recurso, para PyInstaller """
         try:

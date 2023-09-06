@@ -99,7 +99,7 @@
     color: #fff;
 }
 #passoApassoEaj, #passoApassoLacon, #passoApassoCielo, 
-#passoApassoRede, #passoApassoStone{
+#passoApassoRede, #passoApassoStone,#passoApassoAgir{
 	border-radius:14px;
 	border: white;
 	border-style: dotted;
@@ -1395,7 +1395,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <enum>QTabWidget::Triangular</enum>
                        </property>
                        <property name="currentIndex">
-                        <number>0</number>
+                        <number>1</number>
                        </property>
                        <property name="elideMode">
                         <enum>Qt::ElideRight</enum>
@@ -1653,6 +1653,148 @@ QLineEdit:focus {
                          </item>
                         </layout>
                        </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="pageAgir">
+                    <layout class="QVBoxLayout" name="verticalLayout_24">
+                     <item>
+                      <widget class="QFrame" name="frame_29">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>700</width>
+                         <height>230</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_26">
+                        <item>
+                         <widget class="QPushButton" name="excelAgirBtn">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>12</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                            <stylestrategy>PreferDefault</stylestrategy>
+                           </font>
+                          </property>
+                          <property name="layoutDirection">
+                           <enum>Qt::LeftToRight</enum>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="text">
+                           <string>Abrir Excel</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="Resources.qrc">
+                            <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>160</width>
+                            <height>160</height>
+                           </size>
+                          </property>
+                          <property name="autoRepeat">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="txtAgirBtn">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>12</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="toolTip">
+                           <string>Salvar TXT</string>
+                          </property>
+                          <property name="text">
+                           <string>Salvar TXT</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="Resources.qrc">
+                            <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>160</width>
+                            <height>160</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_30">
+                       <property name="maximumSize">
+                        <size>
+                         <width>750</width>
+                         <height>230</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_27">
+                        <item alignment="Qt::AlignTop">
+                         <widget class="QLabel" name="passoApassoAgir">
+                          <property name="font">
+                           <font>
+                            <pointsize>11</pointsize>
+                            <underline>false</underline>
+                            <strikeout>false</strikeout>
+                           </font>
+                          </property>
+                          <property name="toolTip">
+                           <string>Abrir Excel</string>
+                          </property>
+                          <property name="text">
+                           <string>
+ Para utilizar essa ferramenta, siga os seguintes passos:
+   1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.
+   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão &quot;Abrir Excel&quot;.
+   3 - Clique no botão &quot;Salvar TXT&quot; , aguarde alguns instantes e salve o arquivo.
+   4 - Agora, o arquivo txt pode ser importado no Único.
+</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                     </layout>

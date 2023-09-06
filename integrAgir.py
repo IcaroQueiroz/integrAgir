@@ -44,11 +44,6 @@ class FirebaseAPI():
         return response.json()
 
 ##############################################################################
-# CLASS API FIREBASE                                                         #
-##############################################################################
-
-
-##############################################################################
 # CLASS MAIN WINDOWS                                                         #
 ##############################################################################
 class MainWindow(QMainWindow, Aplicacao, Theme):
@@ -162,6 +157,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.comboBoxApp.addItem('Selecione uma empresa...')
         self.ui.comboBoxApp.addItem('EAJ ENGENHARIA LTDA EPP')
         self.ui.comboBoxApp.addItem('LACON EMPREENDIMENTOS IMOBILIARIOS')
+        self.ui.comboBoxApp.addItem('AGIR - ASSESSORIA EMPRESARIAL LTDA')
         # cria as páginas e as adiciona ao stackedWidget
         self.pageHomeApp = QWidget()
         layout1 = QVBoxLayout(self.pageHomeApp)
@@ -174,6 +170,12 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.pageLacon = QWidget()
         layout3 = QVBoxLayout(self.pageLacon)
         self.ui.stackedWidgetApp.addWidget(self.pageLacon)
+
+        self.pageAgir = QWidget()
+        layout4 = QVBoxLayout(self.pageAgir)
+        self.ui.stackedWidgetApp.addWidget(self.pageAgir)
+
+
         
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
@@ -183,7 +185,14 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         #--------------------------------------------------------------------------#
         self.ui.excelEajBtn.clicked.connect(lambda: self.file_open_excel(self.eaj))
         self.ui.txtEajBtn.clicked.connect(self.file_salve)
-        
+
+        #--------------------------------------------------------------------------#
+        # Funções na ABA AGIR do APP                                               #
+        #--------------------------------------------------------------------------#
+        self.ui.excelAgirBtn.clicked.connect(lambda: self.file_open_excel(self.agir))
+        self.ui.txtAgirBtn.clicked.connect(self.file_salve)
+
+
         #--------------------------------------------------------------------------#
         # Funções dos Entry ABA emprestimo                                         #
         #--------------------------------------------------------------------------#        

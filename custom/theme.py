@@ -70,7 +70,7 @@ class Theme:
                 }
 
                 #passoApassoEaj, #passoApassoLacon, #passoApassoCielo, 
-                #passoApassoRede, #passoApassoStone{
+                #passoApassoRede, #passoApassoStone, #passoApassoAgir{
                     border-radius:14px;
                     border: black;
                     border-style: dotted;
