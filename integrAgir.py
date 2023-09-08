@@ -92,12 +92,12 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         model.setHorizontalHeaderLabels(["Contrato", "Imóvel", "Locatário", "CPF/CNPJ", "Valor", "Inicio", "Fim"])  # Definir rótulos das colunas
 
         # Carregar dados do Firebase
-        data_dict = self.firebase_api.get()
-        print("pint dic", data_dict)
-        #data_dict = json.loads(data)
+        self.data_dict = self.firebase_api.get()
+        print("pint dic", self.data_dict)
+        #self.data_dict = json.loads(data)
 
         # Preencher tabela com dados do Firebase
-        for item_id, item in data_dict.items():  # Acessar as chaves e os valores dos dicionários
+        for item_id, item in self.data_dict.items():  # Acessar as chaves e os valores dos dicionários
             row = [QStandardItem(str(item_id))]  # Adicionar o ID como o primeiro valor na linha
             row.extend(QStandardItem(str(value)) for value in item.values())  # Adicionar os demais valores do item
             model.appendRow(row)
