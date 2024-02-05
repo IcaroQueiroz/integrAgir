@@ -99,7 +99,8 @@
     color: #fff;
 }
 #passoApassoEaj, #passoApassoLacon, #passoApassoCielo, 
-#passoApassoRede, #passoApassoStone,#passoApassoAgir{
+#passoApassoRede, #passoApassoStone,#passoApassoAgir,
+#passoApassoSabor{
 	border-radius:14px;
 	border: white;
 	border-style: dotted;
@@ -138,22 +139,27 @@ QGroupBox::title {
 }
 
 QMessageBox {
-	background-color: #2c313c;
+	background-color: #16191d;
 	border-radius: 10px;
+    border-top-left-radius: 10px; /* Borda superior esquerda arredondada */
+    border-top-right-radius: 10px; /* Borda superior direita arredondada */
 }
 
 QMessageBox QLabel {
-	color: red;
+	color: #ffffff;
 }
 
 QMessageBox QHeaderView {
 	background-color: #16191d;
 }
 
-QMessageBox QPushButton {
-        background-color: red;
-        color: white;
-    }
+
+/* Altere a cor da barra de título */
+QMessageBox QFrame {
+    background-color: #16191d; /* Cor da barra de título */
+    border-top-left-radius: 10px; /* Borda superior esquerda arredondada */
+    border-top-right-radius: 10px; /* Borda superior direita arredondada */
+}
 
 #widgetRelatorioEmprestimo, #widgetRelatorioCielo, #widgetRelatorioRede, #widgetRelatorioStone {
 	border-radius:15px;
@@ -350,7 +356,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                 <string>Integrações</string>
                </property>
                <property name="text">
-                <string>   Integrações</string>
+                <string>  Integrações</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -585,7 +591,7 @@ border-left: 2px solid rgb(255,255,255);</string>
              </size>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="pageSettings">
              <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -700,7 +706,7 @@ border-left: 2px solid rgb(255,255,255);</string>
             </widget>
             <widget class="QWidget" name="pageInformation">
              <layout class="QVBoxLayout" name="verticalLayout_8">
-              <item alignment="Qt::AlignTop">
+              <item>
                <widget class="QFrame" name="widgetInfo">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
@@ -759,14 +765,44 @@ border-left: 2px solid rgb(255,255,255);</string>
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>13</pointsize>
+                  <pointsize>10</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                  <underline>false</underline>
+                  <strikeout>false</strikeout>
                  </font>
                 </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
-                 <string>Information</string>
+                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;📱 &lt;span style=&quot; font-weight:600;&quot;&gt;Aplicativo integrAgir&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Versão Beta &lt;/span&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;1.0.3&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Desenvolvedor: Ícaro Queiroz&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Contato:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;icaroqueiroz@live.com&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;icaro.queiroz@agir.cnt.br&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Descrição:&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;O Aplicativo integrAgir é uma&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;solução criada para simplificar&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;e otimizar os processos de &lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;importação de dados em nossa &lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;empresa.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                 </property>
                </widget>
               </item>
@@ -1395,7 +1431,7 @@ border-left: 2px solid rgb(255,255,255);</string>
                         <enum>QTabWidget::Triangular</enum>
                        </property>
                        <property name="currentIndex">
-                        <number>1</number>
+                        <number>0</number>
                        </property>
                        <property name="elideMode">
                         <enum>Qt::ElideRight</enum>
@@ -1773,6 +1809,148 @@ QLineEdit:focus {
                        <layout class="QHBoxLayout" name="horizontalLayout_27">
                         <item alignment="Qt::AlignTop">
                          <widget class="QLabel" name="passoApassoAgir">
+                          <property name="font">
+                           <font>
+                            <pointsize>11</pointsize>
+                            <underline>false</underline>
+                            <strikeout>false</strikeout>
+                           </font>
+                          </property>
+                          <property name="toolTip">
+                           <string>Abrir Excel</string>
+                          </property>
+                          <property name="text">
+                           <string>
+ Para utilizar essa ferramenta, siga os seguintes passos:
+   1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.
+   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão &quot;Abrir Excel&quot;.
+   3 - Clique no botão &quot;Salvar TXT&quot; , aguarde alguns instantes e salve o arquivo.
+   4 - Agora, o arquivo txt pode ser importado no Único.
+</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="pageSabor">
+                    <layout class="QVBoxLayout" name="verticalLayout_25">
+                     <item>
+                      <widget class="QFrame" name="frame_32">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>700</width>
+                         <height>230</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_34">
+                        <item>
+                         <widget class="QPushButton" name="excelSaborBtn">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>12</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                            <stylestrategy>PreferDefault</stylestrategy>
+                           </font>
+                          </property>
+                          <property name="layoutDirection">
+                           <enum>Qt::LeftToRight</enum>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="text">
+                           <string>Abrir Excel</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="Resources.qrc">
+                            <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>160</width>
+                            <height>160</height>
+                           </size>
+                          </property>
+                          <property name="autoRepeat">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="txtSaborBtn">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>12</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="toolTip">
+                           <string>Salvar TXT</string>
+                          </property>
+                          <property name="text">
+                           <string>Salvar TXT</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="Resources.qrc">
+                            <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>160</width>
+                            <height>160</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_31">
+                       <property name="maximumSize">
+                        <size>
+                         <width>750</width>
+                         <height>230</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_33">
+                        <item alignment="Qt::AlignTop">
+                         <widget class="QLabel" name="passoApassoSabor">
                           <property name="font">
                            <font>
                             <pointsize>11</pointsize>

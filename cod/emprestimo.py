@@ -11,8 +11,9 @@ from PyQt5.QtCore import Qt, QSize
 
 
 
-
 class FuncoesEmpretimo():
+    def file_open_pdf(self):
+        self.Criar_pdf() 
     def Usuario(self):
         # vamos obter o nome do usuário logado no sistema
         self.usuario = getpass.getuser()  
@@ -134,7 +135,7 @@ class FuncoesEmpretimo():
                 print(self.txt)
             
             y = y-36
-            self.AnoApropriação = int(self.ano) + 2
+            self.AnoApropriação = int(self.ano) + 1
             self.dataIn = "01/01/"
             cnv.setFont("Helvetica-Oblique", 9)
             while (int(self.longoPrazo) >= 12):
@@ -256,10 +257,35 @@ class FuncoesEmpretimo():
 
         self.exibir_relatorio_emprestimo()
 
+    def clearLayout(layout):
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+
+
     def exibir_relatorio_emprestimo(self):
+        # Remove todos os layouts do widgetRelatorioEmprestimo.
+        layout = self.ui.widgetRelatorioEmprestimo.layout()
+        if layout is not None:
+            while layout.count():
+                child = layout.takeAt(0)
+                if child.widget():
+                    child.widget().deleteLater()
+                elif child.layout():  # Verifique se é um layout
+                    child.layout().deleteLater()
+
+        if new_layout.layout() is not None:
+            while new_layout.count():
+                child = new_layout.takeAt(0)
+                if child.widget():
+                    child.widget().deleteLater()
+                elif child.layout():  # Verifique se é um layout
+                    child.layout().deleteLater()
+
+
         # Criar os componentes do layout
         fonte_titulo = QFont('Arial', 14, QFont.Bold)
-
         titulo_label = QLabel('RESUMO DE EMPRÉSTIMO')
         titulo_label.setFont(fonte_titulo)
         titulo_label2 = QLabel('RELATÓRIOS')
@@ -289,7 +315,7 @@ class FuncoesEmpretimo():
         pdf_emprestimo_btn.setIconSize(QSize(80, 80))  # Defina o tamanho do ícone conforme necessário
         pdf_emprestimo_btn.setFont(font)  # Defina a fonte do botão conforme necessário
         pdf_emprestimo_btn.setObjectName("pdfEmprestimo")  # Defina o nome do objeto conforme necessário 
-
+        pdf_emprestimo_btn.clicked.connect(self.file_open_pdf)
 
         # Definir os estilos CSS
         estilo_titulo = "QLabel { border: none; font-size: 14pt; font-weight: bold; margin: 20px; margin-left: 35px }"
@@ -308,31 +334,28 @@ class FuncoesEmpretimo():
         txt_emprestimo_btn.setStyleSheet(estilo_botão)
         pdf_emprestimo_btn.setStyleSheet(estilo_botão)
 
+        # Criar o novo layout vertical
+        new_layout = QVBoxLayout(self.ui.widgetRelatorioEmprestimo)
+        new_layout.setContentsMargins(2, 2, 2, 2)
+        new_layout.setSpacing(5)
+        new_layout.setAlignment(Qt.AlignTop)
 
-        # Criar o layout horizontal
+        # Adicionar os QLabels ao novo layout
+        new_layout.addWidget(titulo_label)
+        new_layout.addWidget(data_label)
+        new_layout.addWidget(valor_emprestimo_label)
+        new_layout.addWidget(taxa_contrato_label)
+        new_layout.addWidget(iof_label)
+        new_layout.addWidget(total_emprestimo_label)
+        new_layout.addWidget(titulo_label2)
+
+        # Criar o layout horizontal e adicionar os botões
         layout_horizontal = QHBoxLayout()
-        # Adicionar os botões ao layout horizontal
         layout_horizontal.addWidget(txt_emprestimo_btn)
         layout_horizontal.addWidget(pdf_emprestimo_btn)
 
+        if new_layout.layout() is not None:
+            new_layout.addLayout(layout_horizontal)
 
-
-        # Criar o layout vertical
-        layout = QVBoxLayout(self.ui.widgetRelatorioEmprestimo)
-        layout.setContentsMargins(2, 2, 2, 2)  # Remover espaçamento interno
-        layout.setSpacing(5)  # Definir espaçamento entre os widgets
-        layout.setAlignment(Qt.AlignTop)  # Alinhar os widgets no topo
-
-        # Adicionar os QLabels ao layout
-        layout.addWidget(titulo_label)  # Título
-        layout.addWidget(data_label)
-        layout.addWidget(valor_emprestimo_label)
-        layout.addWidget(taxa_contrato_label)
-        layout.addWidget(iof_label)
-        layout.addWidget(total_emprestimo_label)
-        layout.addWidget(titulo_label2)  # Título
-        layout.addLayout(layout_horizontal)  # Adicionar o layout horizontal ao layout vertical
-
-
-
+        # Exibir o widgetRelatorioEmprestimo
         self.ui.widgetRelatorioEmprestimo.show()

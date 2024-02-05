@@ -100,7 +100,8 @@ class Ui_MainWindow(object):
 "    color: #fff;\n"
 "}\n"
 "#passoApassoEaj, #passoApassoLacon, #passoApassoCielo, \n"
-"#passoApassoRede, #passoApassoStone,#passoApassoAgir{\n"
+"#passoApassoRede, #passoApassoStone,#passoApassoAgir,\n"
+"#passoApassoSabor{\n"
 "    border-radius:14px;\n"
 "    border: white;\n"
 "    border-style: dotted;\n"
@@ -139,22 +140,27 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QMessageBox {\n"
-"    background-color: #2c313c;\n"
+"    background-color: #16191d;\n"
 "    border-radius: 10px;\n"
+"    border-top-left-radius: 10px; /* Borda superior esquerda arredondada */\n"
+"    border-top-right-radius: 10px; /* Borda superior direita arredondada */\n"
 "}\n"
 "\n"
 "QMessageBox QLabel {\n"
-"    color: red;\n"
+"    color: #ffffff;\n"
 "}\n"
 "\n"
 "QMessageBox QHeaderView {\n"
 "    background-color: #16191d;\n"
 "}\n"
 "\n"
-"QMessageBox QPushButton {\n"
-"        background-color: red;\n"
-"        color: white;\n"
-"    }\n"
+"\n"
+"/* Altere a cor da barra de título */\n"
+"QMessageBox QFrame {\n"
+"    background-color: #16191d; /* Cor da barra de título */\n"
+"    border-top-left-radius: 10px; /* Borda superior esquerda arredondada */\n"
+"    border-top-right-radius: 10px; /* Borda superior direita arredondada */\n"
+"}\n"
 "\n"
 "#widgetRelatorioEmprestimo, #widgetRelatorioCielo, #widgetRelatorioRede, #widgetRelatorioStone {\n"
 "    border-radius:15px;\n"
@@ -399,7 +405,7 @@ class Ui_MainWindow(object):
         self.closeCenterBtnInfo.setIconSize(QtCore.QSize(20, 20))
         self.closeCenterBtnInfo.setObjectName("closeCenterBtnInfo")
         self.horizontalLayout_3.addWidget(self.closeCenterBtnInfo, 0, QtCore.Qt.AlignRight)
-        self.verticalLayout_8.addWidget(self.widgetInfo, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_8.addWidget(self.widgetInfo)
         self.labelInformation = QtWidgets.QLabel(self.pageInformation)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -407,9 +413,16 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.labelInformation.sizePolicy().hasHeightForWidth())
         self.labelInformation.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(13)
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setUnderline(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
         self.labelInformation.setFont(font)
-        self.labelInformation.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelInformation.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.labelInformation.setAutoFillBackground(False)
+        self.labelInformation.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.labelInformation.setObjectName("labelInformation")
         self.verticalLayout_8.addWidget(self.labelInformation)
         self.menuCenterPages.addWidget(self.pageInformation)
@@ -908,6 +921,74 @@ class Ui_MainWindow(object):
         self.horizontalLayout_27.addWidget(self.passoApassoAgir, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_24.addWidget(self.frame_30)
         self.stackedWidgetApp.addWidget(self.pageAgir)
+        self.pageSabor = QtWidgets.QWidget()
+        self.pageSabor.setObjectName("pageSabor")
+        self.verticalLayout_25 = QtWidgets.QVBoxLayout(self.pageSabor)
+        self.verticalLayout_25.setObjectName("verticalLayout_25")
+        self.frame_32 = QtWidgets.QFrame(self.pageSabor)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_32.sizePolicy().hasHeightForWidth())
+        self.frame_32.setSizePolicy(sizePolicy)
+        self.frame_32.setMaximumSize(QtCore.QSize(700, 230))
+        self.frame_32.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_32.setObjectName("frame_32")
+        self.horizontalLayout_34 = QtWidgets.QHBoxLayout(self.frame_32)
+        self.horizontalLayout_34.setObjectName("horizontalLayout_34")
+        self.excelSaborBtn = QtWidgets.QPushButton(self.frame_32)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.excelSaborBtn.sizePolicy().hasHeightForWidth())
+        self.excelSaborBtn.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        font.setStyleStrategy(QtGui.QFont.PreferDefault)
+        self.excelSaborBtn.setFont(font)
+        self.excelSaborBtn.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.excelSaborBtn.setStyleSheet("")
+        self.excelSaborBtn.setIcon(icon12)
+        self.excelSaborBtn.setIconSize(QtCore.QSize(160, 160))
+        self.excelSaborBtn.setAutoRepeat(False)
+        self.excelSaborBtn.setObjectName("excelSaborBtn")
+        self.horizontalLayout_34.addWidget(self.excelSaborBtn)
+        self.txtSaborBtn = QtWidgets.QPushButton(self.frame_32)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.txtSaborBtn.sizePolicy().hasHeightForWidth())
+        self.txtSaborBtn.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.txtSaborBtn.setFont(font)
+        self.txtSaborBtn.setIcon(icon13)
+        self.txtSaborBtn.setIconSize(QtCore.QSize(160, 160))
+        self.txtSaborBtn.setObjectName("txtSaborBtn")
+        self.horizontalLayout_34.addWidget(self.txtSaborBtn)
+        self.verticalLayout_25.addWidget(self.frame_32)
+        self.frame_31 = QtWidgets.QFrame(self.pageSabor)
+        self.frame_31.setMaximumSize(QtCore.QSize(750, 230))
+        self.frame_31.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_31.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_31.setObjectName("frame_31")
+        self.horizontalLayout_33 = QtWidgets.QHBoxLayout(self.frame_31)
+        self.horizontalLayout_33.setObjectName("horizontalLayout_33")
+        self.passoApassoSabor = QtWidgets.QLabel(self.frame_31)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setUnderline(False)
+        font.setStrikeOut(False)
+        self.passoApassoSabor.setFont(font)
+        self.passoApassoSabor.setObjectName("passoApassoSabor")
+        self.horizontalLayout_33.addWidget(self.passoApassoSabor, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_25.addWidget(self.frame_31)
+        self.stackedWidgetApp.addWidget(self.pageSabor)
         self.verticalLayout_14.addWidget(self.stackedWidgetApp)
         self.mainPages.addWidget(self.pageApp)
         self.pageCartao = QtWidgets.QWidget()
@@ -1561,10 +1642,10 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.menuCenterPages.setCurrentIndex(0)
+        self.menuCenterPages.setCurrentIndex(1)
         self.mainPages.setCurrentIndex(0)
         self.stackedWidgetApp.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.stackedWidgetCartao.setCurrentIndex(0)
         self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1576,7 +1657,7 @@ class Ui_MainWindow(object):
         self.homeBtn.setToolTip(_translate("MainWindow", "Menu"))
         self.homeBtn.setText(_translate("MainWindow", "  Home"))
         self.appBtn.setToolTip(_translate("MainWindow", "Integrações"))
-        self.appBtn.setText(_translate("MainWindow", "   Integrações"))
+        self.appBtn.setText(_translate("MainWindow", "  Integrações"))
         self.cardBtn.setToolTip(_translate("MainWindow", "Cartão de Credito"))
         self.cardBtn.setText(_translate("MainWindow", "  Cartões"))
         self.reportBtn.setToolTip(_translate("MainWindow", "Emprestimos"))
@@ -1590,7 +1671,26 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Tema Dark"))
         self.labelWedgetInfo.setText(_translate("MainWindow", "Informações"))
         self.closeCenterBtnInfo.setToolTip(_translate("MainWindow", "Close Menu"))
-        self.labelInformation.setText(_translate("MainWindow", "Information"))
+        self.labelInformation.setText(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">📱 <span style=\" font-weight:600;\">Aplicativo integrAgir</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Versão Beta </span><span style=\" font-weight:600; text-decoration: underline;\">1.0.3</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Desenvolvedor: Ícaro Queiroz</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Contato:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">icaroqueiroz@live.com</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">icaro.queiroz@agir.cnt.br</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Descrição:</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">O Aplicativo integrAgir é uma</p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">solução criada para simplificar</p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">e otimizar os processos de </p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">importação de dados em nossa </p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">empresa.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.minimizeBtn.setToolTip(_translate("MainWindow", "Minimizar"))
         self.restoreBtn.setToolTip(_translate("MainWindow", "Maximizar"))
         self.closeBtn.setToolTip(_translate("MainWindow", "Fechar"))
@@ -1626,6 +1726,17 @@ class Ui_MainWindow(object):
         self.txtAgirBtn.setText(_translate("MainWindow", "Salvar TXT"))
         self.passoApassoAgir.setToolTip(_translate("MainWindow", "Abrir Excel"))
         self.passoApassoAgir.setText(_translate("MainWindow", "\n"
+" Para utilizar essa ferramenta, siga os seguintes passos:\n"
+"   1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.\n"
+"   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão \"Abrir Excel\".\n"
+"   3 - Clique no botão \"Salvar TXT\" , aguarde alguns instantes e salve o arquivo.\n"
+"   4 - Agora, o arquivo txt pode ser importado no Único.\n"
+""))
+        self.excelSaborBtn.setText(_translate("MainWindow", "Abrir Excel"))
+        self.txtSaborBtn.setToolTip(_translate("MainWindow", "Salvar TXT"))
+        self.txtSaborBtn.setText(_translate("MainWindow", "Salvar TXT"))
+        self.passoApassoSabor.setToolTip(_translate("MainWindow", "Abrir Excel"))
+        self.passoApassoSabor.setText(_translate("MainWindow", "\n"
 " Para utilizar essa ferramenta, siga os seguintes passos:\n"
 "   1 - Primeiro, gere o arquivo de contas a receber no aplicativo Omie, formato Excel.\n"
 "   2 - Abra no módulo o arquivo Excel que deseja converter, clicando no botão \"Abrir Excel\".\n"

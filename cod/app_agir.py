@@ -119,6 +119,6 @@ class AppAgir():
         except KeyError as erro:
             QMessageBox.warning(self, 'KeyError', 'Não foi localizado a coluna: '+ str(erro))
         except ValueError as erro:
-            QMessageBox.warning(self, 'ValueError', 'Retire o filtor da planilha.')                   
+            QMessageBox.warning(self, 'ValueError', 'Retire os filtros da planilha.    ')                   
         except Exception as erro:
             QMessageBox.warning(self, 'Error', 'Erro ao tentar carregar o aquivo. - '+ str(erro))    

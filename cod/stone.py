@@ -7,7 +7,7 @@ import re
 class AppStone():
     # Função para remover caracteres não numéricos e converter para float
     def convert_to_float(self, value):
-        cleaned_value = value.replace(',', '.') # Remove tudo que não é dígito nem ponto
+        cleaned_value = str(value).replace(',', '.') # Remove tudo que não é dígito nem ponto
         try:
             return float(cleaned_value)
         except:

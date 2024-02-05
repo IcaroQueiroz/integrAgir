@@ -61,19 +61,23 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.restoreBtn.clicked.connect(self.toggle_maximized)
         self.ui.restoreBtn.setCheckable(True)
         self.ui.restoreBtn.setChecked(self.isMaximized())
-        # Ocultar a janela(Windows)
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
-        self.show()
+        
+        # Redimensionamento da janela e Definições iniciais                        #
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.setMinimumSize(400, 300)
+        self.setMaximumSize(1680, 1050)
+
+        # Configuração do size grip
+        size_grip = QSizeGrip(self.ui.sizeGrip)  # Use o seu QFrame existente
+        size_grip.setToolTip('Redimensionar Janela')  # Opcional: Adicionar dica de ferramenta
+        
         # Permitir arrastar a janela ao clicar e arrastar no topo
         self.draggable = True
         self.draggable_area_height = 40  # Altura da área superior onde a janela pode ser arrastada
         
-        #--------------------------------------------------------------------------#
-        # Redimensionamento da janela e Definições iniciais                        #
-        #--------------------------------------------------------------------------#
-        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.setMinimumSize(400, 300)
-        self.setMaximumSize(1680, 1050)
+        # Ocultar a janela(Windows)
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.show()
 
         #--------------------------------------------------------------------------#
         # Definições de tema                                                       #
@@ -158,6 +162,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.comboBoxApp.addItem('EAJ ENGENHARIA LTDA EPP')
         self.ui.comboBoxApp.addItem('LACON EMPREENDIMENTOS IMOBILIARIOS')
         self.ui.comboBoxApp.addItem('AGIR - ASSESSORIA EMPRESARIAL LTDA')
+        self.ui.comboBoxApp.addItem('SABOR DA CASA LTDA EPP')
         # cria as páginas e as adiciona ao stackedWidget
         self.pageHomeApp = QWidget()
         layout1 = QVBoxLayout(self.pageHomeApp)
@@ -175,6 +180,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         layout4 = QVBoxLayout(self.pageAgir)
         self.ui.stackedWidgetApp.addWidget(self.pageAgir)
 
+        self.pageSabor = QWidget()
+        layout5 = QVBoxLayout(self.pageSabor)
+        self.ui.stackedWidgetApp.addWidget(self.pageSabor)
 
         
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
@@ -191,6 +199,18 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         #--------------------------------------------------------------------------#
         self.ui.excelAgirBtn.clicked.connect(lambda: self.file_open_excel(self.agir))
         self.ui.txtAgirBtn.clicked.connect(self.file_salve)
+
+        #--------------------------------------------------------------------------#
+        # Funções na ABA SABOR do APP                                              #
+        #--------------------------------------------------------------------------#
+        self.ui.excelSaborBtn.clicked.connect(lambda: self.file_open_excel(self.sabor))
+        self.ui.txtSaborBtn.clicked.connect(self.file_salve)
+
+        #--------------------------------------------------------------------------#
+        # Funções na ABA LACOM do APP                                              #
+        #--------------------------------------------------------------------------#
+        self.ui.excelLaconBtn.clicked.connect(lambda: self.file_open_excel(self.lacon))
+        self.ui.txtLaconBtn.clicked.connect(self.file_salve)
 
 
         #--------------------------------------------------------------------------#
@@ -210,7 +230,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         validator_valor = QRegExpValidator(regex_valor)
         self.ui.entryIoEmp.setValidator(validator_valor)
 
-        self.ui.pushButton.clicked.connect(self.file_open_pdf)
+        self.ui.pushButton.clicked.connect(self.Calcular_Lan)
         
 
 
@@ -365,7 +385,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
                 self.button_states[btn] = False
                 if btn.isChecked():
                     btn.setChecked(False)
-                    
+                if btn == self.ui.reportBtn:
+                    if button.isChecked():
+                        QMessageBox.warning(self, 'Info', 'Este módulo ainda está em desenvolvimento.')
 
         if self.styleSheet() == self.current_theme:
             print('chegou a verificar == self.current_theme ')
@@ -379,6 +401,14 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
             else:
                 button.setStyleSheet("background-color: #348498;  border-left: 2px solid rgb(255,255,255);")
         self.ui.mainPages.setCurrentIndex(index)
+
+        print(button.text())
+
+        # Verifica se o botão reportBtn está selecionado
+        if button.text() == '  Parcelados':
+            print("chegou aqui o")
+            QMessageBox.warning(self, 'Info', 'Este módulo ainda está em desenvolvimento. Por favor, aguarde atualizações futuras para acesso completo a esta funcionalidade.')
+
 
     def animate_center_menu(self):
         # Verificar se o menu central está visível ou oculto
@@ -537,8 +567,10 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
 
                     # Atualizar os dados no Firebase
                     self.firebase_api.patch(item_id, row_data)
+                    # Atualizar self.data_dict com os dados atualizados do Firebase
+                    self.update_data_dict()
                     continue
-
+            
             # Limpar o campo ID
             model.setData(id_index, '')
             return
@@ -558,6 +590,9 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
 
         # Adicionar a nova linha ao modelo da tabela
         model.appendRow(new_row)
+        
+        # Atualizar self.data_dict com os dados atualizados do Firebase
+        self.update_data_dict()
     
     def delete_row(self):
         # Obter o modelo da tabela
@@ -575,6 +610,12 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         # Excluir os dados correspondentes do Firebase
         self.firebase_api.delete(item_id)
 
+        # Atualizar self.data_dict com os dados atualizados do Firebase
+        self.update_data_dict()
+
+    def update_data_dict(self):
+        self.data_dict = self.firebase_api.get()
+
 ##############################################################################
 # EXECUÇÃO DA APLICAÇÃO                                                      #
 ##############################################################################
@@ -589,6 +630,5 @@ if __name__ == "__main__":
 # EXECUÇÃO DO PYINSTALLER                                                    #
 ##############################################################################
 
-"""pyinstaller --onefile --noconsole --icon=icons/icon.ico --add-data "custom;custom" --add-data "cod;cod" --add-data "icons;icons" --add-data 
-"img;img" --add-data "interface.py;." --add-data "Resources_rc.py;." --add-data "Resources.qrc;." integrAgir.py
+"""pyinstaller --onefile --noconsole --icon=icons/icon.ico --add-data "custom;custom" --add-data "cod;cod" --add-data "icons;icons" --add-data "img;img" --add-data "interface.py;." --add-data "Resources_rc.py;." --add-data "Resources.qrc;." integrAgir.py
 """
