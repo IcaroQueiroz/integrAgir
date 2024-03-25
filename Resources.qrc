@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/pagbank.svg</file>
     <file>icons/stone.svg</file>
     <file>icons/cielo.svg</file>
     <file>icons/quebra-errada.svg</file>
@@ -35,6 +36,10 @@
     <file>icons/toggle-left.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/csv-btn.png</file>
+    <file>img/imobilizado.png</file>
+    <file>img/Athenas.png</file>
+    <file>img/pagbank.png</file>
     <file>img/pdf-btn.png</file>
     <file>img/rede-logo.png</file>
     <file>img/home68-t.png</file>

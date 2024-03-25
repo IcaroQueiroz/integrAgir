@@ -123,7 +123,8 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
             self.ui.homeBtn: True,
             self.ui.appBtn: False,
             self.ui.cardBtn: False,
-            self.ui.reportBtn: False}
+            self.ui.reportBtn: False,
+            self.ui.athenasBtn: False}
     
         # Conecta o clique do botão à função de animação
         self.ui.menuBtn.clicked.connect(self.animate_menu)
@@ -137,6 +138,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.appBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.appBtn, 1))
         self.ui.cardBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.cardBtn, 2))
         self.ui.reportBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.reportBtn, 3))
+        self.ui.athenasBtn.clicked.connect(lambda: self.toggle_button_menuPrincipal(self.ui.athenasBtn, 4))
 
         #--------------------------------------------------------------------------#
         # Funções do botoões MenuTec                                               #
@@ -242,6 +244,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         self.ui.comboBoxCartao.addItem('Cielo')
         self.ui.comboBoxCartao.addItem('Stone')
         self.ui.comboBoxCartao.addItem('Redecard')
+        self.ui.comboBoxCartao.addItem('PagBank')
         # cria as páginas e as adiciona ao stackedWidget
         self.pageHomeCartao = QWidget()
         layout1 = QVBoxLayout(self.pageHomeCartao)
@@ -259,16 +262,21 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         layout4 = QVBoxLayout(self.pageRedecard)
         self.ui.stackedWidgetCartao.addWidget(self.pageRedecard)
 
+        self.pagePagBank = QWidget()
+        layout5 = QVBoxLayout(self.pagePagBank)
+        self.ui.stackedWidgetCartao.addWidget(self.pagePagBank)
+
         #--------------------------------------------------------------------------#
         # Funções dos Cartão de Credito                                            #
         #--------------------------------------------------------------------------#
         self.ui.cieloExcelBtn.clicked.connect(lambda: self.file_open_excel(self.cielo))
         self.ui.cieloTxtBtn.clicked.connect(self.file_salve)
-        self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_csv_stone(self.stone))
+        self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_csv(self.stone))
         self.ui.stoneTxtBtn.clicked.connect(self.file_salve)
         self.ui.redeExcelBtn.clicked.connect(lambda: self.file_open_excel(self.rede))
         self.ui.redeTxtBtn.clicked.connect(self.file_salve)
-
+        self.ui.pagbankExcelBtn.clicked.connect(lambda: self.file_open_csv(self.pagbank))
+        self.ui.pagbankTxtBtn.clicked.connect(self.file_salve)
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
         self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change_cartao)
@@ -376,7 +384,7 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
             self.ui.menuBtn.setIcon(QIcon(":/icons/icons/align-justify.svg"))
 
     def toggle_button_menuPrincipal(self, button, index):
-        buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn]
+        buttons_list = [self.ui.homeBtn, self.ui.appBtn, self.ui.cardBtn, self.ui.reportBtn, self.ui.athenasBtn]
 
         self.button_states[button] = True
         for btn in buttons_list:
@@ -408,7 +416,6 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         if button.text() == '  Parcelados':
             print("chegou aqui o")
             QMessageBox.warning(self, 'Info', 'Este módulo ainda está em desenvolvimento. Por favor, aguarde atualizações futuras para acesso completo a esta funcionalidade.')
-
 
     def animate_center_menu(self):
         # Verificar se o menu central está visível ou oculto

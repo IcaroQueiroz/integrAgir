@@ -9,10 +9,11 @@ from cod.app_lacon import AppLacon
 from cod.cielo import AppCielo
 from cod.stone import AppStone
 from cod.rede import AppRede
+from cod.pagbank import AppPagBank
 
 from cod.emprestimo import FuncoesEmpretimo
 
-class Aplicacao(AppEaj, AppAgir, AppSabor, AppLacon, AppCielo, AppStone, AppRede, FuncoesEmpretimo):
+class Aplicacao(AppEaj, AppAgir, AppSabor, AppLacon, AppCielo, AppStone, AppRede, AppPagBank, FuncoesEmpretimo):
     def caminho_arquivo(self, caminho_relativo):
         """ Obtém o caminho absoluto para o recurso, para PyInstaller """
         try:
@@ -40,17 +41,25 @@ class Aplicacao(AppEaj, AppAgir, AppSabor, AppLacon, AppCielo, AppStone, AppRede
             QMessageBox.warning(self, 'Error', 'Erro ao tentar carregar o aquivo. - '+ str(erro))
 
 
-    def file_open_csv_stone(self, funcionalidade):
+    def file_open_csv(self, funcionalidade):
         filename, _ = QFileDialog.getOpenFileName(self, 'Abrir arquivo', 'C://file', 'Arquivos Excel (*.xlsx; *.xls; *.csv)')
         if filename:
             if filename.endswith('.csv'):
-                self.df = pd.read_csv(filename, sep=';', encoding='utf-8')
+                try:
+                    self.df = pd.read_csv(filename, sep=';', encoding='utf-8')
+                except Exception as erro:
+                    try:
+                        self.df = pd.read_csv(filename, sep=';', encoding='latin1', index_col=False)
+                    except Exception as erro:    
+                        QMessageBox.warning(self, 'Error', "Erro ao ler o arquivo CSV com a codificação 'utf-8' e "+ str(erro))
+
             else:
                 self.df = pd.read_excel(filename)
             
             print(self.df)
             print(type(self.df))
             funcionalidade()
+
 
     def file_salve(self):
         try:

@@ -2,6 +2,8 @@ import pandas as pd
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QWidget
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
+from io import StringIO
+import re
 
 class AppRede():
     # Função para remover caracteres não numéricos e converter para float
@@ -100,12 +102,70 @@ class AppRede():
                     conta_despesa = '1428'
                 
                 lanSimp = "000001,"+ str(data_txt) + ","+str(conta_ativo)+",18," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
-                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, 'Taxa']) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
+                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, 'Taxa']) + ",00000000," + "Vlr. Ref. Taxa Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
                 self.txt += str(lanSimp)
                 self.txt += str(lanSimpT)
 
             self.exibir_relatorio_rede(self.relatorio)
             print(self.txt)
+
+            # Definir o cabeçalho
+            header = [
+                "Número do lançamento",
+                "Data do Lançamento",
+                "Conta Contábil/Conta Contábil Débito",
+                "Centro Custo/Centro Custo Débito",
+                "Vazio1",
+                "Vazio2",
+                "Conta Contábil/Conta Contábil Crédito",
+                "Centro Custo/Centro Custo Crédito",
+                "Vazio3",
+                "Vazio4",
+                "Valor",
+                "Histórico",
+                "Tipo D/C",
+                "CAtividade/Atividade Débito",
+                "Atividade Crédito"
+            ]
+
+            # Criar um dataframe a partir dos dados
+            df_ath = pd.read_csv(StringIO(self.txt), header=None)
+
+            # Adicionar colunas extras ao DataFrame
+            for i in range(len(header) - len(df_ath.columns)):
+                df_ath[len(df_ath.columns) + i] = ""
+            
+            # Atribuir o cabeçalho ao dataframe
+            df_ath.columns = header
+
+            # Preencher as colunas conforme especificado
+            df_ath["Número do lançamento"] = df_ath.index + 1
+            df_ath["Histórico"] = df_ath.iloc[:, 6]
+            df_ath["Data do Lançamento"] = pd.to_datetime(df_ath.iloc[:, 1], format='%Y%m%d').dt.strftime('%d/%m/%Y')
+            df_ath["Conta Contábil/Conta Contábil Débito"] = df_ath.iloc[:, 2]
+            df_ath["Conta Contábil/Conta Contábil Crédito"] = df_ath.iloc[:, 3]
+            df_ath["Valor"] = df_ath.iloc[:, 4].round(2)
+
+
+            # Preencher outras colunas com valores padrão
+            df_ath["Tipo D/C"] = ""
+            df_ath["Centro Custo/Centro Custo Débito"] = ""
+            df_ath["Centro Custo/Centro Custo Crédito"] = ""
+            df_ath["Vazio1"] = ""
+            df_ath["Vazio2"] = ""
+            df_ath["Vazio3"] = ""
+            df_ath["Vazio4"] = ""
+            df_ath["CAtividade/Atividade Débito"] = ""
+            df_ath["Atividade Crédito"] = ""
+
+            # Exibir o dataframe
+            print("--------------------------------------- df_ath -------------------------------------------------")
+            print(df_ath)
+
+            # Salvar o dataframe como uma planilha Excel
+            arquivo_excel_salvar = r'C:\Users\Icaro\Desktop\Develop\integrAgir\exemplos\Relatório_cartão_athenas.xlsx'
+            df_ath.to_excel(arquivo_excel_salvar, index=False)
+
             QMessageBox.warning(self, 'Info', 'Excel carregado com Sucesso')  
         except KeyError as erro:
             QMessageBox.warning(self, 'KeyError', 'Não foi localizado a coluna: '+ str(erro))
