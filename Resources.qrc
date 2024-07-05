@@ -36,6 +36,11 @@
     <file>icons/toggle-left.svg</file>
   </qresource>
   <qresource prefix="imagens">
+    <file>img/getnet-logo.png</file>
+    <file>img/Unico.png</file>
+    <file>img/escritório.png</file>
+    <file>img/edifícios.png</file>
+    <file>img/módulo.png</file>
     <file>img/csv-btn.png</file>
     <file>img/imobilizado.png</file>
     <file>img/Athenas.png</file>

@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBo
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 from io import StringIO
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
 import re
 
 class AppRede():
@@ -95,8 +97,8 @@ class AppRede():
                     conta_ativo = '22'
                     conta_despesa = '1423'
                 elif 'débito' in data_nat:
-                    conta_ativo = '23'
-                    conta_despesa = '1424'
+                    conta_ativo = '22'
+                    conta_despesa = '1423'
                 else:
                     conta_ativo = '1615'
                     conta_despesa = '1428'
@@ -108,6 +110,11 @@ class AppRede():
 
             self.exibir_relatorio_rede(self.relatorio)
             print(self.txt)
+
+            # Criar uma nova planilha
+            self.wb = Workbook()
+            # Adicionar uma nova folha
+            self.ws = self.wb.active
 
             # Definir o cabeçalho
             header = [
@@ -129,42 +136,44 @@ class AppRede():
             ]
 
             # Criar um dataframe a partir dos dados
-            df_ath = pd.read_csv(StringIO(self.txt), header=None)
+            self.df_ath = pd.read_csv(StringIO(self.txt), header=None)
 
             # Adicionar colunas extras ao DataFrame
-            for i in range(len(header) - len(df_ath.columns)):
-                df_ath[len(df_ath.columns) + i] = ""
+            for i in range(len(header) - len(self.df_ath.columns)):
+                self.df_ath[len(self.df_ath.columns) + i] = ""
             
             # Atribuir o cabeçalho ao dataframe
-            df_ath.columns = header
+            self.df_ath.columns = header
 
             # Preencher as colunas conforme especificado
-            df_ath["Número do lançamento"] = df_ath.index + 1
-            df_ath["Histórico"] = df_ath.iloc[:, 6]
-            df_ath["Data do Lançamento"] = pd.to_datetime(df_ath.iloc[:, 1], format='%Y%m%d').dt.strftime('%d/%m/%Y')
-            df_ath["Conta Contábil/Conta Contábil Débito"] = df_ath.iloc[:, 2]
-            df_ath["Conta Contábil/Conta Contábil Crédito"] = df_ath.iloc[:, 3]
-            df_ath["Valor"] = df_ath.iloc[:, 4].round(2)
+            self.df_ath["Número do lançamento"] = self.df_ath.index + 1
+            self.df_ath["Histórico"] = self.df_ath.iloc[:, 6]
+            self.df_ath["Data do Lançamento"] = pd.to_datetime(self.df_ath.iloc[:, 1], format='%Y%m%d').dt.strftime('%d/%m/%Y')
+            self.df_ath["Conta Contábil/Conta Contábil Débito"] = self.df_ath.iloc[:, 2]
+            self.df_ath["Conta Contábil/Conta Contábil Crédito"] = self.df_ath.iloc[:, 3]
+            self.df_ath["Valor"] = self.df_ath.iloc[:, 4].round(2)
 
 
             # Preencher outras colunas com valores padrão
-            df_ath["Tipo D/C"] = ""
-            df_ath["Centro Custo/Centro Custo Débito"] = ""
-            df_ath["Centro Custo/Centro Custo Crédito"] = ""
-            df_ath["Vazio1"] = ""
-            df_ath["Vazio2"] = ""
-            df_ath["Vazio3"] = ""
-            df_ath["Vazio4"] = ""
-            df_ath["CAtividade/Atividade Débito"] = ""
-            df_ath["Atividade Crédito"] = ""
+            self.df_ath["Tipo D/C"] = ""
+            self.df_ath["Centro Custo/Centro Custo Débito"] = ""
+            self.df_ath["Centro Custo/Centro Custo Crédito"] = ""
+            self.df_ath["Vazio1"] = ""
+            self.df_ath["Vazio2"] = ""
+            self.df_ath["Vazio3"] = ""
+            self.df_ath["Vazio4"] = ""
+            self.df_ath["CAtividade/Atividade Débito"] = ""
+            self.df_ath["Atividade Crédito"] = ""
+
+            # Adicionar os dados do DataFrame à planilha
+            for r in dataframe_to_rows(self.df_ath, index=False, header=True):
+                self.ws.append(r)
+
 
             # Exibir o dataframe
-            print("--------------------------------------- df_ath -------------------------------------------------")
-            print(df_ath)
+            print("--------------------------------------- self.df_ath -------------------------------------------------")
+            self.ws = self.df_ath
 
-            # Salvar o dataframe como uma planilha Excel
-            arquivo_excel_salvar = r'C:\Users\Icaro\Desktop\Develop\integrAgir\exemplos\Relatório_cartão_athenas.xlsx'
-            df_ath.to_excel(arquivo_excel_salvar, index=False)
 
             QMessageBox.warning(self, 'Info', 'Excel carregado com Sucesso')  
         except KeyError as erro:

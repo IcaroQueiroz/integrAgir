@@ -2,6 +2,9 @@ import pandas as pd
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBoxLayout, QWidget
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
+from io import StringIO
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
 
 class AppCielo():
     def cielo(self):
@@ -95,8 +98,8 @@ class AppCielo():
                     conta_ativo = '22'
                     conta_despesa = '1423'
                 elif 'Débito' in data_nat:
-                    conta_ativo = '23'
-                    conta_despesa = '1424'
+                    conta_ativo = '22'
+                    conta_despesa = '1423'
                 else:
                     conta_ativo = '1615'
                     conta_despesa = '1428'
@@ -108,6 +111,71 @@ class AppCielo():
 
             self.exibir_relatorio(self.relatorio)
             print(self.txt)
+
+            # Criar uma nova planilha
+            self.wb = Workbook()
+            # Adicionar uma nova folha
+            self.ws = self.wb.active
+
+
+            # Definir o cabeçalho
+            header = [
+                "Número do lançamento",
+                "Data do Lançamento",
+                "Conta Contábil/Conta Contábil Débito",
+                "Centro Custo/Centro Custo Débito",
+                "Vazio1",
+                "Vazio2",
+                "Conta Contábil/Conta Contábil Crédito",
+                "Centro Custo/Centro Custo Crédito",
+                "Vazio3",
+                "Vazio4",
+                "Valor",
+                "Histórico",
+                "Tipo D/C",
+                "CAtividade/Atividade Débito",
+                "Atividade Crédito"
+            ]
+
+            # Criar um dataframe a partir dos dados
+            self.df_ath = pd.read_csv(StringIO(self.txt), header=None)
+
+            # Adicionar colunas extras ao DataFrame
+            for i in range(len(header) - len(self.df_ath.columns)):
+                self.df_ath[len(self.df_ath.columns) + i] = ""
+            
+            # Atribuir o cabeçalho ao dataframe
+            self.df_ath.columns = header
+
+            # Preencher as colunas conforme especificado
+            self.df_ath["Número do lançamento"] = self.df_ath.index + 1
+            self.df_ath["Histórico"] = self.df_ath.iloc[:, 6]
+            self.df_ath["Data do Lançamento"] = pd.to_datetime(self.df_ath.iloc[:, 1], format='%Y%m%d').dt.strftime('%d/%m/%Y')
+            self.df_ath["Conta Contábil/Conta Contábil Débito"] = self.df_ath.iloc[:, 2]
+            self.df_ath["Conta Contábil/Conta Contábil Crédito"] = self.df_ath.iloc[:, 3]
+            self.df_ath["Valor"] = self.df_ath.iloc[:, 4].round(2)
+
+
+            # Preencher outras colunas com valores padrão
+            self.df_ath["Tipo D/C"] = ""
+            self.df_ath["Centro Custo/Centro Custo Débito"] = ""
+            self.df_ath["Centro Custo/Centro Custo Crédito"] = ""
+            self.df_ath["Vazio1"] = ""
+            self.df_ath["Vazio2"] = ""
+            self.df_ath["Vazio3"] = ""
+            self.df_ath["Vazio4"] = ""
+            self.df_ath["CAtividade/Atividade Débito"] = ""
+            self.df_ath["Atividade Crédito"] = ""
+
+            # Adicionar os dados do DataFrame à planilha
+            for r in dataframe_to_rows(self.df_ath, index=False, header=True):
+                self.ws.append(r)
+
+
+            # Exibir o dataframe
+            print("--------------------------------------- self.df_ath -------------------------------------------------")
+            self.ws = self.df_ath          
+            
             QMessageBox.warning(self, 'Info', 'Excel carregado com Sucesso')  
         except KeyError as erro:
             QMessageBox.warning(self, 'KeyError', 'Não foi localizado a coluna: '+ str(erro))

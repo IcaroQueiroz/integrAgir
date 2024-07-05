@@ -270,19 +270,46 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
         # Funções dos Cartão de Credito                                            #
         #--------------------------------------------------------------------------#
         self.ui.cieloExcelBtn.clicked.connect(lambda: self.file_open_excel(self.cielo))
-        self.ui.cieloTxtBtn.clicked.connect(self.file_salve)
+        self.ui.cieloTxtBtn.clicked.connect(self.open_save_dialog)
         self.ui.stoneExcelBtn.clicked.connect(lambda: self.file_open_csv(self.stone))
-        self.ui.stoneTxtBtn.clicked.connect(self.file_salve)
+        self.ui.stoneTxtBtn.clicked.connect(self.open_save_dialog)
         self.ui.redeExcelBtn.clicked.connect(lambda: self.file_open_excel(self.rede))
-        self.ui.redeTxtBtn.clicked.connect(self.file_salve)
+        self.ui.redeTxtBtn.clicked.connect(self.open_save_dialog)
         self.ui.pagbankExcelBtn.clicked.connect(lambda: self.file_open_csv(self.pagbank))
-        self.ui.pagbankTxtBtn.clicked.connect(self.file_salve)
+        self.ui.pagbankTxtBtn.clicked.connect(self.open_save_dialog)
         # conecta o sinal currentIndexChanged do comboBox ao método handle_combobox_change
 
         self.ui.comboBoxCartao.currentIndexChanged.connect(self.handle_combobox_change_cartao)
 
 
         # CLOSE MENU CENTER WIDGET SIZE  
+
+        #--------------------------------------------------------------------------#
+        # Funções do comboBox aba Athenas                                             ###############################################
+        #--------------------------------------------------------------------------#        
+        # adiciona as opções no comboBox
+        self.ui.comboBoxAthenas.addItem('Selecione uma empresa...')
+        self.ui.comboBoxAthenas.addItem('Imobilizado')
+
+        # cria as páginas e as adiciona ao stackedWidget
+        self.pageHomeAthenas = QWidget()
+        layout1 = QVBoxLayout(self.pageHomeAthenas)
+        self.ui.stackedWidgetAthenas.addWidget(self.pageHomeAthenas)
+
+        self.pageImobilizado = QWidget()
+        layout2 = QVBoxLayout(self.pageImobilizado)
+        self.ui.stackedWidgetAthenas.addWidget(self.pageImobilizado)
+        
+        #self.ui.comboBoxAthenas.currentIndexChanged.connect(self.handle_combobox_change)
+        #self.handle_combobox_change(index, self.ui.stackedWidgetCartao)
+        self.ui.comboBoxAthenas.currentIndexChanged.connect(lambda index: self.handle_combobox_changeX(index, self.ui.stackedWidgetAthenas))
+
+        #--------------------------------------------------------------------------#
+        # Funções na ABA LACOM do Athenas                                          #
+        #--------------------------------------------------------------------------#
+        self.ui.csvAthenasImob.clicked.connect(lambda: self.file_open_csv(self.athenas))
+        self.ui.excelAthenasImob.clicked.connect(self.file_salve_excel)
+
 
 
 #========================================================#
@@ -527,6 +554,10 @@ class MainWindow(QMainWindow, Aplicacao, Theme):
  
     def handle_combobox_change_cartao(self, index):
         self.ui.stackedWidgetCartao.setCurrentIndex(index)
+
+    def handle_combobox_changeX(self, index, stacked_widget):
+        stacked_widget.setCurrentIndex(index)
+
 
 #========================================================#
 # Funçoes do Firebase                                    #

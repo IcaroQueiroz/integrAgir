@@ -122,7 +122,7 @@ class AppLacon():
                         bancoSimples = banco
             
                     if aluguel > 0:
-                        lanSim += str('{:06d}'.format(contSimples)) +"," + str(data_txt) + ","+str(aluguelConta)+","+str(bancoSimples)+"," + str(aluguel) + ",00000000," + "Recebimento de Aluguel do Imóvel: " + str(imovel) + "/Ref:" + str(competencia_txt) + ",," + str(cpf_cnpj) + "," + "\n"
+                        lanSim += str('{:06d}'.format(contSimples)) +"," + str(data_txt) + ","+str(bancoSimples)+","+str(aluguelConta)+"," + str(aluguel) + ",00000000," + "Recebimento de Aluguel do Imóvel: " + str(imovel) + "/Ref:" + str(competencia_txt) + ",," + str(cpf_cnpj) + "," + "\n"
                         contSimples += 1
                         
                     if condominio > 0:
@@ -170,7 +170,7 @@ class AppLacon():
                         contSimples += 1
 
                     if lancarBancoSimples == 1:
-                        lanSim += str('{:06d}'.format(contSimples)) +"," + str(data_txt) + ","+str(banco)+",0," + str(bancoValor) + ",00000000," + "Recebimento do Imóvel: " + str(imovel) + "/Ref:" + str(competencia_txt) + ",,," + "\n"
+                        lanSim += str('{:06d}'.format(contSimples)) +"," + str(data_txt) + ",0,"+str(banco)+"," + str(bancoValor) + ",00000000," + "Recebimento do Imóvel: " + str(imovel) + "/Ref:" + str(competencia_txt) + ",,," + "\n"
 
                     self.txt += lanSim
 
@@ -186,7 +186,7 @@ class AppLacon():
                     lanMult = ''
 
                     if aluguel > 0:
-                        lanMult += str('{:06d}'.format(contador)) +"," + str(data_txt) + ","+str(aluguelConta)+",0," + str(aluguel) + ",00000000," + "Recebimento de Aluguel do Imóvel: " + str(imovel) + "/Ref:" + str(competencia_txt) + ",," + str(cpf_cnpj) + "," + "\n"
+                        lanMult += str('{:06d}'.format(contador)) +"," + str(data_txt) + ",0,"+str(aluguelConta)+"," + str(aluguel) + ",00000000," + "Recebimento de Aluguel do Imóvel: " + str(imovel) + "/Ref:" + str(competencia_txt) + ",," + str(cpf_cnpj) + "," + "\n"
                         contador += 1
                         
                     if condominio > 0:

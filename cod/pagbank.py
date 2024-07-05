@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox, QApplication, QLabel, QVBo
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 from io import StringIO
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
 import re
 
 class AppPagBank():
@@ -22,7 +24,10 @@ class AppPagBank():
             valor_liquido = 'Valor_Liquido'
             bandeira = 'Bandeira_Cartao_Credito'
             modalidade = 'Tipo_Pagamento'
+            valor_taxa = 'Valor_Taxa'
 
+
+            self.df[bandeira].fillna('Modalidade', inplace=True)
             self.df['Natureza'] = self.df[modalidade]
             self.df[data_venda] = pd.to_datetime(self.df[data_venda], dayfirst=True)  # Converta a coluna para o tipo de dados datetime, se ainda não estiver
             self.df[data_venda] = self.df[data_venda].dt.date  # Extraia apenas a parte da data, excluindo a hora
@@ -32,6 +37,7 @@ class AppPagBank():
 
             # Converter as colunas para o tipo de dados numérico
             # Aplicar a função de conversão às colunas
+            self.df[valor_taxa] = self.df[valor_taxa].apply(self.convert_to_float)
             self.df[valor_venda] = self.df[valor_venda].apply(self.convert_to_float)
             self.df[valor_liquido] = self.df[valor_liquido].apply(self.convert_to_float)
             print(self.df['Status'])
@@ -50,9 +56,8 @@ class AppPagBank():
 
 
             # Agrupando e somando os valores
-            self.df_aprovado[bandeira].fillna('Modalidade', inplace=True)
-            self.df_agrupado = self.df_aprovado.groupby([data_venda, bandeira, 'Natureza', 'DataNat']).agg({valor_venda: 'sum', valor_liquido: 'sum', 'DataNat': 'count'}).rename(columns={'DataNat': 'Quantidade'}).reset_index()
-            self.df_agrupado['Taxa'] = self.df_aprovado['Valor_Taxa']
+            self.df_agrupado = self.df_aprovado.groupby([data_venda, bandeira, 'Natureza', 'DataNat']).agg({valor_taxa: 'sum',valor_venda: 'sum', valor_liquido: 'sum', 'DataNat': 'count'}).rename(columns={'DataNat': 'Quantidade'}).reset_index()
+            #self.df_agrupado['Taxa'] = self.df_aprovado[valor_taxa]
             print("-----------------------------------df_agrupado + 'DataNat' --------------------------------------")
             print(self.df_agrupado)
             print(self.df_aprovado['Natureza'])
@@ -109,20 +114,25 @@ class AppPagBank():
                     print("sim", controlador)
                 #elif 'débito' in data_nat:
                 elif re.search(r'débito', data_nat, re.IGNORECASE):
-                    conta_ativo = '23'
-                    conta_despesa = '1424'
+                    conta_ativo = '22'
+                    conta_despesa = '1423'
                 else:
                     conta_ativo = '1615'
                     conta_despesa = '1428'
                 
                 lanSimp = "000001,"+ str(data_txt) + ","+str(conta_ativo)+",18," + str(self.df_agrupado.loc[i, valor_venda]) + ",00000000," + "Vlr. Ref. Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
-                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, 'Taxa']) + ",00000000," + "Vlr. Ref. Taxa Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
+                lanSimpT = "000001,"+ str(data_txt) + ","+str(conta_despesa)+","+str(conta_ativo)+"," + str(self.df_agrupado.loc[i, valor_taxa]) + ",00000000," + "Vlr. Ref. Taxa Cartão "+ str(self.df_agrupado.loc[i,bandeira])+" "+ str(self.df_agrupado.loc[i,'Natureza']) + " - Nº de Vendas:"+ str(self.df_agrupado.loc[i,'Quantidade']) +",,"+ cpfoucnpj + "," + "\n"
                 self.txt += str(lanSimp)
                 self.txt += str(lanSimpT)
 
             self.exibir_relatorio_pagbank(self.relatorio)
             print(self.txt)
             
+            # Criar uma nova planilha
+            self.wb = Workbook()
+            # Adicionar uma nova folha
+            self.ws = self.wb.active
+
             # Definir o cabeçalho
             header = [
                 "Número do lançamento",
@@ -143,42 +153,48 @@ class AppPagBank():
             ]
 
             # Criar um dataframe a partir dos dados
-            df_ath = pd.read_csv(StringIO(self.txt), header=None)
+            self.df_ath = pd.read_csv(StringIO(self.txt), header=None)
 
             # Adicionar colunas extras ao DataFrame
-            for i in range(len(header) - len(df_ath.columns)):
-                df_ath[len(df_ath.columns) + i] = ""
+            for i in range(len(header) - len(self.df_ath.columns)):
+                self.df_ath[len(self.df_ath.columns) + i] = ""
             
             # Atribuir o cabeçalho ao dataframe
-            df_ath.columns = header
+            self.df_ath.columns = header
 
             # Preencher as colunas conforme especificado
-            df_ath["Número do lançamento"] = df_ath.index + 1
-            df_ath["Histórico"] = df_ath.iloc[:, 6]
-            df_ath["Data do Lançamento"] = pd.to_datetime(df_ath.iloc[:, 1], format='%Y%m%d').dt.strftime('%d/%m/%Y')
-            df_ath["Conta Contábil/Conta Contábil Débito"] = df_ath.iloc[:, 2]
-            df_ath["Conta Contábil/Conta Contábil Crédito"] = df_ath.iloc[:, 3]
-            df_ath["Valor"] = df_ath.iloc[:, 4].round(2)
+            self.df_ath["Número do lançamento"] = self.df_ath.index + 1
+            self.df_ath["Histórico"] = self.df_ath.iloc[:, 6]
+            self.df_ath["Data do Lançamento"] = pd.to_datetime(self.df_ath.iloc[:, 1], format='%Y%m%d').dt.strftime('%d/%m/%Y')
+            self.df_ath["Conta Contábil/Conta Contábil Débito"] = self.df_ath.iloc[:, 2]
+            self.df_ath["Conta Contábil/Conta Contábil Crédito"] = self.df_ath.iloc[:, 3]
+            self.df_ath["Valor"] = self.df_ath.iloc[:, 4].round(2)
 
 
             # Preencher outras colunas com valores padrão
-            df_ath["Tipo D/C"] = ""
-            df_ath["Centro Custo/Centro Custo Débito"] = ""
-            df_ath["Centro Custo/Centro Custo Crédito"] = ""
-            df_ath["Vazio1"] = ""
-            df_ath["Vazio2"] = ""
-            df_ath["Vazio3"] = ""
-            df_ath["Vazio4"] = ""
-            df_ath["CAtividade/Atividade Débito"] = ""
-            df_ath["Atividade Crédito"] = ""
+            self.df_ath["Tipo D/C"] = ""
+            self.df_ath["Centro Custo/Centro Custo Débito"] = ""
+            self.df_ath["Centro Custo/Centro Custo Crédito"] = ""
+            self.df_ath["Vazio1"] = ""
+            self.df_ath["Vazio2"] = ""
+            self.df_ath["Vazio3"] = ""
+            self.df_ath["Vazio4"] = ""
+            self.df_ath["CAtividade/Atividade Débito"] = ""
+            self.df_ath["Atividade Crédito"] = ""
+
+            # Adicionar os dados do DataFrame à planilha
+            for r in dataframe_to_rows(self.df_ath, index=False, header=True):
+                self.ws.append(r)
 
             # Exibir o dataframe
-            print("--------------------------------------- df_ath -------------------------------------------------")
-            print(df_ath)
+            print("--------------------------------------- self.ws-------------------------------------------------")
+            print(self.ws)
+            print("--------------------------------------- self.wb-------------------------------------------------")
+            print(self.wb)
 
             # Salvar o dataframe como uma planilha Excel
-            arquivo_excel_salvar = r'C:\Users\Icaro\Desktop\Develop\integrAgir\exemplos\Relatório_cartão_athenas.xlsx'
-            df_ath.to_excel(arquivo_excel_salvar, index=False)
+            #arquivo_excel_salvar = r'C:\Users\Icaro\Desktop\Develop\integrAgir\exemplos\Relatório_cartão_athenas.xlsx'
+            #self.df_ath.to_excel(arquivo_excel_salvar, index=False)
 
             QMessageBox.warning(self, 'Info', 'Excel carregado com Sucesso')  
         except KeyError as erro:

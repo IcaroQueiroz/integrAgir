@@ -70,7 +70,7 @@
     border: 2px solid white;
     padding: 2px;
 }
-#comboBoxApp, #comboBoxCartao {
+#comboBoxApp, #comboBoxCartao, #comboBoxAthenas {
     background-color: #16191d;
     font-size: 16px;
     color: #fff;
@@ -99,7 +99,7 @@
     color: #fff;
 }
 #passoApassoEaj, #passoApassoLacon, #passoApassoCielo, 
-#passoApassoRede, #passoApassoStone,#passoApassoAgir,
+#passoApassoRede,#passoApassoGetnet, #passoApassoStone,#passoApassoAgir,
 #passoApassoPagbank, #passoApassoSabor,
 #frameAthenas{
 	border-radius:14px;
@@ -163,7 +163,7 @@ QMessageBox QFrame {
 }
 
 #widgetRelatorioEmprestimo, #widgetRelatorioCielo, #widgetRelatorioRede, 
-#widgetRelatorioStone,  #widgetRelatorioPagbank{
+#widgetRelatorioStone,  #widgetRelatorioPagbank, #widgetRelatorioGetnet{
 	border-radius:15px;
 	border: white;
 	border-style: dotted;
@@ -424,8 +424,13 @@ border-left: 2px solid rgb(255,255,255);</string>
              </item>
              <item>
               <widget class="QPushButton" name="athenasBtn">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="text">
-                <string/>
+                <string>  Athenas</string>
                </property>
                <property name="icon">
                 <iconset resource="Resources.qrc">
@@ -433,8 +438,8 @@ border-left: 2px solid rgb(255,255,255);</string>
                </property>
                <property name="iconSize">
                 <size>
-                 <width>25</width>
-                 <height>25</height>
+                 <width>23</width>
+                 <height>23</height>
                 </size>
                </property>
               </widget>
@@ -610,7 +615,7 @@ border-left: 2px solid rgb(255,255,255);</string>
              </size>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="pageSettings">
              <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -2224,7 +2229,7 @@ QLineEdit:focus {
                          <string>Salvar TXT</string>
                         </property>
                         <property name="text">
-                         <string>TXT</string>
+                         <string>SALVAR</string>
                         </property>
                         <property name="icon">
                          <iconset resource="Resources.qrc">
@@ -2302,622 +2307,783 @@ QLineEdit:focus {
                     </layout>
                    </widget>
                    <widget class="QWidget" name="pageStone">
-                    <widget class="QFrame" name="frame_15">
-                     <property name="geometry">
-                      <rect>
-                       <x>9</x>
-                       <y>9</y>
-                       <width>364</width>
-                       <height>365</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>364</width>
-                       <height>365</height>
-                      </size>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
-                     <widget class="QPushButton" name="stoneLogo">
-                      <property name="geometry">
-                       <rect>
-                        <x>0</x>
-                        <y>0</y>
-                        <width>341</width>
-                        <height>71</height>
-                       </rect>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/icons/icons/stone.svg</normaloff>:/icons/icons/stone.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>140</width>
-                        <height>140</height>
-                       </size>
-                      </property>
-                     </widget>
-                     <widget class="QPushButton" name="stoneExcelBtn">
-                      <property name="geometry">
-                       <rect>
-                        <x>20</x>
-                        <y>90</y>
-                        <width>151</width>
-                        <height>80</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                        <stylestrategy>PreferDefault</stylestrategy>
-                       </font>
-                      </property>
-                      <property name="layoutDirection">
-                       <enum>Qt::LeftToRight</enum>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string>EXCEL</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>70</width>
-                        <height>70</height>
-                       </size>
-                      </property>
-                      <property name="autoRepeat">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                     <widget class="QPushButton" name="stoneTxtBtn">
-                      <property name="geometry">
-                       <rect>
-                        <x>190</x>
-                        <y>90</y>
-                        <width>141</width>
-                        <height>80</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Salvar TXT</string>
-                      </property>
-                      <property name="text">
-                       <string>TXT</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>70</width>
-                        <height>70</height>
-                       </size>
-                      </property>
-                     </widget>
-                     <widget class="QLabel" name="passoApassoStone">
-                      <property name="geometry">
-                       <rect>
-                        <x>0</x>
-                        <y>200</y>
-                        <width>351</width>
-                        <height>142</height>
-                       </rect>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>11</pointsize>
-                        <underline>false</underline>
-                        <strikeout>false</strikeout>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Abrir Excel</string>
-                      </property>
-                      <property name="text">
-                       <string>
+                    <layout class="QHBoxLayout" name="horizontalLayout_40">
+                     <item>
+                      <widget class="QFrame" name="frame_15">
+                       <property name="minimumSize">
+                        <size>
+                         <width>364</width>
+                         <height>365</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QPushButton" name="stoneLogo">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>341</width>
+                          <height>71</height>
+                         </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/icons/icons/stone.svg</normaloff>:/icons/icons/stone.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>140</width>
+                          <height>140</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="stoneExcelBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>20</x>
+                          <y>90</y>
+                          <width>151</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                          <stylestrategy>PreferDefault</stylestrategy>
+                         </font>
+                        </property>
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string>EXCEL</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="stoneTxtBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>190</x>
+                          <y>90</y>
+                          <width>141</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Salvar TXT</string>
+                        </property>
+                        <property name="text">
+                         <string>SALVAR</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="passoApassoStone">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>200</y>
+                          <width>351</width>
+                          <height>142</height>
+                         </rect>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>11</pointsize>
+                          <underline>false</underline>
+                          <strikeout>false</strikeout>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Abrir Excel</string>
+                        </property>
+                        <property name="text">
+                         <string>
  Para utilizar o módulo, siga os seguintes passos:
    1 - Salve o arquivo no site, formato Excel.
    2 - Clique no botão &quot;Excel&quot;, e abre o aquivo.
    3 - Clique no botão &quot;Salvar TXT&quot; , aguarde.
    4 - Agora, importe no Único.
 </string>
-                      </property>
-                     </widget>
-                    </widget>
-                    <widget class="QFrame" name="frame_16">
-                     <property name="geometry">
-                      <rect>
-                       <x>379</x>
-                       <y>9</y>
-                       <width>364</width>
-                       <height>365</height>
-                      </rect>
-                     </property>
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
-                     <layout class="QHBoxLayout" name="horizontalLayout_21">
-                      <item>
-                       <widget class="QWidget" name="widgetRelatorioStone" native="true">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true"/>
                         </property>
                        </widget>
-                      </item>
-                     </layout>
-                    </widget>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_16">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_21">
+                        <item>
+                         <widget class="QWidget" name="widgetRelatorioStone" native="true">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                    <widget class="QWidget" name="pageRedecard">
-                    <widget class="QFrame" name="frame_27">
-                     <property name="geometry">
-                      <rect>
-                       <x>379</x>
-                       <y>9</y>
-                       <width>364</width>
-                       <height>365</height>
-                      </rect>
-                     </property>
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
-                     <layout class="QHBoxLayout" name="horizontalLayout_23">
-                      <property name="spacing">
-                       <number>6</number>
-                      </property>
-                      <property name="leftMargin">
-                       <number>9</number>
-                      </property>
-                      <property name="topMargin">
-                       <number>9</number>
-                      </property>
-                      <property name="rightMargin">
-                       <number>9</number>
-                      </property>
-                      <property name="bottomMargin">
-                       <number>9</number>
-                      </property>
-                      <item>
-                       <widget class="QWidget" name="widgetRelatorioRede" native="true">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
+                    <layout class="QHBoxLayout" name="horizontalLayout_41">
+                     <item>
+                      <widget class="QFrame" name="frame_28">
+                       <property name="minimumSize">
+                        <size>
+                         <width>364</width>
+                         <height>365</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QPushButton" name="redeLogo">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>341</width>
+                          <height>71</height>
+                         </rect>
                         </property>
                         <property name="styleSheet">
                          <string notr="true"/>
                         </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/rede-logo.png</normaloff>:/imagens/img/rede-logo.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>140</width>
+                          <height>140</height>
+                         </size>
+                        </property>
                        </widget>
-                      </item>
-                     </layout>
-                    </widget>
-                    <widget class="QFrame" name="frame_28">
-                     <property name="geometry">
-                      <rect>
-                       <x>9</x>
-                       <y>9</y>
-                       <width>364</width>
-                       <height>365</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>364</width>
-                       <height>365</height>
-                      </size>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
-                     <widget class="QPushButton" name="redeLogo">
-                      <property name="geometry">
-                       <rect>
-                        <x>0</x>
-                        <y>0</y>
-                        <width>341</width>
-                        <height>71</height>
-                       </rect>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/rede-logo.png</normaloff>:/imagens/img/rede-logo.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>140</width>
-                        <height>140</height>
-                       </size>
-                      </property>
-                     </widget>
-                     <widget class="QPushButton" name="redeExcelBtn">
-                      <property name="geometry">
-                       <rect>
-                        <x>20</x>
-                        <y>90</y>
-                        <width>151</width>
-                        <height>80</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                        <stylestrategy>PreferDefault</stylestrategy>
-                       </font>
-                      </property>
-                      <property name="layoutDirection">
-                       <enum>Qt::LeftToRight</enum>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string>EXCEL</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>70</width>
-                        <height>70</height>
-                       </size>
-                      </property>
-                      <property name="autoRepeat">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                     <widget class="QPushButton" name="redeTxtBtn">
-                      <property name="geometry">
-                       <rect>
-                        <x>190</x>
-                        <y>90</y>
-                        <width>141</width>
-                        <height>80</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Salvar TXT</string>
-                      </property>
-                      <property name="text">
-                       <string>TXT</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>70</width>
-                        <height>70</height>
-                       </size>
-                      </property>
-                     </widget>
-                     <widget class="QLabel" name="passoApassoRede">
-                      <property name="geometry">
-                       <rect>
-                        <x>0</x>
-                        <y>200</y>
-                        <width>351</width>
-                        <height>142</height>
-                       </rect>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>11</pointsize>
-                        <underline>false</underline>
-                        <strikeout>false</strikeout>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Abrir Excel</string>
-                      </property>
-                      <property name="text">
-                       <string>
+                       <widget class="QPushButton" name="redeExcelBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>20</x>
+                          <y>90</y>
+                          <width>151</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                          <stylestrategy>PreferDefault</stylestrategy>
+                         </font>
+                        </property>
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string>EXCEL</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="redeTxtBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>190</x>
+                          <y>90</y>
+                          <width>141</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Salvar TXT</string>
+                        </property>
+                        <property name="text">
+                         <string>SALVAR</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="passoApassoRede">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>200</y>
+                          <width>351</width>
+                          <height>142</height>
+                         </rect>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>11</pointsize>
+                          <underline>false</underline>
+                          <strikeout>false</strikeout>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Abrir Excel</string>
+                        </property>
+                        <property name="text">
+                         <string>
  Para utilizar o módulo, siga os seguintes passos:
    1 - Salve o arquivo no site, formato Excel.
    2 - Clique no botão &quot;Excel&quot;, e abre o aquivo.
    3 - Clique no botão &quot;Salvar TXT&quot; , aguarde.
    4 - Agora, importe no Único.
 </string>
-                      </property>
-                     </widget>
-                    </widget>
+                        </property>
+                       </widget>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_27">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_23">
+                        <property name="spacing">
+                         <number>6</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>9</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>9</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>9</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>9</number>
+                        </property>
+                        <item>
+                         <widget class="QWidget" name="widgetRelatorioRede" native="true">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                    <widget class="QWidget" name="pagePagbank">
-                    <widget class="QFrame" name="frame_33">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>0</y>
-                       <width>364</width>
-                       <height>365</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>364</width>
-                       <height>365</height>
-                      </size>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
-                     <widget class="QPushButton" name="pagbankLogo">
-                      <property name="geometry">
-                       <rect>
-                        <x>0</x>
-                        <y>0</y>
-                        <width>341</width>
-                        <height>71</height>
-                       </rect>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/icons/icons/pagbank.svg</normaloff>:/icons/icons/pagbank.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>160</width>
-                        <height>160</height>
-                       </size>
-                      </property>
-                     </widget>
-                     <widget class="QPushButton" name="pagbankExcelBtn">
-                      <property name="geometry">
-                       <rect>
-                        <x>20</x>
-                        <y>90</y>
-                        <width>151</width>
-                        <height>80</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                        <stylestrategy>PreferDefault</stylestrategy>
-                       </font>
-                      </property>
-                      <property name="layoutDirection">
-                       <enum>Qt::LeftToRight</enum>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string>EXCEL</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>70</width>
-                        <height>70</height>
-                       </size>
-                      </property>
-                      <property name="autoRepeat">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                     <widget class="QPushButton" name="pagbankTxtBtn">
-                      <property name="geometry">
-                       <rect>
-                        <x>190</x>
-                        <y>90</y>
-                        <width>141</width>
-                        <height>80</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Salvar TXT</string>
-                      </property>
-                      <property name="text">
-                       <string>TXT</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="Resources.qrc">
-                        <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>70</width>
-                        <height>70</height>
-                       </size>
-                      </property>
-                     </widget>
-                     <widget class="QLabel" name="passoApassoPagbank">
-                      <property name="geometry">
-                       <rect>
-                        <x>0</x>
-                        <y>200</y>
-                        <width>351</width>
-                        <height>142</height>
-                       </rect>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>11</pointsize>
-                        <underline>false</underline>
-                        <strikeout>false</strikeout>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Abrir Excel</string>
-                      </property>
-                      <property name="text">
-                       <string>
+                    <layout class="QHBoxLayout" name="horizontalLayout_36">
+                     <item>
+                      <widget class="QFrame" name="frame_33">
+                       <property name="minimumSize">
+                        <size>
+                         <width>364</width>
+                         <height>365</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QPushButton" name="pagbankLogo">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>341</width>
+                          <height>71</height>
+                         </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/icons/icons/pagbank.svg</normaloff>:/icons/icons/pagbank.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>160</width>
+                          <height>160</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="pagbankExcelBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>20</x>
+                          <y>90</y>
+                          <width>151</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                          <stylestrategy>PreferDefault</stylestrategy>
+                         </font>
+                        </property>
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string>EXCEL</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="pagbankTxtBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>190</x>
+                          <y>90</y>
+                          <width>141</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Salvar TXT</string>
+                        </property>
+                        <property name="text">
+                         <string>SALVAR</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="passoApassoPagbank">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>200</y>
+                          <width>351</width>
+                          <height>142</height>
+                         </rect>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>11</pointsize>
+                          <underline>false</underline>
+                          <strikeout>false</strikeout>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Abrir Excel</string>
+                        </property>
+                        <property name="text">
+                         <string>
  Para utilizar o módulo, siga os seguintes passos:
    1 - Salve o arquivo no site, formato Excel.
    2 - Clique no botão &quot;Excel&quot;, e abre o aquivo.
    3 - Clique no botão &quot;Salvar TXT&quot; , aguarde.
    4 - Agora, importe no Único.
 </string>
-                      </property>
-                     </widget>
-                    </widget>
-                    <widget class="QFrame" name="frame_34">
-                     <property name="geometry">
-                      <rect>
-                       <x>370</x>
-                       <y>0</y>
-                       <width>364</width>
-                       <height>365</height>
-                      </rect>
-                     </property>
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
-                     <layout class="QHBoxLayout" name="horizontalLayout_35">
-                      <item>
-                       <widget class="QWidget" name="widgetRelatorioPagbank" native="true">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
+                        </property>
+                       </widget>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_34">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_35">
+                        <item>
+                         <widget class="QWidget" name="widgetRelatorioPagbank" native="true">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="pageGetnet">
+                    <layout class="QHBoxLayout" name="horizontalLayout_51">
+                     <item>
+                      <widget class="QFrame" name="frame_45">
+                       <property name="minimumSize">
+                        <size>
+                         <width>364</width>
+                         <height>365</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QPushButton" name="getnetLogo">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>341</width>
+                          <height>71</height>
+                         </rect>
                         </property>
                         <property name="styleSheet">
                          <string notr="true"/>
                         </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/getnet-logo.png</normaloff>:/imagens/img/getnet-logo.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>160</width>
+                          <height>160</height>
+                         </size>
+                        </property>
                        </widget>
-                      </item>
-                     </layout>
-                    </widget>
+                       <widget class="QPushButton" name="getnetExcelBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>20</x>
+                          <y>90</y>
+                          <width>151</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                          <stylestrategy>PreferDefault</stylestrategy>
+                         </font>
+                        </property>
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="text">
+                         <string>EXCEL</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/excel-btn.png</normaloff>:/imagens/img/excel-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                        <property name="autoRepeat">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="getnetTxtBtn">
+                        <property name="geometry">
+                         <rect>
+                          <x>190</x>
+                          <y>90</y>
+                          <width>141</width>
+                          <height>80</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Salvar TXT</string>
+                        </property>
+                        <property name="text">
+                         <string>SALVAR</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="Resources.qrc">
+                          <normaloff>:/imagens/img/txt-btn.png</normaloff>:/imagens/img/txt-btn.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>70</width>
+                          <height>70</height>
+                         </size>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="passoApassoGetnet">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>200</y>
+                          <width>351</width>
+                          <height>142</height>
+                         </rect>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>11</pointsize>
+                          <underline>false</underline>
+                          <strikeout>false</strikeout>
+                         </font>
+                        </property>
+                        <property name="toolTip">
+                         <string>Abrir Excel</string>
+                        </property>
+                        <property name="text">
+                         <string>
+ Para utilizar o módulo, siga os seguintes passos:
+   1 - Salve o arquivo no site, formato Excel.
+   2 - Clique no botão &quot;Excel&quot;, e abre o aquivo.
+   3 - Clique no botão &quot;Salvar TXT&quot; , aguarde.
+   4 - Agora, importe no Único.
+</string>
+                        </property>
+                       </widget>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_44">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_50">
+                        <item>
+                         <widget class="QWidget" name="widgetRelatorioGetnet" native="true">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </widget>
                  </item>
@@ -3654,7 +3820,7 @@ QLineEdit:focus {
                        <string/>
                       </property>
                       <property name="pixmap">
-                       <pixmap resource="Resources.qrc">:/icons/icons/quebra-errada.svg</pixmap>
+                       <pixmap resource="Resources.qrc">:/imagens/img/módulo.png</pixmap>
                       </property>
                       <property name="scaledContents">
                        <bool>true</bool>
@@ -3681,7 +3847,7 @@ QLineEdit:focus {
                        </font>
                       </property>
                       <property name="text">
-                       <string>Modulo: </string>
+                       <string>Módulo: </string>
                       </property>
                      </widget>
                     </item>
@@ -3749,13 +3915,32 @@ QLineEdit:focus {
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_38">
+                        <property name="leftMargin">
+                         <number>6</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>8</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>8</number>
+                        </property>
                         <item>
                          <widget class="QLabel" name="label_9">
                           <property name="text">
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap resource="Resources.qrc">:/imagens/img/imobilizado.png</pixmap>
+                           <pixmap resource="Resources.qrc">:/imagens/img/escritório.png</pixmap>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_6">
+                          <property name="text">
+                           <string/>
                           </property>
                          </widget>
                         </item>
